@@ -122,6 +122,13 @@
 " goes to beginning and end of line while in insertion mode and keeps in insertion mode
   inoremap <A-l> <esc>$a
   inoremap <A-h> <esc>0i
+" make split and tab easier
+  nnoremap <C-n> :tabnew<cr>
+  nnoremap <C-i> :tabprevious<cr>
+  nnoremap <C-o> :tabnext<cr>
+  nnoremap <C-x> :tabclose<cr>
+  nnoremap <C-s> :split<cr>
+  nnoremap <C-d> :vsplit<cr>
 " " map : to ; 'cause its easiest
   nnoremap ; :
   inoremap <c-f> <c-x><c-f>
