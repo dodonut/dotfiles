@@ -116,8 +116,10 @@ endif
   noremap L g_
   noremap J 5j
   noremap K 5k
-
-" map : to ; 'cause its easiest
+" goes to beginning and end of line while in insertion mode and keeps in insertion mode
+  inoremap <A-l> <esc>$a
+  inoremap <A-h> <esc>0i
+" " map : to ; 'cause its easiest
   nnoremap ; :
   inoremap <c-f> <c-x><c-f>
 " Copy to clipboard
@@ -126,7 +128,106 @@ endif
   let g:multi_cursor_prev_key='<C-p>'
   let g:multi_cursor_skip_key='<C-x>'
   let g:multi_cursor_quit_key='<Esc>'
-
 " Align blocks of text and keep them selected
   vmap < <gv
   vmap > >gv
+  vnoremap <c-/> :TComment<cr>
+  "if something is highlited , them just hit escape to get out
+  map <esc> :noh<cr> 
+
+" Themes, Commands, etc---------------------------------------------------------------{{{
+" Theme
+  syntax enable
+  colorscheme OceanicNext
+  set background=dark
+" Highlight the current line number
+  hi CursorLineNR guifg=#ffffff
+" highlight bad words in red
+  hi SpellBad guibg=#ff2929 guifg=#ffffff ctermbg=224
+" enable deoplete
+  let g:deoplete#enable_at_startup = 1
+" keep term windown open when I navigate away
+  autocmd TermOpen * set bufhidden=hide
+"}}}
+
+" Fold, gets ti's own section---------------------------------------------------------------{{{
+  function! MyfoldTest() "{{{
+  set foldtext=MyFoldtext()
+  autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod
+        \ | setlocal foldmethod=manual | endif
+  autocmd Insertleave,WinLeave * if exists('w:last_fdm') | let
+        \ &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+  set foldlevel=99
+" Space to toggle folds.
+  nnoremap <Space> za
+  vnoremap <Space> za
+  autocmd Filetype vim setlocal foldmethod=marker 
+  autocmd Filetype vim setlocal foldlevel=0 
+  autocmd Filetype html setlocal foldmethod=marker 
+  autocmd Filetype html setlocal fdl=3
+  autocmd Filetype c,c++ setlocal foldlevel=99
+  autocmd Filetype c,c++ setlocal foldmethod=marker
+  autocmd Filetype c,c++ setlocal foldmarker={,}
+"}}}
+
+
+"NERDTree ---------------------------------------------------------------{{{
+  map <leader>k :NERDTreeToggle<cr>
+  autocmd StdinReadPre * let s:std_in=1
+  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+  let NERDTreeShowHidden=2
+
+" NERDTress File highlighting
+  function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+  exec 'autocmd FileType nerdtrehighlight ' . a:extension .' ctermbg='. a:fg
+  .' guibg='.a:guibg.' guifg='. a:guifg
+  exec 'autocmd Filetype nerdtree syn match ' . a:extension . ' #^\s\+.*' .
+  a:extension .'$#'
+
+
+  call NERDTreeHighlightFile('c', '#ffa235', 'none', '#f22', 'none' )
+  call NERDTreeHighlightFile('cpp', '#25ff21', 'none', '#f22', 'none' )
+  call NERDTreeHighlightFile('gitignore', '#ccc', 'none', '#f22', 'none' )
+"}}}
+
+
+
+"Snippets ---------------------------------------------------------------{{{
+" Enable snipMate compatibility feature.
+  let g:neosnippet#nable_snipmate_compatibility=1
+  imap <C-k>    <Plug>(neosnippet_expand_or_jump)
+  smap <C-k>    <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k>    <Plug>(neosnippet_expand_or_target)
+
+" SuperTab like snippets behavior.
+  imap <expr><TAB> neosnippet#expandable_or_jumpable() ? 
+        \ "\<Plug>(neosnippet_expand_or_jump)"
+        \: pumvisible() ? "\<C-n>" : "\<TAB>"
+  smap <expr><TAB> neosnippet#expandable_or_jumpable() ? 
+        \ "\<Plug>(neosnippet_expand_or_jump)"
+        \: "\<TAB>"
+"}}}
+
+
+  
+"FZF ---------------------------------------------------------------{{{
+  map <leader>t :FZF<cr>
+" search for the selected word on files
+  vmap <leader>aw y:Ag <c-r>0<cr> 
+
+
+"Navigate between panes ---------------------------------------------------------------{{{
+
+  let g:tmux_navigator_no_mappings = 1
+  nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+  nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+  nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+  nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+  nnoremap <silent> <C-;> :TmuxNavigatePrevious<cr>
+
+"}}}
+
+
+"Airlines ---------------------------------------------------------------{{{
+  let g:airline_theme='oceanicnext'
+"}}}
