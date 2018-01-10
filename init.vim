@@ -12,9 +12,10 @@
   if (!isdirectory(expand("$HOME/.config/nvim/repos/github.com/Shougo/dein.vim")))
     call system(expand("mkdir -p $HOME/.config/nvim/repos/github.com"))
     call system(expand("git clone https://github.com/Shougo/dein.vim $HOME/.config/nvim/repos/github.com/Shougo/dein.vim"))
-endif
+  endif
 
   set runtimepath+=~/.config/nvim/repos/github.com/Shougo/dein.vim/
+  set rtp+=~/.config/nvim/repos/github.com/junegunn/fzf/
   call dein#begin(expand('~/.config/nvim'))
   call dein#add('Shougo/dein.vim')
 
@@ -45,7 +46,7 @@ endif
   call dein#add('Shougo/neosnippet-snippets')
 " icons
   call dein#add('ryanoasis/vim-devicons')
-  call dein#add('junegunn/fzf', {'dir': '~/.fzf'})
+  call dein#add('junegunn/fzf', {'dir': '~/.config/nvim/repos/github.com/junegunn/fzf/'}) 
   call dein#add('junegunn/fzf.vim')
   "call dein#add('mattn/gist-vim',{'depends':'mattn/webapi-vim'})
 
@@ -54,6 +55,7 @@ endif
     let pluginsExist=1
   endif
 
+  call dein#end()
 " Required:
   filetype plugin indent on
 " }}}
@@ -112,6 +114,7 @@ endif
   nmap cp :let @+ = expand("%") <cr>
 " ,f to format code, require formatters: read the docs
   noremap <leader>f :Autoformat<cr>
+  map <leader>ev :e! ~/.config/nvim/init.vim<cr>
   noremap H ^
   noremap L g_
   noremap J 5j
@@ -131,7 +134,6 @@ endif
 " Align blocks of text and keep them selected
   vmap < <gv
   vmap > >gv
-  vnoremap <c-/> :TComment<cr>
   "if something is highlited , them just hit escape to get out
   map <esc> :noh<cr> 
 
@@ -151,43 +153,46 @@ endif
 "}}}
 
 " Fold, gets ti's own section---------------------------------------------------------------{{{
-  function! MyfoldTest() "{{{
-  set foldtext=MyFoldtext()
-  autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod
-        \ | setlocal foldmethod=manual | endif
-  autocmd Insertleave,WinLeave * if exists('w:last_fdm') | let
-        \ &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
-  set foldlevel=99
-" Space to toggle folds.
-  nnoremap <Space> za
-  vnoremap <Space> za
-  autocmd Filetype vim setlocal foldmethod=marker 
-  autocmd Filetype vim setlocal foldlevel=0 
-  autocmd Filetype html setlocal foldmethod=marker 
-  autocmd Filetype html setlocal fdl=3
-  autocmd Filetype c,c++ setlocal foldlevel=99
-  autocmd Filetype c,c++ setlocal foldmethod=marker
-  autocmd Filetype c,c++ setlocal foldmarker={,}
+"   function! MyfoldTest() "{{{
+"   set foldtext=MyFoldtext()
+"   "autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod
+"   "      \ | setlocal foldmethod=manual | endif
+"   "autocmd Insertleave,WinLeave * if exists('w:last_fdm') | let
+"   "      \ &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+"   set foldlevel=99
+" " Space to toggle folds.
+"   nnoremap <Space> za
+"   vnoremap <Space> za
+"   autocmd Filetype vim setlocal foldmethod=marker 
+"   autocmd Filetype vim setlocal foldlevel=0 
+"   autocmd Filetype html setlocal foldmethod=marker 
+"   autocmd Filetype html setlocal fdl=3
+"   autocmd Filetype c,c++ setlocal foldlevel=99
+"   autocmd Filetype c,c++ setlocal foldmethod=marker
+"   autocmd Filetype c,c++ setlocal foldmarker={,}
+"   endfunction
 "}}}
 
 
 "NERDTree ---------------------------------------------------------------{{{
-  map <leader>k :NERDTreeToggle<cr>
+  nmap <silent> <leader>k :NERDTreeToggle<CR>
+  nmap <silent> <leader>y :NERDTreeFind<CR>
   autocmd StdinReadPre * let s:std_in=1
   autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
   let NERDTreeShowHidden=2
+  let g:NERDTreeQuitOnOpen=1
 
 " NERDTress File highlighting
-  function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-  exec 'autocmd FileType nerdtrehighlight ' . a:extension .' ctermbg='. a:fg
-  .' guibg='.a:guibg.' guifg='. a:guifg
-  exec 'autocmd Filetype nerdtree syn match ' . a:extension . ' #^\s\+.*' .
-  a:extension .'$#'
-
-
-  call NERDTreeHighlightFile('c', '#ffa235', 'none', '#f22', 'none' )
-  call NERDTreeHighlightFile('cpp', '#25ff21', 'none', '#f22', 'none' )
-  call NERDTreeHighlightFile('gitignore', '#ccc', 'none', '#f22', 'none' )
+  " function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+  " exec 'autocmd FileType nerdtrehighlight ' . a:extension .' ctermbg='. a:fg
+  " .' guibg='.a:guibg.' guifg='. a:guifg
+  " exec 'autocmd Filetype nerdtree syn match ' . a:extension . ' #^\s\+.*' .
+  " a:extension .'$#'
+  " endfunction
+  "
+  " call NERDTreeHighlightFile('c', '#ffa235', 'none', '#f22', 'none' )
+  " call NERDTreeHighlightFile('cpp', '#25ff21', 'none', '#f22', 'none' )
+  " call NERDTreeHighlightFile('gitignore', '#ccc', 'none', '#f22', 'none' )
 "}}}
 
 
@@ -212,19 +217,17 @@ endif
   
 "FZF ---------------------------------------------------------------{{{
   map <leader>t :FZF<cr>
+  map <leader>r :Buffers<cr>
 " search for the selected word on files
   vmap <leader>aw y:Ag <c-r>0<cr> 
 
 
 "Navigate between panes ---------------------------------------------------------------{{{
 
-  let g:tmux_navigator_no_mappings = 1
-  nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-  nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-  nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
-  nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
-  nnoremap <silent> <C-;> :TmuxNavigatePrevious<cr>
-
+  nnoremap <C-j> <C-w>j
+  nnoremap <C-k> <C-w>k
+  nnoremap <C-l> <C-w>l
+  nnoremap <C-h> <C-w>h
 "}}}
 
 
