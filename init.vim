@@ -45,7 +45,7 @@
   call dein#add('Shougo/neoinclude.vim')
   call dein#add('Shougo/neosnippet-snippets')
 " icons
-  call dein#add('ryanoasis/vim-devicons')
+" call dein#add('ryanoasis/vim-devicons')
   call dein#add('junegunn/fzf', {'dir': '~/.config/nvim/repos/github.com/junegunn/fzf/'}) 
   call dein#add('junegunn/fzf.vim')
   "call dein#add('mattn/gist-vim',{'depends':'mattn/webapi-vim'})
@@ -76,6 +76,8 @@
   set virtualedit=
   set wildmenu
   set laststatus=2
+  set autowrite
+  set autoread
 " set colorcolumn=100
   "set wrap linebreak nolist
   "set wildmode=full
@@ -142,7 +144,7 @@
   vmap < <gv
   vmap > >gv
   "if something is highlited , them just hit escape to get out
-  map <esc> :noh<cr> 
+  "map <esc> :noh<cr> 
 
 " Themes, Commands, etc---------------------------------------------------------------{{{
 " Theme
