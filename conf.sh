@@ -15,4 +15,4 @@ git remote add origin http://github.com/toomanysand/codes
 git pull origin master
 git config --global user.name "toomanysand"
 git config --global user.email "viniciusvims@gmail.com"
-nvim
+nvim $HOME/Desktop/codes

@@ -33,7 +33,8 @@ call dein#add('Xuyuanp/nerdtree-git-plugin')
 " utils
 call dein#add('benekastah/neomake')
 call dein#add('scrooloose/nerdtree')
-call dein#add('bling/vim-airline')
+"call dein#add('bling/vim-airline')
+call dein#add('itchyny/lightline.vim')
 call dein#add('tpope/vim-surround')
 call dein#add('tomtom/tcomment_vim')
 call dein#add('Chiel92/vim-autoformat')
@@ -46,6 +47,7 @@ call dein#add('Shougo/neoinclude.vim')
 call dein#add('Shougo/neosnippet-snippets')
 "call dein#add('zchee/deoplete-clang')
 "call dein#add('tweekmonster/deoplete-clang2')
+call dein#add('Rip-Rip/clang_complete.git')
 " icons
 " call dein#add('ryanoasis/vim-devicons')
 call dein#add('junegunn/fzf', {'dir': '~/.config/nvim/repos/github.com/junegunn/fzf/'})
@@ -165,26 +167,26 @@ let g:deoplete#enable_at_startup = 1
 autocmd TermOpen * set bufhidden=hide
 "}}}
 
-" Fold, gets ti's own section---------------------------------------------------------------{{{
-  function! MyfoldTest() "{{{
-  set foldtext=MyFoldtext()
-  autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod
-       \ | setlocal foldmethod=manual | endif
-  autocmd Insertleave,WinLeave * if exists('w:last_fdm') | let
-       \ &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
-  set foldlevel=99
-" Space to toggle folds.
-  nnoremap <Space> za
-  vnoremap <Space> za
-  autocmd Filetype vim setlocal foldmethod=marker
-  autocmd Filetype vim setlocal foldlevel=0
-  autocmd Filetype html setlocal foldmethod=marker
-  autocmd Filetype html setlocal fdl=3
-  autocmd Filetype c,c++ setlocal foldlevel=99
-  autocmd Filetype c,c++ setlocal foldmethod=marker
-  autocmd Filetype c,c++ setlocal foldmarker={,}
-  endfunction
-"}}}
+" " Fold, gets ti's own section---------------------------------------------------------------{{{
+"   function! MyfoldTest() "{{{
+"   set foldtext=MyFoldtext()
+"   autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod
+"        \ | setlocal foldmethod=manual | endif
+"   autocmd Insertleave,WinLeave * if exists('w:last_fdm') | let
+"        \ &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+"   set foldlevel=99
+" " Space to toggle folds.
+"   nnoremap <Space> za
+"   vnoremap <Space> za
+"   autocmd Filetype vim setlocal foldmethod=marker
+"   autocmd Filetype vim setlocal foldlevel=0
+"   autocmd Filetype html setlocal foldmethod=marker
+"   autocmd Filetype html setlocal fdl=3
+"   autocmd Filetype c,c++ setlocal foldlevel=99
+"   autocmd Filetype c,c++ setlocal foldmethod=marker
+"   autocmd Filetype c,c++ setlocal foldmarker={,}
+"   endfunction
+" "}}}
 
 
 "NERDTree ---------------------------------------------------------------{{{
@@ -249,20 +251,6 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
-
-" pane resise
-tnoremap left :resize -3
-" tnoremap <C-j>
-" tnoremap <C-k>
-" tnoremap <C-l>
-" inoremap <C-h>
-" inoremap <C-j>
-" inoremap <C-k>
-" inoremap <C-l>
-" nnoremap <C-j>
-" nnoremap <C-k>
-" nnoremap <C-l>
-" nnoremap <C-h>
 "}}}
 
 
