@@ -264,3 +264,19 @@ let g:airline_theme='oceanicnext'
 let g:clang_library_path = '/usr/lib/llvm-3.8/lib/libclang-3.8.so.1'
 " ===============================================================================
 
+" *************************************************************************
+" Neomake
+" function! MyOnBattery()
+"   return readfile('/sys/class/power_supply/AC/online') == ['0']
+" endfunction
+"
+" if MyOnBattery()
+"   call neomake#configure#automake('w')
+" else
+"   call neomake#configure#automake('nw', 1000)
+" endif
+let g:neomake_cpp_enable_markers=['clang']
+let g:neomake_cpp_clang_args = ["-std+=c++14","-Wextra", "-Wall", "-fsanitize=undefined","-g"]
+
+" When writing a buffer.
+call neomake#configure#automake('w')
