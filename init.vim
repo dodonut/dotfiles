@@ -257,3 +257,10 @@ nnoremap <C-h> <C-w>h
 "Airlines ---------------------------------------------------------------{{{
 let g:airline_theme='oceanicnext'
 "}}}
+
+" *************************************************************************
+" Plugin: Clang Complete
+" Set the clang_library_path to the directory containing file named libclang.{dll,so,dylib}.
+let g:clang_library_path = '/usr/lib/llvm-3.8/lib/libclang-3.8.so.1'
+" ===============================================================================
+
