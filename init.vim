@@ -46,7 +46,7 @@ call dein#add('Shougo/neco-vim')
 call dein#add('Shougo/neoinclude.vim')
 call dein#add('Shougo/neosnippet-snippets')
 "call dein#add('zchee/deoplete-clang')
-"call dein#add('tweekmonster/deoplete-clang2')
+" call dein#add('tweekmonster/deoplete-clang2')
 call dein#add('Rip-Rip/clang_complete.git')
 " icons
 " call dein#add('ryanoasis/vim-devicons')
@@ -78,6 +78,14 @@ set tabstop=2 shiftwidth=2 expandtab
 "set conceallevel=0
 " block selected not limited by shortest line
 set virtualedit=
+set ignorecase
+set smartcase
+" folding options
+set foldcolumn=0    " visual representation of folds
+set foldmethod=syntax
+set foldnestmax=1
+set nofoldenable
+
 set wildmenu
 set laststatus=2
 set autowrite
@@ -89,6 +97,10 @@ set autoread
 let mapleader = ','
 set undofile
 set undodir="$HOME/.VIM_UNDO_FILES"
+" put cursor between curly braces on enter key
+set autoindent
+set cindent
+inoremap { {<CR>}<up><end><CR>
 " Remember cursor position between vim sessions
 autocmd BufReadPost *
       \ if line("'\"") > 0 && line ("'\"") <= line("$") |
@@ -117,16 +129,17 @@ map q <nop>
 nnoremap <silent> j gj
 nnoremap <silent> k gk
 " copy current files path to clipboard
-nmap cp :let @+ = expand("%") <cr>
+" nmap cp :let @+ = expand("%") <cr>
 " ,f to format code, require formatters: read the docs
 noremap <leader>f :Autoformat<cr>
 " go no normal mode with esc in terminal
 tnoremap <esc> <C-\><C-n>
 map <leader>ev :e! ~/.config/nvim/init.vim<cr>
-noremap H ^
-noremap L g_
-noremap J 5j
-noremap K 5k
+" set cpoptions=$
+nnoremap H ^
+nnoremap L g_
+nnoremap J 5j
+nnoremap K 5k
 " goes to beginning and end of line while in insertion mode and keeps in insertion mode
 "inoremap <A-l> <esc>$a
 "inoremap <A-h> <esc>0i
@@ -219,6 +232,7 @@ imap <C-k>    <Plug>(neosnippet_expand_or_jump)
 smap <C-k>    <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>    <Plug>(neosnippet_expand_or_target)
 
+let g:neosnippet#snippets_directory="~/.config/nvim/repos/github.com/Shougo/neosnippet-snippets/neosnippets/"
 " SuperTab like snippets behavior.
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
       \ "\<Plug>(neosnippet_expand_or_jump)"
@@ -226,6 +240,7 @@ imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
       \ "\<Plug>(neosnippet_expand_or_jump)"
       \: "\<TAB>"
+
 "}}}
 
 
@@ -267,6 +282,7 @@ let g:clang_library_path = '/usr/lib/llvm-3.8/lib/libclang-3.8.so.1'
 " *************************************************************************
 " Neomake
 " For cpp lint
+" let g:neomake_sources_clang_autofill_neomake = 1
 let g:neomake_cpp_enable_markers=['clang']
 let g:neomake_cpp_clang_args = ["-std=c++14", "-Wextra", "-Wall", "-fsanitize=undefined","-g"]
 
