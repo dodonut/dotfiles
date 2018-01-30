@@ -53,6 +53,7 @@ call dein#add('Rip-Rip/clang_complete.git')
 call dein#add('junegunn/fzf', {'dir': '~/.config/nvim/repos/github.com/junegunn/fzf/'})
 call dein#add('junegunn/fzf.vim')
 "call dein#add('mattn/gist-vim',{'depends':'mattn/webapi-vim'})
+call dein#add('octol/vim-cpp-enhanced-highlight')
 
 if dein#check_install()
   call dein#install()
