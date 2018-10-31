@@ -10,16 +10,25 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " load fuzzy finder to neovim
 Plug 'junegunn/fzf.vim'
 " autocomplete (does not work well for c++)
-Plug 'roxma/nvim-completion-manager'
+" Plug 'roxma/nvim-completion-manager'
+Plug 'prabirshrestha/asyncomplete.vim'
 " linting
 Plug 'w0rp/ale'
 " tag pair () [] {}
 Plug 'jiangmiao/auto-pairs'
-" snippets
-Plug 'SirVer/ultisnips'
+" autocomplete
+
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/neco-vim'
+Plug 'Shougo/deoplete-clangx'
+Plug 'Shougo/neoinclude.vim'
+Plug 'wellle/tmux-complete.vim'
+
+" nerdtree
+Plug 'scrooloose/nerdtree'
 call plug#end()
 
-
+autocmd vimenter * NERDTree
 colorscheme gruvbox
 set background=dark
 
@@ -54,5 +63,9 @@ nnoremap <c-p> :Files<cr>
 " control + f activates search word in entire project
 nnoremap <c-f> :Ag<space>
 
+noremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 
+map <leader>k :NERDTreeToggle<CR>
 	
