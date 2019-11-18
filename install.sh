@@ -20,9 +20,8 @@ fi
 #installing neovim
 if ! command_exists nvim; then
     echo "Installing NeoVim..."
-	https://github.com/neovim/neovim/releases/download/v0.4.3/nvim-linux64.tar.gz
 	cd '/tmp' && { curl -L https://github.com/neovim/neovim/releases/download/v0.4.3/nvim-linux64.tar.gz | tar zx; }
-	nvimDir = '/tmp/nvim-linux64'
+	nvimDir='/tmp/nvim-linux64'
 	sudo cp -r $nvimDir/bin /usr/local/
 	sudo cp -r $nvimDir/share /usr/local/
     echo "\n\nDone - OK"
@@ -80,7 +79,7 @@ fi
 read -p "Want to install all the development package? (y/n)" ans
 if [$ans == "y"]; then
 	echo "Installing Golang 1.13.4..."
-	tmpDir = "/tmp/golang"
+	tmpDir="/tmp/golang"
 	sudo mkdir $tmpDir;
 	cd $tmpDir && { curl -O https://dl.google.com/go/go1.13.4.linux-amd64.tar.gz; cd -;}
 	echo "\n\nExtracting Golang tar"
