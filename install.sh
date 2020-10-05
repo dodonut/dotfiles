@@ -20,6 +20,10 @@ command_exists() {
     type "$1" > /dev/null 2>$1
 }
 
+sudo apt install xinit 
+
+
+: '
 #installing zsh
 if ! command_exists zsh; then
 	printRed "Installing zsh..."
@@ -123,3 +127,5 @@ sudo apt update; sudo apt upgrade -y;
 # install the plugins automatically
 printRed "Install VIM plugins"
 vim +PlugInstall
+'
+
