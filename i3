@@ -1,1 +1,0 @@
-/home/vinmoraes/.i3
