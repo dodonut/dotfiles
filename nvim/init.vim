@@ -141,6 +141,12 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " autocompletion
  let g:coc_global_extensions = ['coc-prettier', 'coc-tsserver', 'coc-snippets', 'coc-sh', 'coc-go', 'coc-vimlsp', 'coc-explorer']
 
+let g:airline_filetype_overrides = {
+  \ 'coc-explorer':  [ 'CoC Explorer', '' ],
+  \ 'fugitive': ['fugitive', '%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'],
+  \ 'help':  [ 'Help', '%f' ],
+  \ }
+
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
 
@@ -157,9 +163,7 @@ command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> ]g <Plug>(coc-diagnostic-prev)
 nmap <silent> [g <Plug>(coc-diagnostic-next)
-
-nnoremap <silent> <C-k> <Plug>(NERDCommenterToggle)
-
+nnoremap <silent> <leader>gad  :<C-u>CocList diagnostics<cr>
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)
 " GoTo code navigation.
@@ -168,6 +172,7 @@ nmap <leader>gt <Plug>(coc-type-definition)
 nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
 nmap <leader>rr <Plug>(coc-rename)
+
 nnoremap <leader>fa :CocSearch 
 nnoremap <leader>sw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>sf :Rg <C-R>=expand("<cword>")<CR><CR>

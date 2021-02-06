@@ -3,6 +3,7 @@
 set $inner_gaps 10
 set $outer_gaps 5
 set $mod Mod1
+set $win Mod4
 set $hibernate sudo -A systemctl suspend
 set $term i3-sensible-terminal
 
@@ -154,13 +155,13 @@ bar {
 }
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% && pkill -SIGRTMIN+1 i3blocks #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% && pkill -SIGRTMIN+1 i3blocks #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle && pkill -SIGRTMIN+1 i3blocks # mute sound
 
 # # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec lux -a 500; exec pkill -SIGRTMIN+5 i3blocks # increase screen brightness
+bindsym XF86MonBrightnessDown exec lux -s 500; exec pkill -SIGRTMIN+5 i3blocks # decrease screen brightness
 
 
 # assign [class="Mate-terminal"] $ws1
@@ -170,9 +171,7 @@ assign [class="whatsapp-desktop"] $ws8
 assign [class="Microsoft Teams - Preview"] $ws9
 assign [class="spotify"] $ws9
 
-exec feh --bg-scale ~/Pictures/re3.jpg
-exec_always sh ./screen/layout.sh
-exec_always nm-applet
+exec feh --bg-scale ~/Pictures/ds.png
 exec setxkbmap us
-exec touchpad-indicator
+exec_always nm-applet
 exec_always xrandr --output HDMI-1 --mode 1920x1080 --output eDP-1 --same-as HDMI-1
