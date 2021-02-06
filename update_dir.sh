@@ -5,11 +5,13 @@ cp -v ~/.config/nvim/init.vim ~/.config/nvim/coc-settings.json ./nvim/
 
 cp -rv ~/.config/lf/* ./config/lf/ 
 
-read -p 'Upload to git? [no] ' ans
+read -p 'Upload to git? [Y]es or N[o] ' ans
 
 if [[ $ans == 'yes'  || "$ans" == 'y' || "$ans" == 'Yes' ]]; then
+	read -p 'Message: [empty] ' msg
+
 	git add . && 
-	git commit -m ${1:-'update dotfiles'} &&
+	git commit -m ${msg:-'update dotfiles'} &&
 	git push origin master 
 else
     echo 'No git upload'
