@@ -25,7 +25,7 @@ let g:coc_snippet_next = '<tab>'
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " autocompletion
-let g:coc_global_extensions = ['coc-prettier', 'coc-tsserver', 'coc-snippets', 'coc-sh', 'coc-go', 'coc-vimlsp', 'coc-explorer']
+let g:coc_global_extensions = ['coc-prettier', 'coc-sh', 'coc-vimlsp', 'coc-explorer', 'coc-marketplace']
 
 let g:airline_filetype_overrides = {
   \ 'coc-explorer':  [ 'CoC Explorer', '' ],
