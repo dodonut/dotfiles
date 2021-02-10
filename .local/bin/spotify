@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Copyright (C) 2020 Pavel Makhov <streetturtle@gmail.com>
+
+
+case $BLOCK_BUTTON in
+    1) sp play ;; # left click
+    4) sp next ;; # scroll up
+    5) sp prev ;; # scroll down
+esac
+
+echo "teste" >> output2.txt
+if sp status | grep 'not running' > /dev/null; then
+    printf "Spotify not running"
+else 
+    if sp status | grep 'Paused' > /dev/null; then
+        st='' # fa-pause
+    else
+        st='' # fa-play
+    fi
+    sp current-oneline | sed "s/ [|] / $st /g"
+fi
