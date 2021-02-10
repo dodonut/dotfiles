@@ -4,7 +4,11 @@ set $inner_gaps 10
 set $outer_gaps 5
 set $mod Mod1
 set $win Mod4
-set $hibernate sudo -A systemctl suspend
+set $shutdown sudo -A shutdown -h now
+set $reboot sudo -A reboot
+set $lock i3lock
+set $suspend sudo systemctl suspend
+set $hibernate sudo -A systemctl hibernate
 set $term i3-sensible-terminal
 
 # #---Gaps---# #
@@ -21,11 +25,20 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return 		exec $term
-bindsym $mod+Shift+Return	exec --no-startup-id samedir
+bindsym $mod+Shift+Return	exec $term --working-directory  $(xcwd)
+
+bindsym $mod+Escape	             exec --no-startup-id dm-tool switch-to-greeter
+bindsym $mod+Shift+Escape	       exec --no-startup-id $suspend
+
+bindsym $mod+Shift+BackSpace	   exec --no-startup-id prompt "Reboot computer?" $reboot
+
+bindsym $mod+r mode "resize"
+
 # kill focused window
 bindsym $mod+q kill
 
 bindsym $mod+d exec j4-dmenu-desktop
+bindsym $mod+i exec rofi -show run
 bindsym $mod+b exec brave-browser
 
 # change focus
@@ -142,14 +155,13 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-bindsym $mod+r mode "resize"
 
 hide_edge_borders both
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-       status_command i3blocks -c ~/.i3/i3blocks.conf
+       status_command i3blocks -c ~/dotfiles/.config/i3/i3blocks.conf
         # status_command i3status -c ~/.i3/i3status.conf
         font pango:System San Francisco Display 10
 }
@@ -171,6 +183,7 @@ assign [class="whatsapp-desktop"] $ws8
 assign [class="Microsoft Teams - Preview"] $ws9
 assign [class="spotify"] $ws9
 
+exec touchpad-indicator
 exec feh --bg-scale ~/Pictures/ds.png
 exec setxkbmap us
 exec_always nm-applet

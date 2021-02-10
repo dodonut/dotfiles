@@ -1,0 +1,25 @@
+mkdir -p ~/.local/bin
+for file in $(ls ./.local/bin)
+do
+    rm ~/.local/bin/$file 2> /dev/null
+    $(ln -s ~/dotfiles/.local/bin/$file ~/.local/bin/$file)
+done
+
+mkdir -p ~/.config/i3
+mkdir -p ~/.config/nvim
+mkdir -p ~/.config/nvim/plugin
+mkdir -p ~/.config/lf
+for dir in $(ls ./.config)
+do
+    for file in $(ls -p ./.config/$dir | grep -v /)
+    do 
+        rm ~/.config/$dir/$file 2> /dev/null
+        ln -s ~/dotfiles/.config/$dir/$file ~/.config/$dir/$file
+    done
+done
+
+for file in $(ls ./.config/nvim/plugin)
+do
+    rm ~/.config/nvim/plugin/$file 2> /dev/null
+    ln -s ~/dotfiles/.config/nvim/plugin/$file ~/.config/nvim/plugin/$file
+done
