@@ -44,21 +44,16 @@ command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> ]g <Plug>(coc-diagnostic-prev)
-nmap <silent> [g <Plug>(coc-diagnostic-next)
-nnoremap <silent> <leader>gad  :<C-u>CocList diagnostics<cr>
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" GoTo code navigation.
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gt <Plug>(coc-type-definition)
-nmap <leader>gi <Plug>(coc-implementation)
-nmap <leader>gr <Plug>(coc-references)
-nmap <leader>rr <Plug>(coc-rename)
-
+nmap <leader>dp <Plug>(coc-diagnostic-prev)
+nmap <leader>dn <Plug>(coc-diagnostic-next)
+nnoremap <silent> <leader>cD  :<C-u>CocList diagnostics<cr>
+nmap <leader>cc  <Plug>(coc-codeaction)
+nmap <leader>cd <Plug>(coc-definition)
+nmap <leader>ct <Plug>(coc-type-definition)
+nmap <leader>ci <Plug>(coc-implementation)
+nmap <leader>cr <Plug>(coc-references)
+nmap <leader>cR <Plug>(coc-rename)
 nnoremap <leader>fa :CocSearch 
 nnoremap <leader>sw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>sf :Rg <C-R>=expand("<cword>")<CR><CR>
-
-" Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)

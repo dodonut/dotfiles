@@ -18,5 +18,8 @@
 		"~/.config/nvim/plugged/vim-snippets/UltiSnips"
 	],
 	"explorer.icon.enableNerdfont": true,
-	"explorer.quitOnOpen": true
+	"explorer.quitOnOpen": true,
+	"codeLens.enable": true,
+	"java.home": "/home/vinmoraes/.jdks/openjdk-15.0.1",
+	"java.referencesCodeLens.enabled": true
 }

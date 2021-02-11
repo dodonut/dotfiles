@@ -105,10 +105,10 @@ cmd git_branch ${{
     lf -remote "send $id updir"
     lf -remote "send $id cd \"$pwd_shell\""
 }}
-map gb :git_branch
-map gp ${{clear; git pull --rebase || true; echo "press ENTER"; read ENTER}}
-map gs ${{clear; git status; echo "press ENTER"; read ENTER}}
-map gl ${{clear; git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit}}
+map gib :git_branch
+map gip ${{clear; git pull --rebase || true; echo "press ENTER"; read ENTER}}
+map gis ${{clear; git status; echo "press ENTER"; read ENTER}}
+map gil ${{clear; git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit}}
 
 # Archive Mappings
 map az zip
@@ -138,5 +138,7 @@ map U unselect
 map e $/usr/bin/nvim.appimage $id
 map gt cd ~/.local/share/Trash/files
 map gpg cd ~/Documents/tilix/pgs/pagseguro-api
-map gps cd ~/Documents/personal/
+map gps cd ~/Documents/tilix/pgs/scheduling-engine
+map gpp cd ~/Documents/personal/
+map gd cd ~/dotfiles
 map gcd cd .

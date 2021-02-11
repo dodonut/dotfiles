@@ -11,6 +11,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'vim-test/vim-test'
 Plug 'morhetz/gruvbox'
 Plug 'mbbill/undotree'
+Plug 'liuchengxu/vim-which-key'
+Plug 'ap/vim-css-color'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -25,8 +27,6 @@ call plug#end()
 
 " Config section
 let mapleader = ","
-nmap <leader>gs :G<cr>
-nmap <leader>gh :diffget //3<cr>
 
 " map jk to esc on insert mode
 inoremap jk <esc>
@@ -44,4 +44,5 @@ nnoremap <leader>, :wa<CR>
 
 " does not work on go files because of vim-go mapping for :GoDef on same key,,
 nnoremap <C-t> :tabnew<cr>
+source ~/dotfiles/.config/nvim/plugin/whichkey.vim
 

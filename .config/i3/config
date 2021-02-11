@@ -186,5 +186,10 @@ assign [class="spotify"] $ws9
 exec touchpad-indicator
 exec feh --bg-scale ~/Pictures/ds.png
 exec setxkbmap us
-exec_always nm-applet
 exec_always xrandr --output HDMI-1 --mode 1920x1080 --output eDP-1 --same-as HDMI-1
+exec_always --no-startup-id mate-settings-daemon
+exec_always --no-startup-id nm-applet
+exec_always --no-startup-id mate-power-manager 
+exec_always --no-startup-id blueman-applet
+exec_always --no-startup-id compton 
+exec_always --no-startup-id mate-volume-control-applet 

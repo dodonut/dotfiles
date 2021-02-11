@@ -11,6 +11,8 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+nnoremap <leader>v :vs<cr>
+nnoremap <leader>h :sp<cr>
 nnoremap <C-right> :tabnext<cr>
 nnoremap <C-left> :tabprevious<cr>
 nnoremap <C-up> :bnext<cr>

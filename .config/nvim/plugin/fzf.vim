@@ -1,5 +1,5 @@
 " fuzzy finding mapping
-nnoremap <C-g> :FZF<CR>
+nnoremap <C-P> :FZF<CR>
 nnoremap <C-p> :GFiles<CR>
 let g:fzf_action = {
 			\ 'ctrl-t': 'tab split',
