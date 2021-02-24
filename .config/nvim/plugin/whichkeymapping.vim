@@ -12,6 +12,8 @@ let g:which_key_map['ut'] = [ ':UndotreeToggle<cr> :UndotreeFocus<cr>'      , 'u
 let g:which_key_map['ev'] = [ ':tabnew ~/dotfiles/.config/nvim/init.vim<cr>'      , 'open vimrc']
 let g:which_key_map['sv'] = [ ':source ~/dotfiles/.config/nvim/init.vim<cr>'      , 'source vimrc']
 
+
+
 let g:which_key_map.d = {
       \ 'name' : '+debugger' ,
       \ 'm' : [':MaximizerToggle!<cr>'     , 'maximize pane'],
@@ -19,7 +21,7 @@ let g:which_key_map.d = {
       \ 'c' : [':call GotoWindow(g:vimspector_session_windows.code)<CR>'     , 'code window'],
       \ 't' : [':call GotoWindow(g:vimspector_session_windows.tabpage)<CR>'     , 'tab window'],
       \ 'v' : [':call GotoWindow(g:vimspector_session_windows.variables)<CR>'     , 'variables window'],
-      \ 'w' : [':call GotoWindow(g:vimspector_session_windows.watches)<CR>'     , 'variables window'],
+      \ 'w' : [':call GotoWindow(g:vimspector_session_windows.watches)<CR>'     , 'watches window'],
       \ 's' : [':call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>'     , 'stack trace window'],
       \ 'o' : [':call GotoWindow(g:vimspector_session_windows.output)<CR>'     , 'output window'],
       \ 'b' : [':<plug>VimspectorToggleBreakpoint<cr>'     , 'toggle breakpoint'],
@@ -44,20 +46,31 @@ let g:which_key_map.C = {
       \ 'p' : [':GFiles'     , 'search files'],
       \ }
 
-" s is for search
 let g:which_key_map.c = {
       \ 'name' : '+coc' ,
       \ 'dp' : ['<plug>(coc-diagnostic-prev)'     , 'prev diag'],
       \ 'dn' : ['<plug>(coc-diagnostic-next)'     , 'next diag'],
       \ 'D' : [':<C-u>CocList diagnostics<cr>'     , 'list diag'],
-      \ 'c' : ['<plug>(coc-codeaction)'     , 'code action'],
-      \ 'd' : ['<plug>(coc-definition)'     , 'code action'],
-      \ 't' : ['<plug>(coc-type-definition)'     , 'code action'],
-      \ 'i' : ['<plug>(coc-implementation)'     , 'code action'],
-      \ 'r' : ['<plug>(coc-references)'     , 'code action'],
-      \ 'R' : ['<plug>(coc-rename)'     , 'code action'],
+      \ 'c' : ['<plug>(coc-codeaction)'     , 'action'],
+      \ 'd' : ['<plug>(coc-definition)'     , 'definition'],
+      \ 't' : ['<plug>(coc-type-definition)'     , 'type definition'],
+      \ 'i' : ['<plug>(coc-implementation)'     , 'implementation'],
+      \ 'r' : ['<plug>(coc-references)'     , 'references'],
+      \ 'R' : ['<plug>(coc-rename)'     , 'rename'],
+      \ 'f' : [':CocSearch'     , 'search'],
+      \ 'w' : [':CocSearch <C-R>=expand("<cword>")<CR><CR>'     , 'search under cursor'],
       \ }
 
+
+let g:which_key_map.f = {
+      \ 'name' : '+fzf' ,
+      \ 's' : [':Snippet<cr>'     , 'snippets'],
+      \ 'm' : [':Maps<cr>'     , 'mappings'],
+      \ 'c' : [':Commands<cr>'     , 'commands'],
+      \ 'l' : [':Locate '     , 'locate patterns'],
+      \ 'f' : [':FZF<cr>'     , 'search all files'],
+      \ 'b' : [':Buffers<cr>'     , 'Buffers'],
+      \ }
 
 
 " g is for git
@@ -71,4 +84,7 @@ let g:which_key_map.g = {
       \ 'l' : [':Git log'                          , 'log'],
       \ 'p' : [':Git push'                         , 'push'],
       \ 'P' : [':Git pull'                         , 'pull'],
+      \ 'v' : [':GV<cr>'                         , 'project history'],
+      \ 'V' : [':GV!<cr>'                         , 'file history'],
+      \ 'B' : [':Gbrowse<cr>'                         , 'open browser'],
       \ }

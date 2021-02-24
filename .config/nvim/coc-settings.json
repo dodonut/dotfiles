@@ -6,8 +6,12 @@
 		"go",
 		"json",
 		"vue",
-		"py"
+		"py",
+		"java",
+		"vim"
 	],
+	"coc.preferences.useQuickfixForLocations": true,
+	"coc.preferences.snippets.enable": true,
 	"signature.enable": true,
 	"signature.preferShownAbove": true,
 	"prettier.useTabs": true,

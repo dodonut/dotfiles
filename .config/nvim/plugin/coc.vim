@@ -41,7 +41,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
-
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <leader>dp <Plug>(coc-diagnostic-prev)
@@ -53,7 +52,6 @@ nmap <leader>ct <Plug>(coc-type-definition)
 nmap <leader>ci <Plug>(coc-implementation)
 nmap <leader>cr <Plug>(coc-references)
 nmap <leader>cR <Plug>(coc-rename)
-nnoremap <leader>fa :CocSearch 
-nnoremap <leader>sw :CocSearch <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader>sf :Rg <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>cf :CocSearch 
+nnoremap <leader>cw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 imap <C-l> <Plug>(coc-snippets-expand)

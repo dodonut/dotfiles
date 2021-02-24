@@ -37,9 +37,10 @@ bindsym $mod+r mode "resize"
 # kill focused window
 bindsym $mod+q kill
 
+#bindsym $mod+d exec dmenu_run -p run:
 bindsym $mod+d exec j4-dmenu-desktop
 bindsym $mod+i exec rofi -show run
-bindsym $mod+b exec brave-browser
+bindsym $mod+b exec firefox -P
 
 # change focus
 bindsym $mod+h focus left
@@ -129,7 +130,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+s exec "i3-nagbar -t warning -m 'Shutdown?' -b 'Yes' 'shutdown now'"
+bindsym $mod+Shift+o exec "i3-nagbar -t warning -m 'Shutdown?' -b 'Yes' 'shutdown now'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -177,14 +178,14 @@ bindsym XF86MonBrightnessDown exec lux -s 500; exec pkill -SIGRTMIN+5 i3blocks #
 
 
 # assign [class="Mate-terminal"] $ws1
-assign [class="Brave-browser"] $ws2
+assign [class="Firefox"] $ws2
 assign [class="Slack"] $ws8
 assign [class="whatsapp-desktop"] $ws8
 assign [class="Microsoft Teams - Preview"] $ws9
 assign [class="spotify"] $ws9
 
 exec touchpad-indicator
-exec feh --bg-scale ~/Pictures/ds.png
+exec feh --bg-scale ~/Pictures/mhw.jpg
 exec setxkbmap us
 exec_always xrandr --output HDMI-1 --mode 1920x1080 --output eDP-1 --same-as HDMI-1
 exec_always --no-startup-id mate-settings-daemon

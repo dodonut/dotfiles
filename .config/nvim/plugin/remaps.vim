@@ -17,3 +17,21 @@ nnoremap <C-right> :tabnext<cr>
 nnoremap <C-left> :tabprevious<cr>
 nnoremap <C-up> :bnext<cr>
 nnoremap <C-down> :bprevious<cr>
+" Config section
+let mapleader = ","
+
+" map jk to esc on insert mode
+inoremap jk <esc>
+" edit ~/.config/nvim/init.vim
+map <leader>ev :tabnew ~/dotfiles/.config/nvim/init.vim<cr>
+map <leader>sv :source ~/dotfiles/.config/nvim/init.vim<cr>
+
+" close tab or buffer
+map <leader>x :close<cr>
+
+nnoremap <leader>, :wa<CR>
+" nnoremap ; :
+
+
+" does not work on go files because of vim-go mapping for :GoDef on same key,,
+nnoremap <C-t> :tabnew<cr>

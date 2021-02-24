@@ -7,4 +7,7 @@ nmap <leader>gP :Git pull<cr>
 nmap <leader>gl :Git log<cr>
 nmap <leader>gb :Git blame<cr>
 nmap <leader>gd :Git diff<cr>
+nmap <leader>gv :GV<cr>
+nmap <leader>gV :GV!<cr>
+nmap <leader>gB :Gbrowse<cr>
 

@@ -1,4 +1,8 @@
 #!/bin/bash
+
+rm ~/.tmux.conf
+ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
+
 mkdir -p ~/.local/bin
 for file in $(ls ./.local/bin)
 do

@@ -17,6 +17,7 @@ set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
 set smartindent
+set nowrap
 set incsearch
 set updatetime=50
 set shortmess+=c
