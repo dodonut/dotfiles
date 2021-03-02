@@ -25,7 +25,7 @@ let g:coc_snippet_next = '<tab>'
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " autocompletion
-let g:coc_global_extensions = ['coc-prettier', 'coc-sh', 'coc-vimlsp', 'coc-explorer', 'coc-marketplace']
+let g:coc_global_extensions = ['coc-prettier', 'coc-vimlsp', 'coc-explorer', 'coc-marketplace']
 
 let g:airline_filetype_overrides = {
   \ 'coc-explorer':  [ 'CoC Explorer', '' ],
@@ -43,15 +43,15 @@ command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <leader>dp <Plug>(coc-diagnostic-prev)
-nmap <leader>dn <Plug>(coc-diagnostic-next)
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 nnoremap <silent> <leader>cD  :<C-u>CocList diagnostics<cr>
-nmap <leader>cc  <Plug>(coc-codeaction)
+nmap <leader>ca  <Plug>(coc-codeaction)
 nmap <leader>cd <Plug>(coc-definition)
 nmap <leader>ct <Plug>(coc-type-definition)
 nmap <leader>ci <Plug>(coc-implementation)
 nmap <leader>cr <Plug>(coc-references)
 nmap <leader>cR <Plug>(coc-rename)
+nmap <leader>cF  <Plug>(coc-fix-current)
 nnoremap <leader>cf :CocSearch 
 nnoremap <leader>cw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 imap <C-l> <Plug>(coc-snippets-expand)

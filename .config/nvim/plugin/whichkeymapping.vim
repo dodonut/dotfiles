@@ -6,11 +6,13 @@ let g:which_key_map['v'] = [ ':vs<cr>'                     , 'split right']
 let g:which_key_map['h'] = [ ':sp<cr>'                     , 'split right']
 let g:which_key_map['x'] = [ ':close<cr>'      , 'close buffer']
 let g:which_key_map[','] = [ ':wa<cr>'      , 'save all buffers']
+let g:which_key_map['K'] = [ ':call <SID>show_documentation()<cr>'      , 'show docs']
 
 " Double key mappings
 let g:which_key_map['ut'] = [ ':UndotreeToggle<cr> :UndotreeFocus<cr>'      , 'undotree']
 let g:which_key_map['ev'] = [ ':tabnew ~/dotfiles/.config/nvim/init.vim<cr>'      , 'open vimrc']
 let g:which_key_map['sv'] = [ ':source ~/dotfiles/.config/nvim/init.vim<cr>'      , 'source vimrc']
+let g:which_key_map['<space>a'] = [ 'nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>'      , 'list all diagnostics']
 
 
 
@@ -51,7 +53,7 @@ let g:which_key_map.c = {
       \ 'dp' : ['<plug>(coc-diagnostic-prev)'     , 'prev diag'],
       \ 'dn' : ['<plug>(coc-diagnostic-next)'     , 'next diag'],
       \ 'D' : [':<C-u>CocList diagnostics<cr>'     , 'list diag'],
-      \ 'c' : ['<plug>(coc-codeaction)'     , 'action'],
+      \ 'a' : ['<plug>(coc-codeaction)'     , 'action'],
       \ 'd' : ['<plug>(coc-definition)'     , 'definition'],
       \ 't' : ['<plug>(coc-type-definition)'     , 'type definition'],
       \ 'i' : ['<plug>(coc-implementation)'     , 'implementation'],
@@ -70,6 +72,7 @@ let g:which_key_map.f = {
       \ 'l' : [':Locate '     , 'locate patterns'],
       \ 'f' : [':FZF<cr>'     , 'search all files'],
       \ 'b' : [':Buffers<cr>'     , 'Buffers'],
+      \ 'r' : [':Rg<cr>'     , 'Find inside files'],
       \ }
 
 

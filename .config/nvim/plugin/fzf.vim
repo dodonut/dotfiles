@@ -7,8 +7,10 @@ nnoremap <leader>fm :Maps<cr>
 nnoremap <leader>ff :FZF<cr>
 nnoremap <leader>fl :Locate 
 nnoremap <leader>fr :Rg<cr> 
-
+nnoremap <leader>fq :Plug
+" Use K to show documentation in preview window.
 nnoremap <C-p> :GFiles<CR>
+
 let g:fzf_action = {
 			\ 'ctrl-t': 'tab split',
 			\ 'ctrl-s': 'split',

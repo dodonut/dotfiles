@@ -40,7 +40,7 @@ bindsym $mod+q kill
 #bindsym $mod+d exec dmenu_run -p run:
 bindsym $mod+d exec j4-dmenu-desktop
 bindsym $mod+i exec rofi -show run
-bindsym $mod+b exec firefox -P
+bindsym $mod+b exec brave-browser
 
 # change focus
 bindsym $mod+h focus left
@@ -178,7 +178,7 @@ bindsym XF86MonBrightnessDown exec lux -s 500; exec pkill -SIGRTMIN+5 i3blocks #
 
 
 # assign [class="Mate-terminal"] $ws1
-assign [class="Firefox"] $ws2
+assign [class="Brave-browser-nightly"] $ws2
 assign [class="Slack"] $ws8
 assign [class="whatsapp-desktop"] $ws8
 assign [class="Microsoft Teams - Preview"] $ws9

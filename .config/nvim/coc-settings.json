@@ -1,15 +1,36 @@
 {
 	"diagnostic.virtualTextCurrentLineOnly": false,
 	"diagnostic.virtualText": true,
+	"languageserver": {
+		"ccls": {
+			"command": "ccls",
+			"filetypes": ["c", "cpp", "objc", "objcpp"],
+			"rootPatterns": [
+				".ccls",
+				"compile_commands.json",
+				".vim/",
+				".git/",
+				".hg/"
+			],
+			"initializationOptions": {
+				"cache": {
+					"directory": "/tmp/ccls"
+				}
+			}
+		}
+	},
 	"coc.preferences.formatOnSaveFiletypes": [
-		"typescript",
-		"go",
 		"json",
-		"vue",
-		"py",
-		"java",
-		"vim"
+		"cpp",
+		"typescript",
+		"javascript",
+		"go"
 	],
+	"coc.preferences.hoverTarget": "float",
+	"coc.preferences.snippetStatusText": "SNIP",
+	"coc.preferences.enableMessageDialog": true,
+	"coc.preferences.bracketEnterImprove": true,
+	"prettier.bracketSpacing": true,
 	"coc.preferences.useQuickfixForLocations": true,
 	"coc.preferences.snippets.enable": true,
 	"signature.enable": true,

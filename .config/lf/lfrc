@@ -1,8 +1,10 @@
 set hidden true
+set previewer ~/dotfiles/.config/lf/preview2
 set preview true
 set color256 true
 set incsearch true
 set info size:time
+set ignorecase true
 
 set shell sh
 
@@ -11,11 +13,19 @@ set shellopts '-eu'
 map x $$f
 map X !$f
 
+cmd openFileBrowser ${{
+    $FILEBROWSER & .
+}}
+
 cmd open ${{
     case $(file --mime-type $f -b) in
         text/*) $EDITOR $fx;;
         *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
+}}
+
+cmd openInVIM ${{
+    $EDITOR $id
 }}
 
 cmd mkdir ${{
@@ -95,8 +105,7 @@ cmd zip ${{
 }}
 
 cmd on-quit &{{
-        #lf -remote 'quit && cd $f'
-        lf -remote "send $id set promptfmt $fs"
+        cd .
     }}
 
 cmd git_branch ${{
@@ -111,8 +120,9 @@ map gis ${{clear; git status; echo "press ENTER"; read ENTER}}
 map gil ${{clear; git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit}}
 
 # Archive Mappings
-map az zip
-map at tar
+map zz zip
+map zt tar
+map ze extract
 
 # Delete Mappings
 map tt trash
@@ -125,7 +135,6 @@ map z
 map a
 
 # Basic Functions
-map z on-quit
 map . set hidden!
 map <enter> open
 map a mkfile
@@ -135,7 +144,8 @@ map r rename
 map R reload
 map C clear
 map U unselect
-map e $/usr/bin/nvim.appimage $id
+map e openInVIM
+map E openFileBrowser
 map gt cd ~/.local/share/Trash/files
 map gpg cd ~/Documents/tilix/pgs/pagseguro-api
 map gps cd ~/Documents/tilix/pgs/scheduling-engine

@@ -13,10 +13,10 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <leader>v :vs<cr>
 nnoremap <leader>h :sp<cr>
-nnoremap <C-right> :tabnext<cr>
-nnoremap <C-left> :tabprevious<cr>
-nnoremap <C-up> :bnext<cr>
-nnoremap <C-down> :bprevious<cr>
+nnoremap <right> :tabnext<cr>
+nnoremap <left> :tabprevious<cr>
+nnoremap <up> :bnext<cr>
+nnoremap <down> :bprevious<cr>
 " Config section
 let mapleader = ","
 
@@ -29,9 +29,22 @@ map <leader>sv :source ~/dotfiles/.config/nvim/init.vim<cr>
 " close tab or buffer
 map <leader>x :close<cr>
 
-nnoremap <leader>, :wa<CR>
+nnoremap <leader>, :w<CR>
 " nnoremap ; :
 
 
 " does not work on go files because of vim-go mapping for :GoDef on same key,,
 nnoremap <C-t> :tabnew<cr>
+
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
