@@ -57,12 +57,17 @@ let g:which_key_map.c = {
       \ 'd' : ['<plug>(coc-definition)'     , 'definition'],
       \ 't' : ['<plug>(coc-type-definition)'     , 'type definition'],
       \ 'i' : ['<plug>(coc-implementation)'     , 'implementation'],
-      \ 'r' : ['<plug>(coc-references)'     , 'references'],
-      \ 'R' : ['<plug>(coc-rename)'     , 'rename'],
+      \ 'R' : ['<plug>(coc-references)'     , 'references'],
+      \ 'r' : ['<plug>(coc-rename)'     , 'rename'],
       \ 'f' : [':CocSearch'     , 'search'],
       \ 'w' : [':CocSearch <C-R>=expand("<cword>")<CR><CR>'     , 'search under cursor'],
       \ }
 
+let g:which_key_map.m = {
+      \ 'name' : '+cmake' ,
+      \ 'b' : [':CMakeBuild'     , 'make build'],
+      \ 'g' : [':CMakeGenerate'     , 'make generate'],
+      \ }
 
 let g:which_key_map.f = {
       \ 'name' : '+fzf' ,

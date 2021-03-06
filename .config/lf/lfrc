@@ -1,5 +1,4 @@
 set hidden true
-set previewer ~/dotfiles/.config/lf/preview2
 set preview true
 set color256 true
 set incsearch true

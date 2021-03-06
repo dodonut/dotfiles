@@ -18,7 +18,7 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-let g:coc_snippet_next = '<tab>'
+let g:coc_snippet_next = '<c-l>'
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -49,8 +49,8 @@ nmap <leader>ca  <Plug>(coc-codeaction)
 nmap <leader>cd <Plug>(coc-definition)
 nmap <leader>ct <Plug>(coc-type-definition)
 nmap <leader>ci <Plug>(coc-implementation)
-nmap <leader>cr <Plug>(coc-references)
-nmap <leader>cR <Plug>(coc-rename)
+nmap <leader>cR <Plug>(coc-references)
+nmap <leader>cr <Plug>(coc-rename)
 nmap <leader>cF  <Plug>(coc-fix-current)
 nnoremap <leader>cf :CocSearch 
 nnoremap <leader>cw :CocSearch <C-R>=expand("<cword>")<CR><CR>

@@ -15,6 +15,8 @@ Plug 'junegunn/gv.vim'
 Plug 'sirver/UltiSnips'
 Plug 'honza/vim-snippets'
 Plug 'sbdchd/neoformat'
+Plug 'cdelledonne/vim-cmake'
+Plug 'antoinemadec/FixCursorHold.nvim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -27,6 +29,7 @@ Plug 'szw/vim-maximizer'
 call plug#end()
 
 source ~/dotfiles/.config/nvim/plugin/whichkey.vim
+source ~/dotfiles/.config/nvim/plugin/cmake.vim
 source ~/dotfiles/.config/nvim/plugin/whichkeymapping.vim
 source ~/dotfiles/.config/nvim/plugin/coc.vim
 source ~/dotfiles/.config/nvim/plugin/colors.vim
