@@ -1,15 +1,15 @@
 
-inoremap <silent><expr> <TAB>
-			\ pumvisible() ? coc#_select_confirm():
-			\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-			\ <SID>check_back_space() ? "\<TAB>" :
-			\ coc#refresh()
+"inoremap <silent><expr> <TAB>
+			"\ pumvisible() ? coc#_select_confirm():
+			"\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+			"\ <SID>check_back_space() ? "\<TAB>" :
+			"\ coc#refresh()
 
 
-function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+"function! s:check_back_space() abort
+	"let col = col('.') - 1
+	"return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
 
 " Use <c-space> to trigger completion.
 if has('nvim')
@@ -51,7 +51,7 @@ nmap <leader>ct <Plug>(coc-type-definition)
 nmap <leader>ci <Plug>(coc-implementation)
 nmap <leader>cR <Plug>(coc-references)
 nmap <leader>cr <Plug>(coc-rename)
-nmap <leader>cF  <Plug>(coc-fix-current)
+nmap <leader>cq  <Plug>(coc-fix-current)
 nnoremap <leader>cf :CocSearch 
 nnoremap <leader>cw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 imap <C-l> <Plug>(coc-snippets-expand)

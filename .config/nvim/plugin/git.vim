@@ -1,13 +1,13 @@
 
-nmap <leader>gs :Gstatus<cr>
-nmap <leader>ga :Git add .<cr>
-nmap <leader>gc :Git commit<cr>
-nmap <leader>gp :Git push<cr>
-nmap <leader>gP :Git pull<cr>
-nmap <leader>gl :Git log<cr>
-nmap <leader>gb :Git blame<cr>
-nmap <leader>gd :Git diff<cr>
-nmap <leader>gv :GV<cr>
-nmap <leader>gV :GV!<cr>
-nmap <leader>gB :Gbrowse<cr>
+nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>ga :Git add .<cr>
+nnoremap <leader>gc :Git commit<cr>
+nnoremap <leader>gp :Git push<cr>
+nnoremap <leader>gP :Git pull<cr>
+nnoremap <leader>gl :Git log<cr>
+nnoremap <leader>gb :Git blame<cr>
+nnoremap <leader>gd :Git diff<cr>
+nnoremap <leader>gv :GV<cr>
+nnoremap <leader>gV :GV!<cr>
+nnoremap <leader>gB :Gbrowse<cr>
 

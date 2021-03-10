@@ -16,11 +16,12 @@ set nohlsearch
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
-set smartindent
 set nowrap
 set incsearch
 set updatetime=50
 set shortmess+=c
 set scrolloff=8
 set signcolumn=yes
+set colorcolumn=80
 set completeopt=menuone,noinsert,noselect
+set autoindent smartindent cindent

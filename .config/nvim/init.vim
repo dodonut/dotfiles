@@ -17,16 +17,19 @@ Plug 'honza/vim-snippets'
 Plug 'sbdchd/neoformat'
 Plug 'cdelledonne/vim-cmake'
 Plug 'antoinemadec/FixCursorHold.nvim'
+Plug 'RishabhRD/popfix'
+Plug 'RishabhRD/nvim-cheat.sh'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 
 Plug 'christianchiarulli/nvcode-color-schemes.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-" Debugger Plugins
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 call plug#end()
+
 
 source ~/dotfiles/.config/nvim/plugin/whichkey.vim
 source ~/dotfiles/.config/nvim/plugin/cmake.vim
@@ -40,5 +43,7 @@ source ~/dotfiles/.config/nvim/plugin/remaps.vim
 source ~/dotfiles/.config/nvim/plugin/sets.vim
 source ~/dotfiles/.config/nvim/plugin/vimspector.vim
 
-
-
+function! JavaFormat()
+    silent execute("!java -jar ~/jar/google-java-format.jar --replace %:p")
+    silent execute("e %")
+endfunction

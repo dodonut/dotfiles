@@ -23,19 +23,18 @@ let mapleader = ","
 " map jk to esc on insert mode
 inoremap jk <esc>
 " edit ~/.config/nvim/init.vim
-map <leader>ev :tabnew ~/dotfiles/.config/nvim/init.vim<cr>
-map <leader>sv :source ~/dotfiles/.config/nvim/init.vim<cr>
+nnoremap <leader>ev :tabnew ~/dotfiles/.config/nvim/init.vim<cr>
+nnoremap <leader>sv :source ~/dotfiles/.config/nvim/init.vim<cr>
 
 " close tab or buffer
-map <leader>x :close<cr>
+nnoremap <leader>x :close<cr>
 
 nnoremap <leader>, :w<CR>
-" nnoremap ; :
-
+nnoremap : ;
+nnoremap ; :
 
 " does not work on go files because of vim-go mapping for :GoDef on same key,,
 nnoremap <C-t> :tabnew<cr>
-
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 

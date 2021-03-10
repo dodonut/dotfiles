@@ -185,7 +185,7 @@ assign [class="Microsoft Teams - Preview"] $ws9
 assign [class="spotify"] $ws9
 
 exec touchpad-indicator
-exec feh --bg-scale ~/Pictures/mhw.jpg
+exec feh --bg-scale ~/Pictures/space.jpg
 exec setxkbmap us
 exec_always xrandr --output HDMI-1 --mode 1920x1080 --output eDP-1 --same-as HDMI-1
 exec_always --no-startup-id mate-settings-daemon
