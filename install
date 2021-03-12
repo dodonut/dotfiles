@@ -12,6 +12,7 @@ done
 
 mkdir -p ~/.config/i3
 mkdir -p ~/.config/nvim
+mkdir -p ~/.config/nvim/lua
 mkdir -p ~/.config/nvim/plugin
 mkdir -p ~/.config/lf
 for dir in $(ls ./.config)
@@ -27,4 +28,10 @@ for file in $(ls ./.config/nvim/plugin)
 do
     rm ~/.config/nvim/plugin/$file 2> /dev/null
     ln -s ~/dotfiles/.config/nvim/plugin/$file ~/.config/nvim/plugin/$file
+done
+
+for file in $(ls ./.config/nvim/lua)
+do
+    rm ~/.config/nvim/lua/$file 2> /dev/null
+    ln -s ~/dotfiles/.config/nvim/lua/$file ~/.config/nvim/lua/$file
 done

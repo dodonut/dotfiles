@@ -1,6 +1,10 @@
 
 nnoremap <leader>ut :UndotreeToggle<CR> :UndotreeFocus<cr>
-nnoremap <leader>k :CocCommand explorer --toggle<cr>
+"nnoremap <leader>k :CocCommand explorer --toggle<cr>
+nnoremap <leader>k :NvimTreeToggle<cr>
+
+inoremap <silent><expr> <c-space> compe#complete()
+inoremap <silent><expr> <cr>      compe#confirm('<CR>')
 
 "navigation
 tnoremap <C-h> <C-\><C-n><C-w>h
@@ -36,14 +40,3 @@ nnoremap ; :
 " does not work on go files because of vim-go mapping for :GoDef on same key,,
 nnoremap <C-t> :tabnew<cr>
 
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction

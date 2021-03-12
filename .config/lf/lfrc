@@ -68,7 +68,7 @@ cmd delete ${{
     printf "$fx\n"
     printf "delete?[y/n]"
     read ans
-    [ $ans = "y" ] && rm -rf $fx
+    [ $ans = "y" ] && sudo rm -rf $fx
 }}
 
 # extract the current file with the right command
