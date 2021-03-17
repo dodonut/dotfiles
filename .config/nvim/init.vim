@@ -75,6 +75,7 @@ source ~/dotfiles/.config/nvim/plugin/nerdcomment.vim
 source ~/dotfiles/.config/nvim/plugin/remaps.vim
 source ~/dotfiles/.config/nvim/plugin/sets.vim
 source ~/dotfiles/.config/nvim/plugin/vimspector.vim
+source ~/dotfiles/.config/nvim/plugin/coc.vim
 
 
 luafile ~/dotfiles/.config/nvim/lua/galaxyline-config.lua
