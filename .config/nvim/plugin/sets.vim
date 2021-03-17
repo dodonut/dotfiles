@@ -25,3 +25,4 @@ set signcolumn=yes
 set colorcolumn=80
 set completeopt=menuone,noinsert,noselect
 set autoindent smartindent cindent
+set termguicolors

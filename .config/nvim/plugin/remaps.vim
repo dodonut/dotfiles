@@ -1,10 +1,7 @@
 
 nnoremap <leader>ut :UndotreeToggle<CR> :UndotreeFocus<cr>
-"nnoremap <leader>k :CocCommand explorer --toggle<cr>
-nnoremap <leader>k :NvimTreeToggle<cr>
-
-inoremap <silent><expr> <c-space> compe#complete()
-inoremap <silent><expr> <cr>      compe#confirm('<CR>')
+"nnoremap <leader>k :NvimTreeToggle<cr>
+nnoremap <leader>k :CocCommand explorer --toggle<cr>
 
 "navigation
 tnoremap <C-h> <C-\><C-n><C-w>h
@@ -24,16 +21,19 @@ nnoremap <down> :bprevious<cr>
 " Config section
 let mapleader = ","
 
-" map jk to esc on insert mode
-inoremap jk <esc>
-" edit ~/.config/nvim/init.vim
+" better than Esc
+inoremap jk <esc> 
+" source and edit vim file
 nnoremap <leader>ev :tabnew ~/dotfiles/.config/nvim/init.vim<cr>
 nnoremap <leader>sv :source ~/dotfiles/.config/nvim/init.vim<cr>
 
 " close tab or buffer
 nnoremap <leader>x :close<cr>
 
+" save file
 nnoremap <leader>, :w<CR>
+
+" greatest remap everrrrrrr
 nnoremap : ;
 nnoremap ; :
 

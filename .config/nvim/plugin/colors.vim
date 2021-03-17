@@ -32,7 +32,7 @@ if (has("termguicolors"))
 endif
 
 " Misc
-highlight TSError guifg=#F44747
+highlight TSError guifg=#F44747 
 highlight TSPunctDelimiter guifg=#ABB2BF
 highlight TSPunctBracket guifg=#ABB2BF
 highlight TSPunctSpecial guifg=#ABB2BF
