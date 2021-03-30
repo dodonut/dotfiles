@@ -17,12 +17,12 @@ nnoremap <leader>de :call vimspector#Reset()<CR>
 
 nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
 
-nmap <leader>dl <Plug>VimspectorStepInto
-nmap <leader>dj <Plug>VimspectorStepOver
-nmap <leader>dk <Plug>VimspectorStepOut
-nmap <leader>d_ <Plug>VimspectorRestart
+nnoremap <leader>dl <Plug>VimspectorStepInto
+nnoremap <leader>dj <Plug>VimspectorStepOver
+nnoremap <leader>dk <Plug>VimspectorStepOut
+nnoremap <leader>d_ <Plug>VimspectorRestart
 nnoremap <leader>d<space> :call vimspector#Continue()<CR>
 
-nmap <leader>drc <Plug>VimspectorRunToCursor
-nmap <leader>db <Plug>VimspectorToggleBreakpoint
-nmap <leader>dB <Plug>VimspectorToggleConditionalBreakpoint
+nnoremap <leader>drc <Plug>VimspectorRunToCursor
+nnoremap <leader>db <Plug>VimspectorToggleBreakpoint
+nnoremap <leader>dB <Plug>VimspectorToggleConditionalBreakpoint

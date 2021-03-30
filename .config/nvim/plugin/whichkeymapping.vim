@@ -13,7 +13,14 @@ let g:which_key_map['ut'] = [ ':UndotreeToggle<cr> :UndotreeFocus<cr>'      , 'u
 let g:which_key_map['ev'] = [ ':tabnew ~/dotfiles/.config/nvim/init.vim<cr>'      , 'open vimrc']
 let g:which_key_map['sv'] = [ ':source ~/dotfiles/.config/nvim/init.vim<cr>'      , 'source vimrc']
 let g:which_key_map['<space>a'] = [ 'nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>'      , 'list all diagnostics']
-
+let g:which_key_map.t = {
+      \ 'name' : '+terminal' ,
+      \ ';' : [':FloatermNew --wintype=popup --height=10 --position=bottom'        , 'terminal'],
+      \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
+      \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
+      \ 't' : [':FloatermToggle'                                , 'toggle'],
+      \ 'h' : [':FloatermNew htop'                              , 'htop'],
+      \ }
 
 
 let g:which_key_map.d = {
