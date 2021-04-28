@@ -1,5 +1,6 @@
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
+
 vim.g.nvim_tree_follow = 1
 vim.g.nvim_tree_bindings = {
 	-- mappings

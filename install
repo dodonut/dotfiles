@@ -1,13 +1,13 @@
 #!/bin/bash
 
 rm ~/.tmux.conf
-ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
+ln -s ~/programming/dotfiles/.tmux.conf ~/.tmux.conf
 
 mkdir -p ~/.local/bin
 for file in $(ls ./.local/bin)
 do
     rm ~/.local/bin/$file 2> /dev/null
-    $(ln -s ~/dotfiles/.local/bin/$file ~/.local/bin/$file)
+    $(ln -s ~/programming/dotfiles/.local/bin/$file ~/.local/bin/$file)
 done
 
 mkdir -p ~/.config/i3
@@ -20,18 +20,18 @@ do
     for file in $(ls -p ./.config/$dir | grep -v /)
     do 
         rm ~/.config/$dir/$file 2> /dev/null
-        ln -s ~/dotfiles/.config/$dir/$file ~/.config/$dir/$file
+        ln -s ~/programming/dotfiles/.config/$dir/$file ~/.config/$dir/$file
     done
 done
 
 for file in $(ls ./.config/nvim/plugin)
 do
     rm ~/.config/nvim/plugin/$file 2> /dev/null
-    ln -s ~/dotfiles/.config/nvim/plugin/$file ~/.config/nvim/plugin/$file
+    ln -s ~/programming/dotfiles/.config/nvim/plugin/$file ~/.config/nvim/plugin/$file
 done
 
 for file in $(ls ./.config/nvim/lua)
 do
     rm ~/.config/nvim/lua/$file 2> /dev/null
-    ln -s ~/dotfiles/.config/nvim/lua/$file ~/.config/nvim/lua/$file
+    ln -s ~/programming/dotfiles/.config/nvim/lua/$file ~/.config/nvim/lua/$file
 done

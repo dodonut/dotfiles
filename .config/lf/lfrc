@@ -148,8 +148,5 @@ map U unselect
 map e openInVIM
 map E openFileBrowser
 map gt cd ~/.local/share/Trash/files
-map gpg cd ~/Documents/tilix/pgs/pagseguro-api
-map gps cd ~/Documents/tilix/pgs/scheduling-engine
 map gpp cd ~/Documents/personal/
-map gd cd ~/dotfiles
-map gG $lf -remote "send $id cd ~/Documents/personal/"
+map gd cd ~/programming/dotfiles

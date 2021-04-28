@@ -1,6 +1,44 @@
-" LSP config (the mappings used in the default file don't quite work right)
-set completeopt=menuone,noinsert,noselect
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+" This is where most of my basic keymapping goes.
+"   Plugin keymaps will all be found in `./after/plugin/*`
+
+
+" navigation
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <leader>v :vs<cr>
+nnoremap <leader>h :sp<cr>
+nnoremap <right> :tabnext<cr>
+nnoremap <left> :tabprevious<cr>
+nnoremap <up> :bnext<cr>
+nnoremap <down> :bprevious<cr>
+
+
+" close tab or buffer
+nnoremap <leader>x :close<cr>
+
+" save file
+nnoremap <leader>, :w!<CR>
+
+" greatest remap everrrrrrr
+nnoremap : ;
+nnoremap ; :
+
+vnoremap : ;
+vnoremap ; :
+
+" does not work on go files because of vim-go mapping for :GoDef on same key,,
+nnoremap <C-t> :tabnew<cr>
+
+" better <esc>
+inoremap jk <esc> 
+
+nnoremap <leader>sv <cmd>luafile ~/.config/nvim/init.lua<cr>
 
 nnoremap <silent><leader>ca :Lspsaga code_action<CR>
 vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>

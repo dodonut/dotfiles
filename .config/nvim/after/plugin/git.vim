@@ -1,4 +1,5 @@
 
+
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>ga :Git add .<cr>
 nnoremap <leader>gc :Git commit<cr>
