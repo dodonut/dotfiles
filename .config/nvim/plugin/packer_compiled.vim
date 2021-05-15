@@ -79,6 +79,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/viniciusmoraes/.local/share/nvim/site/pack/packer/start/auto-pairs"
   },
+  ["barbar.nvim"] = {
+    loaded = true,
+    path = "/home/viniciusmoraes/.local/share/nvim/site/pack/packer/start/barbar.nvim"
+  },
   ["completion-treesitter"] = {
     loaded = true,
     path = "/home/viniciusmoraes/.local/share/nvim/site/pack/packer/start/completion-treesitter"
@@ -103,9 +107,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/viniciusmoraes/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
   },
+  ["jedi-vim"] = {
+    loaded = true,
+    path = "/home/viniciusmoraes/.local/share/nvim/site/pack/packer/start/jedi-vim"
+  },
   ["lsp-status.nvim"] = {
     loaded = true,
     path = "/home/viniciusmoraes/.local/share/nvim/site/pack/packer/start/lsp-status.nvim"
+  },
+  ["lsp-trouble.nvim"] = {
+    loaded = true,
+    path = "/home/viniciusmoraes/.local/share/nvim/site/pack/packer/start/lsp-trouble.nvim"
   },
   ["lsp_extensions.nvim"] = {
     loaded = true,
@@ -122,6 +134,14 @@ _G.packer_plugins = {
   ["lspsaga.nvim"] = {
     loaded = true,
     path = "/home/viniciusmoraes/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
+  },
+  ["markdown-preview.nvim"] = {
+    loaded = true,
+    path = "/home/viniciusmoraes/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim"
+  },
+  neogit = {
+    loaded = true,
+    path = "/home/viniciusmoraes/.local/share/nvim/site/pack/packer/start/neogit"
   },
   ["nlua.nvim"] = {
     loaded = true,
@@ -147,6 +167,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/viniciusmoraes/.local/share/nvim/site/pack/packer/start/nvim-luadev"
   },
+  ["nvim-peekup"] = {
+    loaded = true,
+    path = "/home/viniciusmoraes/.local/share/nvim/site/pack/packer/start/nvim-peekup"
+  },
   ["nvim-tree.lua"] = {
     loaded = true,
     path = "/home/viniciusmoraes/.local/share/nvim/site/pack/packer/start/nvim-tree.lua"
@@ -167,6 +191,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/viniciusmoraes/.local/share/nvim/site/pack/packer/start/plenary.nvim"
   },
+  ["poet-v"] = {
+    loaded = true,
+    path = "/home/viniciusmoraes/.local/share/nvim/site/pack/packer/start/poet-v"
+  },
   ["popup.nvim"] = {
     loaded = true,
     path = "/home/viniciusmoraes/.local/share/nvim/site/pack/packer/start/popup.nvim"
@@ -182,10 +210,6 @@ _G.packer_plugins = {
   ["vim-commentary"] = {
     loaded = true,
     path = "/home/viniciusmoraes/.local/share/nvim/site/pack/packer/start/vim-commentary"
-  },
-  ["vim-fugitive"] = {
-    loaded = true,
-    path = "/home/viniciusmoraes/.local/share/nvim/site/pack/packer/start/vim-fugitive"
   },
   ["vim-go"] = {
     loaded = true,

@@ -5,7 +5,7 @@ require('vim.lsp.log').set_level("debug")
 
 _ = require('lspkind').init()
 
-require('vm.lsp.status').activate()
+local lsp_status = require('vm.lsp.status').activate()
 require('vm.lsp.handlers')
 
 local on_attach = function(client, bufnr)
@@ -16,6 +16,7 @@ local on_attach = function(client, bufnr)
 end
 
 
+require("trouble").setup{}
 require'lspinstall'.setup()
 local servers = require'lspinstall'.installed_servers()
 for _, server in pairs(servers) do

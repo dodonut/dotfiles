@@ -55,4 +55,7 @@ nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
 "nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent><space>a <cmd>lua vim.lsp.diagnostic.get_all()<CR>
+nnoremap <silent><space>a <cmd>LspTroubleToggle<CR>
+
+nnoremap <silent>    <leader>x :BufferClose<CR>
+

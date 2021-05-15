@@ -19,8 +19,14 @@ return require('packer').startup {
         use 'tjdevries/express_line.nvim'
         -- lua development
         use 'bfredl/nvim-luadev'
+        -- python
+        use 'davidhalter/jedi-vim'
+        -- virtual environment python
+        use 'petobens/poet-v'
         -- lsp
         use 'neovim/nvim-lspconfig'
+        -- lsp pretty diag
+        use 'folke/lsp-trouble.nvim'
         -- status on statusline
         use 'wbthomason/lsp-status.nvim'
         -- completion
@@ -58,6 +64,10 @@ return require('packer').startup {
         use { 'prettier/vim-prettier', run = 'yarn install' }
         -- treesitter
         use {
+            'iamcco/markdown-preview.nvim', 
+            run = function() vim.cmd [['TSUpdate' ]] end
+        }
+        use {
             'nvim-treesitter/completion-treesitter',
             run = function() vim.cmd [[TSUpdate]] end
           }
@@ -69,8 +79,11 @@ return require('packer').startup {
         use 'AndrewRadev/splitjoin.vim'
         -- Surround text objects easily
         use 'tpope/vim-surround'
-        -- fugitive
-        use 'tpope/vim-fugitive'
+        -- git
+        -- use 'tpope/vim-fugitive'
+        use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+        --look into registers with ""
+        use 'gennaro-tedesco/nvim-peekup'
         -- signs for git hunks
         use 'lewis6991/gitsigns.nvim'
 
@@ -78,6 +91,7 @@ return require('packer').startup {
         use 'christianchiarulli/nvcode-color-schemes.vim'
         use {'nvim-treesitter/nvim-treesitter', run = function() vim.cmd [[TSUpdate]] end}
 
+        use 'romgrk/barbar.nvim'
 
 
     end,
