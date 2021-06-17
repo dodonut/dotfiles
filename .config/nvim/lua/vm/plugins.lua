@@ -9,6 +9,8 @@ return require('packer').startup {
         use 'jiangmiao/auto-pairs'
         -- lua dev
         use 'tjdevries/nlua.nvim'
+        -- vim cmake
+        use 'cdelledonne/vim-cmake'
         -- vim-go
         use 'fatih/vim-go'
         -- logs
@@ -19,10 +21,6 @@ return require('packer').startup {
         use 'tjdevries/express_line.nvim'
         -- lua development
         use 'bfredl/nvim-luadev'
-        -- python
-        use 'davidhalter/jedi-vim'
-        -- virtual environment python
-        use 'petobens/poet-v'
         -- lsp
         use 'neovim/nvim-lspconfig'
         -- lsp pretty diag
@@ -58,7 +56,7 @@ return require('packer').startup {
         use 'mhinz/vim-lookup'
         -- icons
         use 'kyazdani42/nvim-web-devicons'
-        -- tree 
+        -- tree
         use 'kyazdani42/nvim-tree.lua'
         -- formatter
         use { 'prettier/vim-prettier', run = 'yarn install' }

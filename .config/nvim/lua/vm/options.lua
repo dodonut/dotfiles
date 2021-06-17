@@ -2,8 +2,6 @@
 local opt = vim.opt
 
 -- Ignore compiled files
-opt.wildignore = '__pycache__'
-opt.wildignore = opt.wildignore + { '*.o' , '*~', '*.pyc', '*pycache*' }
 
 opt.wildmode = {'longest', 'list', 'full'}
 

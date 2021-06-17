@@ -1,7 +1,9 @@
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
-
+vim.g.nvim_tree_ignore = { ".git", "node_modules", ".cache" }
 vim.g.nvim_tree_follow = 1
+vim.g.nvim_tree_git_hl = 1
+vim.g.nvim_tree_highlight_opened_files = 1
 vim.g.nvim_tree_bindings = {
 	-- mappings
 	["<CR>"]           = tree_cb("edit"),

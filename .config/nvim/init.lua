@@ -14,13 +14,12 @@ vim.g.mapleader = ','
 --  See `./lua/vm/globals/*.lua` for more information.
 require('vm.globals')
 
-require('plugin')
-
 -- Load packer.nvim files
 require('vm.plugins')
 
 -- Load neovim options
 require('vm.options')
+require('plugin')
 
 -- Neovim builtin LSP configuration
 require('vm.lsp')
