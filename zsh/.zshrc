@@ -17,22 +17,38 @@ else
   export EDITOR='nvim'
 fi
 
-alias vc="dir=$(pwd); cd ~/.config/nvim; vim; cd $dir;"
+# alias vc="dir=$(pwd); cd ~/.config/nvim; vim; cd $dir;"
+alias vc=VimFiles . " > /dev/null"
 alias zc="vim ~/.zshrc"
+alias rn="ranger"
+
+function VimFiles() {
+    pushd $(pwd) > /dev/null
+    cd $HOME/.config/nvim
+    vim .;
+    popd > /dev/null
+}
+
+
 alias ohmyzsh="vim ~/.oh-my-zsh"
 
 export PATH=$HOME/dev/eclipse/eclipse.jdt.ls/scripts:$PATH
 
 export EDITOR='vim'
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$nvm_dir/nvm.sh" ] && \. "$nvm_dir/nvm.sh"  # this loads nvm
+[ -s "$nvm_dir/bash_completion" ] && \. "$nvm_dir/bash_completion"  # this loads nvm bash_completion
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export JAR=$HOME/dev/eclipse/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_1.6.200.v20210416-2027.jar
 export JDTLS_CONFIG=$HOME/dev/eclipse/eclipse.jdt.ls/config_linux
 export WORKSPACE=$HOME/workspace
+export  RANGER_LOAD_DEFAULT_RC=false
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 alias luamake=/home/viniciusmoraes/programming/git-repos/lua-language-server/3rd/luamake/luamake
 

@@ -12,8 +12,3 @@ vim.cmd[[
 
 require('options')
 require('plugin')
-
-
-
-
-

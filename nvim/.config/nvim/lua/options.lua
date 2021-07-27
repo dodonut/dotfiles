@@ -13,6 +13,8 @@ opt.wildmode = 'longest:full,full'
 
 opt.wildoptions = 'pum'
 
+
+opt.modifiable = true
 opt.background     = 'dark' -- dark background
 opt.showmode       = false
 opt.showcmd        = true
@@ -30,7 +32,7 @@ opt.splitright     = true  -- Prefer windows splitting to the right
 opt.splitbelow     = true  -- Prefer windows splitting to the bottom
 opt.updatetime     = 1000  -- Make updates happen faster
 opt.hlsearch       = false -- I wouldn't use this without my DoNoHL function
-opt.scrolloff      = 10    -- Make it so there are always ten lines below my cursor
+-- opt.scrolloff      = 10    -- Make it so there are always ten lines below my cursor
 
 -- Tabs
 opt.autoindent     = true
@@ -46,7 +48,7 @@ opt.breakindent    = true
 opt.showbreak      = string.rep(' ', 3) -- Make it so that long lines wrap smartly
 opt.linebreak      = true
 
-opt.foldmethod     = 'marker'
+opt.foldmethod     = 'indent'
 opt.foldlevel      = 0
 opt.modelines      = 1
 
@@ -58,7 +60,6 @@ opt.inccommand     = 'split'
 opt.swapfile       = false -- Living on the edge
 opt.shada          = { "!", "'1000", "<50", "s10", "h" }
 
-opt.undodir        = '~/.vim/undodir'
 opt.undofile       = true
 opt.mouse          = 'n'
 

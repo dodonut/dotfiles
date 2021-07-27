@@ -3,11 +3,13 @@ return require('packer').startup {
         -- plug manager
         use 'wbthomason/packer.nvim'
         -- colorschemd
-        use 'morhetz/gruvbox'
+        -- use 'morhetz/gruvbox'
         -- auto pairs
         use 'jiangmiao/auto-pairs'
         --use 'windwp/nvim-autopairs'
 
+        -- foldmethods
+        use 'tmhedberg/SimpylFold'
         -- statusline
         use 'hoob3rt/lualine.nvim'
 
@@ -29,11 +31,16 @@ return require('packer').startup {
         use 'tpope/vim-surround'
         --git plugin
         use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+
+        -- diffview for better diff on commit 
+        use 'sindrets/diffview.nvim'
         -- signs for git hunks
         use 'lewis6991/gitsigns.nvim'
         -- colors
         use 'christianchiarulli/nvcode-color-schemes.vim'
 
+        --fzf comparizon
+        use { 'junegunn/fzf.vim', requires = 'junegunn/fzf', run = 'fzf#install()' }
         -- help char for end of line and blank spaces
         use 'tjdevries/cyclist.vim'
 
@@ -55,10 +62,16 @@ return require('packer').startup {
         -- tree
         use 'kyazdani42/nvim-tree.lua'
 
-        use {
-          'nvim-telescope/telescope.nvim',
-          requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
-        }
+        -- use {
+        --   'nvim-telescope/telescope.nvim',
+        --   requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}, { 'nvim-telescope/telescope-fzy-native.nvim' }}
+        -- }
+
+        -- testing
+        use { 'vim-test/vim-test', requires ={  'neomake/neomake', 'tpope/vim-dispatch' }}
+
+        -- pasting history
+        use 'svermeulen/vim-yoink'
 
         -- cheat.sh nvim
         use{  
