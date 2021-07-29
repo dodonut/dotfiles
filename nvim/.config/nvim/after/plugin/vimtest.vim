@@ -1,8 +1,8 @@
 if has('nvim')
-    let test#strategy='dispatch'
+    let test#strategy='neovim'
 else
     let test#strategy='vimterminal'
 endif
 
 let test#java#runner='gradletest'
-" let test#java#gradletest#executable=''
+let test#javascript#runner='jest'

@@ -97,6 +97,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/fzf"
   },
+  ["fzf-quickfix"] = {
+    loaded = true,
+    path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/fzf-quickfix"
+  },
   ["fzf.vim"] = {
     loaded = true,
     path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/fzf.vim"
@@ -121,10 +125,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/neogit"
   },
-  neomake = {
-    loaded = true,
-    path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/neomake"
-  },
   ["nlua.nvim"] = {
     loaded = true,
     path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/nlua.nvim"
@@ -141,6 +141,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/nvim-compe"
   },
+  ["nvim-jdtls"] = {
+    loaded = true,
+    path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/nvim-jdtls"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
@@ -148,6 +152,10 @@ _G.packer_plugins = {
   ["nvim-lspinstall"] = {
     loaded = true,
     path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/nvim-lspinstall"
+  },
+  ["nvim-lsputils"] = {
+    loaded = true,
+    path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/nvim-lsputils"
   },
   ["nvim-luapad"] = {
     loaded = true,
@@ -181,13 +189,21 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/popfix"
   },
+  ["popup.nvim"] = {
+    loaded = true,
+    path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/popup.nvim"
+  },
+  ["telescope-fzy-native.nvim"] = {
+    loaded = true,
+    path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim"
+  },
+  ["telescope.nvim"] = {
+    loaded = true,
+    path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+  },
   ["vim-commentary"] = {
     loaded = true,
     path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/vim-commentary"
-  },
-  ["vim-dispatch"] = {
-    loaded = true,
-    path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/vim-dispatch"
   },
   ["vim-surround"] = {
     loaded = true,
@@ -196,10 +212,6 @@ _G.packer_plugins = {
   ["vim-test"] = {
     loaded = true,
     path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/vim-test"
-  },
-  ["vim-yoink"] = {
-    loaded = true,
-    path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/vim-yoink"
   }
 }
 

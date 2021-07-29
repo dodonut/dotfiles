@@ -10,6 +10,7 @@ local protocol = require("vim.lsp.protocol")
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+    print('attaching ', client.name)
 	local function key(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
 	end
@@ -94,6 +95,16 @@ for _, server in pairs(servers) do
 	end
 end
 
+vim.cmd[[
+if has('nvim-0.5')
+  augroup lsp
+    au!
+    au FileType java lua require('jdtls_config').setup()
+  augroup end
+endif
+]]
+
+
 -- icon
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 	underline = true,
@@ -103,3 +114,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 		prefix = "",
 	},
 })
+
+return {
+    on_attach = on_attach
+}

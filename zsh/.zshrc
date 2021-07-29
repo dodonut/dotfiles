@@ -32,7 +32,7 @@ function VimFiles() {
 
 alias ohmyzsh="vim ~/.oh-my-zsh"
 
-export PATH=$HOME/dev/eclipse/eclipse.jdt.ls/scripts:$PATH
+export PATH=$HOME/.config/scripts:$PATH
 
 export EDITOR='vim'
 export NVM_DIR="$HOME/.nvm"
@@ -41,10 +41,10 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export JAR=$HOME/dev/eclipse/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_1.6.200.v20210416-2027.jar
-export JDTLS_CONFIG=$HOME/dev/eclipse/eclipse.jdt.ls/config_linux
+export JAR=$HOME/.config/java-lsp/plugins/org.eclipse.equinox.launcher_1.6.200.v20210416-2027.jar
+export JDTLS_CONFIG=$HOME/.config/java-lsp/config_linux
 export WORKSPACE=$HOME/workspace
-export  RANGER_LOAD_DEFAULT_RC=false
+export RANGER_LOAD_DEFAULT_RC=false
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

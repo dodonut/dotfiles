@@ -9,7 +9,7 @@ function! CtrlP()
 endfunction
 
 
-let opt = { 'options':['--info=inline', '--preview', '~/dev/scripts/fzfpreview {}']    }
+let opt = { 'options':['--info=inline', '--preview', '~/.config/scripts/fzfpreview {}']    }
 
 nnoremap <leader>ev <cmd>call fzf#vim#files('~/.config/nvim', opt)<cr>
 nnoremap <leader>fg <cmd>Rg<cr>
@@ -18,4 +18,5 @@ nnoremap <leader>fb <cmd>Buffers<cr>
 nnoremap <leader>fk <cmd>Maps<cr>
 nnoremap <leader>fh <cmd>Helptags<cr>
 nnoremap <leader>fc <cmd>Commands<cr>
+nnoremap <leader>fq <cmd>Quickfix<cr>
 nnoremap <c-p> <cmd>call CtrlP()<cr>

@@ -23,6 +23,8 @@ return require('packer').startup {
         -- completion
         use 'hrsh7th/nvim-compe'
 
+        -- lsp for java
+        use 'mfussenegger/nvim-jdtls'
         -- ultisnips
         use 'sirver/UltiSnips'
         -- Easily comment out lines or objects
@@ -32,7 +34,7 @@ return require('packer').startup {
         --git plugin
         use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
 
-        -- diffview for better diff on commit 
+        -- diffview for better diff on commit
         use 'sindrets/diffview.nvim'
         -- signs for git hunks
         use 'lewis6991/gitsigns.nvim'
@@ -51,6 +53,8 @@ return require('packer').startup {
         use 'tjdevries/nlua.nvim'
         use 'euclidianAce/BetterLua.vim'
 
+        use { 'fszymanski/fzf-quickfix', run = {'Quickfix'} }
+
         --tree sitter
         use {
                 'nvim-treesitter/nvim-treesitter',
@@ -62,17 +66,20 @@ return require('packer').startup {
         -- tree
         use 'kyazdani42/nvim-tree.lua'
 
-        -- use {
-        --   'nvim-telescope/telescope.nvim',
-        --   requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}, { 'nvim-telescope/telescope-fzy-native.nvim' }}
-        -- }
+        use {
+          'nvim-telescope/telescope.nvim',
+          requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}, { 'nvim-telescope/telescope-fzy-native.nvim' }}
+        }
 
         -- testing
-        use { 'vim-test/vim-test', requires ={  'neomake/neomake', 'tpope/vim-dispatch' }}
+        use { 'vim-test/vim-test' }
 
         -- pasting history
-        use 'svermeulen/vim-yoink'
+        -- use 'svermeulen/vim-yoink'
 
+        use {
+            'RishabhRD/nvim-lsputils', requires = { 'RishabhRD/popfix' }
+        }
         -- cheat.sh nvim
         use{  
             'RishabhRD/nvim-cheat.sh',

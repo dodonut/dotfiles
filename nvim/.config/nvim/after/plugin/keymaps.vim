@@ -33,7 +33,6 @@ nnoremap <C-n> :tabnew<cr>
 " better <esc>
 inoremap jk <esc> 
 
-" nnoremap <leader>sv :so ~/.config/nvim/init.lua<cr>
 nnoremap <leader>sv <cmd>lua require('functions').SourceFiles()<cr>
 nnoremap <c-e> 4<c-e>
 nnoremap <c-y> 4<c-y>
