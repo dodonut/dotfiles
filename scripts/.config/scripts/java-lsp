@@ -9,7 +9,7 @@
 
 # JAR="$HOME/dev/eclipse/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_*.jar"
 # -configuration "$HOME/dev/eclipse/eclipse.jdt.ls/config_linux" \
-JAR="$HOME/.config/java-lsp/plugins/org.eclipse.equinox.launcher_*.jar"
+JAR="$HOME/dev/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_*.jar"
 GRADLE_HOME=$GRADLE_HOME/bin/gradle $JAVA_HOME/bin/java \
   -Declipse.application=org.eclipse.jdt.ls.core.id1 \
   -Dosgi.bundles.defaultStartLevel=4 \
@@ -19,7 +19,7 @@ GRADLE_HOME=$GRADLE_HOME/bin/gradle $JAVA_HOME/bin/java \
   -Xms1g \
   -Xmx2G \
   -jar $(echo "$JAR") \
-  -configuration "$HOME/.config/java-lsp/config_linux" \
+  -configuration "$HOME/dev/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/config_linux" \
   -data "${1:-$HOME/workspace}" \
   --add-modules=ALL-SYSTEM \
   --add-opens java.base/java.util=ALL-UNNAMED \

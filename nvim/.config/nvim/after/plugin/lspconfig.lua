@@ -10,7 +10,6 @@ local protocol = require("vim.lsp.protocol")
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-    print('attaching ', client.name)
 	local function key(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
 	end
@@ -32,7 +31,7 @@ local on_attach = function(client, bufnr)
 	key("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
 	key("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
 	key("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-	-- key("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+	key("n", "gR", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	key("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
 	key("n", "<F3>", "<cmd>call MyFormatting()<cr>", opts)
 	--buf_set_keymap('n', '<C-j>', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)

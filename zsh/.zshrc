@@ -41,8 +41,8 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export JAR=$HOME/.config/java-lsp/plugins/org.eclipse.equinox.launcher_1.6.200.v20210416-2027.jar
-export JDTLS_CONFIG=$HOME/.config/java-lsp/config_linux
+export JAR=$HOME/dev/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_*.jar
+export JDTLS_CONFIG=$HOME/dev/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/config_linux
 export WORKSPACE=$HOME/workspace
 export RANGER_LOAD_DEFAULT_RC=false
 
