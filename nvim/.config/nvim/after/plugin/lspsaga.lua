@@ -43,6 +43,6 @@ sc('n', ',rn', '<cmd>Lspsaga rename<cr>', opts)
 sc('n', ',ca', '<cmd>Lspsaga code_action<cr>', opts)
 sc('n', 'gdn', '<cmd>Lspsaga diagnostic_jump_next<cr>', opts)
 sc('n', 'gdp', '<cmd>Lspsaga diagnostic_jump_prev<cr>', opts)
-sc('n', '<c-t>', '<cmd>Lspsaga open_floaterm<cr>', opts)
-sc('t', '<c-t>', '<cmd>Lspsaga close_floaterm<cr>', opts)
+sc('n', '<s-t>', '<cmd>Lspsaga open_floaterm<cr>', opts)
+sc('t', '<s-t>', '<cmd>Lspsaga close_floaterm<cr>', opts)
 

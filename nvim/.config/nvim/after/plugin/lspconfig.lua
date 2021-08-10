@@ -94,14 +94,14 @@ for _, server in pairs(servers) do
 	end
 end
 
-vim.cmd[[
-if has('nvim-0.5')
-  augroup lsp
-    au!
-    au FileType java lua require('jdtls_config').setup()
-  augroup end
-endif
-]]
+-- vim.cmd[[
+-- if has('nvim-0.5')
+--   augroup lsp
+--     au!
+--     au FileType java lua require('jdtls_config').setup()
+--   augroup end
+-- endif
+-- ]]
 
 
 -- icon

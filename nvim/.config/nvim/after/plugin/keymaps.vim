@@ -36,3 +36,6 @@ inoremap jk <esc>
 nnoremap <leader>sv <cmd>lua require('functions').SourceFiles()<cr>
 nnoremap <c-e> 4<c-e>
 nnoremap <c-y> 4<c-y>
+
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)

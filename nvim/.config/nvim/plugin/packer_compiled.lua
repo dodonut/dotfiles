@@ -189,21 +189,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/popfix"
   },
-  ["popup.nvim"] = {
-    loaded = true,
-    path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/popup.nvim"
-  },
-  ["telescope-fzy-native.nvim"] = {
-    loaded = true,
-    path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim"
-  },
-  ["telescope.nvim"] = {
-    loaded = true,
-    path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/telescope.nvim"
-  },
   ["vim-commentary"] = {
     loaded = true,
     path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/vim-commentary"
+  },
+  ["vim-easy-align"] = {
+    loaded = true,
+    path = "/home/usertqi/.local/share/nvim/site/pack/packer/start/vim-easy-align"
   },
   ["vim-surround"] = {
     loaded = true,
