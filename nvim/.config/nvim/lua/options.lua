@@ -1,6 +1,8 @@
 
 local opt = vim.opt
 
+
+
 -- Ignore compiled files
 
 opt.wildmode = {'longest', 'list', 'full'}

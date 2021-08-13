@@ -1,7 +1,6 @@
 
 
 if not pcall(require, 'compe') then
-    print('Nvim Compe not isntalled')
     return
 end
 

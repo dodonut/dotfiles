@@ -59,18 +59,6 @@ return require("packer").startup({
 			run = ":TSUpdate",
 		})
 
-		-- use({
-		-- 	"lambdalisue/fern.vim",
-		-- 	requires = {
-		-- 		"antoinemadec/FixCursorHold.nvim",
-		-- 		"lambdalisue/fern-renderer-nerdfont.vim",
-		-- 		"lambdalisue/fern-git-status.vim",
-		-- 		"lambdalisue/fern-hijack.vim",
-		-- 	},
-		-- })
-		-- nerd tree
-		-- use({ "preservim/nerdtree", requires = "ryanoasis/vim-devicons" })
-
 		-- tree
 		use({ "kyazdani42/nvim-tree.lua", requires = "kyazdani42/nvim-web-devicons" })
 

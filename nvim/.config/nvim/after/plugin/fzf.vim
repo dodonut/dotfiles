@@ -20,6 +20,11 @@ function! s:build_quickfix_list(lines)
   cc
 endfunction
 
+let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.8, 'relative': v:true, 'yoffset': 1 } }
+
+" uses ctrl-n
+" let g:fzf_history_dir = '~/.local/share/fzf-history'
+
 let g:fzf_action = {
   \ 'ctrl-q': function('s:build_quickfix_list'),
   \ 'ctrl-t': 'tab split',

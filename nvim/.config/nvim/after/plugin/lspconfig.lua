@@ -10,6 +10,7 @@ local protocol = require("vim.lsp.protocol")
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+
 	local function key(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
 	end
@@ -87,7 +88,6 @@ for _, server in pairs(servers) do
 			},
 		})
 	else
-		-- vim.cmd[[nnoremap <leader>= <cmd>lua vim.lsp.buf.formatting_seq_sync()<cr> :w<cr>]]
 		lspconfig[server].setup({
 			on_attach = on_attach,
 		})
@@ -103,7 +103,6 @@ end
 -- endif
 -- ]]
 
-
 -- icon
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 	underline = true,
@@ -115,5 +114,5 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 })
 
 return {
-    on_attach = on_attach
+	on_attach = on_attach,
 }

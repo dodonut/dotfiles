@@ -1,4 +1,8 @@
 
+let g:neosolorized_termtrans=1
+" runtime ./after/colors/nvcode.vim
+colorscheme nvcode
+
 " configure nvcode-color-schemes
 let g:nvcode_termcolors=256
 
