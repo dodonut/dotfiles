@@ -10,6 +10,8 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <leader>v :vs<cr>
 nnoremap <leader>h :sp<cr>
+nnoremap <c-right> :bnext<cr>
+nnoremap <c-left> :bprevious<cr>
 nnoremap <right> :tabnext<cr>
 nnoremap <left> :tabprevious<cr>
 "nnoremap <right> :bnext<cr>
@@ -29,9 +31,6 @@ vnoremap : ;
 vnoremap ; :
 
 nnoremap <C-n> :tabnew<cr>
-
-" better <esc>
-inoremap jk <esc> 
 
 nnoremap <leader>sv <cmd>lua require('functions').SourceFiles()<cr>
 nnoremap <c-e> 4<c-e>

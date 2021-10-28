@@ -5,7 +5,6 @@ return require("packer").startup({
 		-- use 'morhetz/gruvbox'
 		-- auto pairs
 		use("jiangmiao/auto-pairs")
-		--use 'windwp/nvim-autopairs'
 
 		-- foldmethods
 		use("tmhedberg/SimpylFold")
@@ -15,17 +14,22 @@ return require("packer").startup({
 		-- lsp
 		use("neovim/nvim-lspconfig")
 		use("kabouzeid/nvim-lspinstall")
+
+		use("ray-x/lsp_signature.nvim")
 		-- improve lsp
-		use("glepnir/lspsaga.nvim")
+		-- use("glepnir/lspsaga.nvim")
 		-- colors for lsp errors
 		use("folke/lsp-colors.nvim")
 		-- completion
-		use("hrsh7th/nvim-compe")
-
+		use({
+			"hrsh7th/cmp-nvim-lsp",
+			requires = { "hrsh7th/cmp-buffer", "hrsh7th/nvim-cmp", "quangnguyen30192/cmp-nvim-ultisnips" },
+		})
 		-- lsp for java
-		use("mfussenegger/nvim-jdtls")
+		use({ "mfussenegger/nvim-jdtls", requires = "mfussenegger/nvim-dap" })
+		-- use()
 		-- ultisnips
-		use("sirver/UltiSnips")
+		use({ "sirver/UltiSnips", requires = "honza/vim-snippets" })
 		-- Easily comment out lines or objects
 		use("tpope/vim-commentary")
 		-- Surround text objects easily
@@ -51,8 +55,6 @@ return require("packer").startup({
 		use("tjdevries/nlua.nvim")
 		use("euclidianAce/BetterLua.vim")
 
-		use({ "fszymanski/fzf-quickfix", run = { "Quickfix" } })
-
 		--tree sitter
 		use({
 			"nvim-treesitter/nvim-treesitter",
@@ -60,16 +62,24 @@ return require("packer").startup({
 		})
 
 		-- tree
-		use({ "kyazdani42/nvim-tree.lua", requires = "kyazdani42/nvim-web-devicons" })
+		use({
+			"kyazdani42/nvim-tree.lua",
+			requires = "kyazdani42/nvim-web-devicons",
+			config = function()
+				require("nvim-tree").setup({})
+			end,
+		})
 
-		-- use({
-		-- 	"nvim-telescope/telescope.nvim",
-		-- 	requires = {
-		-- 		{ "nvim-lua/popup.nvim" },
-		-- 		{ "nvim-lua/plenary.nvim" },
-		-- 		{ "nvim-telescope/telescope-fzy-native.nvim" },
-		-- 	},
-		-- })
+		use({
+			"nvim-telescope/telescope.nvim",
+			requires = {
+				{ "nvim-lua/popup.nvim" },
+				{ "nvim-lua/plenary.nvim" },
+				{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+			},
+		})
+
+		-- use('romgrk/barbar.nvim')
 
 		-- testing
 		use({ "vim-test/vim-test" })
@@ -87,6 +97,10 @@ return require("packer").startup({
 			requires = { "RishabhRD/popfix" },
 		})
 
-        use 'junegunn/vim-easy-align'
+		-- use ( {'neoclide/coc.nvim', branch = 'release'} )
+
+		use({ "kevinhwang91/nvim-bqf", ft = "qf" })
+
+		use("junegunn/vim-easy-align")
 	end,
 })

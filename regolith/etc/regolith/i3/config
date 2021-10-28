@@ -666,3 +666,11 @@ set_from_resource $i3-wm.program.2 i3-wm.program.2 :
 exec --no-startup-id $i3-wm.program.2
 set_from_resource $i3-wm.program.3 i3-wm.program.3 :
 exec --no-startup-id $i3-wm.program.3
+
+
+assign [class="jetbrains-idea-ce"]=$ws1
+assign [class="Brave-browser"]=$ws2
+assign [class="Slack"]=$ws2
+assign [class="whatsdesk"]=$ws2
+assign [class="Microsoft Teams - Preview"]=$ws2
+assign [class="Cisco AnyConnect Secure Mobility Client"]=$ws2

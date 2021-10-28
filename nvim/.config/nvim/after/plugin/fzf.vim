@@ -1,5 +1,5 @@
 
-function! CtrlP()
+function! CtrlP_fzf()
     silent! !git rev-parse --is-inside-work-tree
     if v:shell_error == 0
         execute "GFiles"
@@ -20,13 +20,12 @@ function! s:build_quickfix_list(lines)
   cc
 endfunction
 
-let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.8, 'relative': v:true, 'yoffset': 1 } }
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8, 'relative': v:true } }
 
 " uses ctrl-n
 " let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 let g:fzf_action = {
-  \ 'ctrl-q': function('s:build_quickfix_list'),
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
@@ -40,5 +39,6 @@ nnoremap <leader>fb <cmd>Buffers<cr>
 nnoremap <leader>fk <cmd>Maps<cr>
 nnoremap <leader>fh <cmd>Helptags<cr>
 nnoremap <leader>fc <cmd>Commands<cr>
-nnoremap <leader>fq <cmd>Quickfix<cr>
-nnoremap <c-p> <cmd>call CtrlP()<cr>
+nnoremap <leader>fs <cmd>Snippets<cr>
+nnoremap <c-p> <cmd>call CtrlP_fzf()<cr>
+nnoremap <c-f> :Files<cr>

@@ -1,5 +1,4 @@
 if not pcall(require, 'lsp-colors') then
-    print('LSP colors not installed')
     return
 end
 

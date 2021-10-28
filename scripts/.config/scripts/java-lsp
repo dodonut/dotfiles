@@ -1,15 +1,6 @@
 #!/usr/bin/env bash
 
-# NOTE:
-# This doesn't work as is on Windows. You'll need to create an equivalent `.bat` file instead
-#
-# NOTE:
-# If you're not using Linux you'll need to adjust the `-configuration` option
-# to point to the `config_mac' or `config_win` folders depending on your system.
-
-# JAR="$HOME/dev/eclipse/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_*.jar"
-# -configuration "$HOME/dev/eclipse/eclipse.jdt.ls/config_linux" \
-JAR="$HOME/dev/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_*.jar"
+JAR="$HOME/dev/jdt/plugins/org.eclipse.equinox.launcher_*.jar"
 GRADLE_HOME=$GRADLE_HOME/bin/gradle $JAVA_HOME/bin/java \
   -Declipse.application=org.eclipse.jdt.ls.core.id1 \
   -Dosgi.bundles.defaultStartLevel=4 \
@@ -19,7 +10,7 @@ GRADLE_HOME=$GRADLE_HOME/bin/gradle $JAVA_HOME/bin/java \
   -Xms1g \
   -Xmx2G \
   -jar $(echo "$JAR") \
-  -configuration "$HOME/dev/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/config_linux" \
+  -configuration "$HOME/dev/jdt/config_linux" \
   -data "${1:-$HOME/workspace}" \
   --add-modules=ALL-SYSTEM \
   --add-opens java.base/java.util=ALL-UNNAMED \

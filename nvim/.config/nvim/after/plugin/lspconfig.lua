@@ -1,16 +1,13 @@
 if not pcall(require, "lspconfig") then
-	print("LSP not installed")
 	return
 end
 
 --vim.lsp.set_log_level("debug")
-local nvim_lsp = require("lspconfig")
 local protocol = require("vim.lsp.protocol")
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-
 	local function key(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
 	end
@@ -28,16 +25,19 @@ local on_attach = function(client, bufnr)
 	key("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	key("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
 	key("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+	key("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 	key("n", "<space>d", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
 	key("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
 	key("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
 	key("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-	key("n", "gR", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+	key("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	key("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
 	key("n", "<F3>", "<cmd>call MyFormatting()<cr>", opts)
-	--buf_set_keymap('n', '<C-j>', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-	--buf_set_keymap('n', '<S-C-j>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 	key("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+
+    key('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+    key('i', '<c-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+    key('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
 
 	--protocol.SymbolKind = { }
 	protocol.CompletionItemKind = {
@@ -73,35 +73,39 @@ end
 local _, lspconfig = pcall(require, "lspconfig")
 require("lspinstall").setup()
 
-local servers = require("lspinstall").installed_servers()
-for _, server in pairs(servers) do
-	if server == "lua" then
-		lspconfig[server].setup({
-			on_attach = on_attach,
-			settings = {
-				Lua = {
-					diagnostics = {
-						-- Get the language server to recognize the `vim` global
-						globals = { "vim" },
+local function setup_servers()
+	require("lspinstall").setup()
+	local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	local servers = require("lspinstall").installed_servers()
+	for _, server in pairs(servers) do
+		if server == "lua" then
+			lspconfig[server].setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+				settings = {
+					Lua = {
+						diagnostics = {
+							-- Get the language server to recognize the `vim` global
+							globals = { "vim" },
+						},
 					},
 				},
-			},
-		})
-	else
-		lspconfig[server].setup({
-			on_attach = on_attach,
-		})
+			})
+		else
+			lspconfig[server].setup({
+				on_attach = on_attach,
+			})
+		end
 	end
 end
 
--- vim.cmd[[
--- if has('nvim-0.5')
---   augroup lsp
---     au!
---     au FileType java lua require('jdtls_config').setup()
---   augroup end
--- endif
--- ]]
+setup_servers()
+
+-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+require("lspinstall").post_install_hook = function()
+	setup_servers() -- reload installed servers
+	vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+end
 
 -- icon
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {

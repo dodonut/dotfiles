@@ -6,7 +6,7 @@ ZSH_THEME="apple"
 # ZSH_THEME="amuse"
 
 
-plugins=(git aws)
+plugins=(git aws gradle-completion)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -46,6 +46,7 @@ export JDTLS_CONFIG=$HOME/dev/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/r
 export WORKSPACE=$HOME/workspace
 export RANGER_LOAD_DEFAULT_RC=false
 
+export SPRING_PROFILES_ACTIVE=qa
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

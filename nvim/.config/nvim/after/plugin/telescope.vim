@@ -1,22 +1,16 @@
 
-" if not pcall(require, 'telescope') then
-"     print("Telescope Not installed")
-"     return
-" end
+if !exists(':Telescope')
+    finish
+endif
 
-" if !exists(':Telescope')
-"     echo 'Telescope not installed'
-"     finish
-" endif
-
-" function! CtrlP()
-"     silent! !git rev-parse --is-inside-work-tree
-"     if v:shell_error == 0
-"         execute "lua require('tscope.functions').git_files()"
-"     else
-"         execute "lua require('tscope.functions').find_files()"
-"     endif
-" endfunction
+function! CtrlP()
+    silent! !git rev-parse --is-inside-work-tree
+    if v:shell_error == 0
+        execute "lua require('tscope.functions').git_files()"
+    else
+        execute "lua require('tscope.functions').find_files()"
+    endif
+endfunction
 
 
 
