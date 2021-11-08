@@ -28,7 +28,7 @@ function M.git_files()
 	require("telescope.builtin").git_files({
 		path_display = function(opts, path)
 			local tail = require("telescope.utils").path_tail(path)
-			return string.format("%s (%s)", tail, path)
+			return string.format("%s - %s", tail, path)
 		end,
 		prompt = " ~ git files ~ ",
 
@@ -53,6 +53,10 @@ end
 
 function M.find_files()
 	require("telescope.builtin").find_files({
+		path_display = function(opts, path)
+			local tail = require("telescope.utils").path_tail(path)
+			return string.format("%s - %s", tail, path)
+		end,
 		prompt = " ~ all files ~ ",
 
 		layout_strategy = "horizontal",
@@ -100,5 +104,6 @@ function M.edit_neovim()
 end
 
 require("telescope").load_extension("fzf")
+require('telescope').load_extension('ultisnips')
 
 return M

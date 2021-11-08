@@ -32,7 +32,6 @@ function VimFiles() {
 
 alias ohmyzsh="vim ~/.oh-my-zsh"
 
-export PATH=$HOME/.config/scripts:$PATH
 
 export EDITOR='vim'
 export NVM_DIR="$HOME/.nvm"
@@ -56,3 +55,6 @@ alias luamake=/home/viniciusmoraes/programming/git-repos/lua-language-server/3rd
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/usertqi/.sdkman"
 [[ -s "/home/usertqi/.sdkman/bin/sdkman-init.sh" ]] && source "/home/usertqi/.sdkman/bin/sdkman-init.sh"
+
+export LD_LIBRARY_PATH=/opt/oracle/instantclient_21_3:$LD_LIBRARY_PATH
+export PATH=$HOME/.config/scripts:/opt/oracle/instantclient_21_3:$PATH

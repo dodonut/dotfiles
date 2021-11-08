@@ -23,11 +23,16 @@ return require("packer").startup({
 		-- completion
 		use({
 			"hrsh7th/cmp-nvim-lsp",
-			requires = { "hrsh7th/cmp-buffer", "hrsh7th/nvim-cmp", "quangnguyen30192/cmp-nvim-ultisnips" },
+			requires = {
+				"hrsh7th/cmp-buffer",
+				"hrsh7th/nvim-cmp",
+				"hrsh7th/cmp-path",
+				"hrsh7th/cmp-nvim-lua",
+				"quangnguyen30192/cmp-nvim-ultisnips",
+			},
 		})
+		use("onsails/lspkind-nvim")
 		-- lsp for java
-		use({ "mfussenegger/nvim-jdtls", requires = "mfussenegger/nvim-dap" })
-		-- use()
 		-- ultisnips
 		use({ "sirver/UltiSnips", requires = "honza/vim-snippets" })
 		-- Easily comment out lines or objects
@@ -42,7 +47,8 @@ return require("packer").startup({
 		-- signs for git hunks
 		use("lewis6991/gitsigns.nvim")
 		-- colors
-		use("christianchiarulli/nvcode-color-schemes.vim")
+		-- use("christianchiarulli/nvcode-color-schemes.vim")
+		use("marko-cerovac/material.nvim")
 
 		--fzf comparizon
 		use({ "junegunn/fzf.vim", requires = "junegunn/fzf", run = "fzf#install()" })
@@ -76,6 +82,7 @@ return require("packer").startup({
 				{ "nvim-lua/popup.nvim" },
 				{ "nvim-lua/plenary.nvim" },
 				{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+				{ "fhill2/telescope-ultisnips.nvim" },
 			},
 		})
 
@@ -97,10 +104,54 @@ return require("packer").startup({
 			requires = { "RishabhRD/popfix" },
 		})
 
+		-- shows all diagnostics across files
+		use({
+			"folke/lsp-trouble.nvim",
+			cmd = "LspTrouble",
+			config = function()
+				-- Can use P to toggle auto movement
+				require("trouble").setup({
+					auto_preview = false,
+					auto_fold = true,
+				})
+			end,
+		})
+
 		-- use ( {'neoclide/coc.nvim', branch = 'release'} )
 
 		use({ "kevinhwang91/nvim-bqf", ft = "qf" })
 
 		use("junegunn/vim-easy-align")
+
+		-- notifications
+		use("rcarriga/nvim-notify")
+
+		-- cursor hold lag and performance bug
+		use({
+			"antoinemadec/FixCursorHold.nvim",
+			run = function()
+				vim.g.curshold_updatime = 1000
+			end,
+		})
+
+		-- Better profiling output for startup.
+		use({
+			"dstein64/vim-startuptime",
+			cmd = "StartupTime",
+		})
+
+		--sql
+		use("tpope/vim-dadbod")
+		use("kristijanhusak/vim-dadbod-completion")
+		use("kristijanhusak/vim-dadbod-ui")
+		use("skywind3000/vim-quickui")
+
+		-- look into how to make it work
+		--debugger
+		use("mfussenegger/nvim-jdtls")
+		use("mfussenegger/nvim-dap")
+		use("rcarriga/nvim-dap-ui")
+		use("theHamsta/nvim-dap-virtual-text")
+		use("nvim-telescope/telescope-dap.nvim")
 	end,
 })

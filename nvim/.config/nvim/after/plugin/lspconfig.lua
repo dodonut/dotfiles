@@ -2,9 +2,6 @@ if not pcall(require, "lspconfig") then
 	return
 end
 
---vim.lsp.set_log_level("debug")
-local protocol = require("vim.lsp.protocol")
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -35,38 +32,9 @@ local on_attach = function(client, bufnr)
 	key("n", "<F3>", "<cmd>call MyFormatting()<cr>", opts)
 	key("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 
-    key('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-    key('i', '<c-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-    key('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-
-	--protocol.SymbolKind = { }
-	protocol.CompletionItemKind = {
-		"", -- Text
-		"", -- Method
-		"", -- Function
-		"", -- Constructor
-		"", -- Field
-		"", -- Variable
-		"", -- Class
-		"ﰮ", -- Interface
-		"", -- Module
-		"", -- Property
-		"", -- Unit
-		"", -- Value
-		"", -- Enum
-		"", -- Keyword
-		"﬌", -- Snippet
-		"", -- Color
-		"", -- File
-		"", -- Reference
-		"", -- Folder
-		"", -- EnumMember
-		"", -- Constant
-		"", -- Struct
-		"", -- Event
-		"ﬦ", -- Operator
-		"", -- TypeParameter
-	}
+	key("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+	key("i", "<c-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+	key("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 end
 
 --setup language servers
@@ -116,7 +84,26 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 		prefix = "",
 	},
 })
-
+vim.lsp.handlers["textDocument/hover"] = function(_, method, result)
+	vim.lsp.util.focusable_float(method, function()
+		if not (result and result.contents) then
+			vim.notify("No information avalailable")
+			return
+		end
+		local markdown_lines = vim.lsp.util.convert_input_to_markdown_lines(result.contents)
+		markdown_lines = vim.lsp.util.trim_empty_lines(markdown_lines)
+		if vim.tbl_isempty(markdown_lines) then
+			-- return { 'No information available' }
+			return
+		end
+		local bufnr, winnr = vim.lsp.util.fancy_floating_markdown(markdown_lines, {
+			pad_left = 1,
+			pad_right = 1,
+		})
+		vim.lsp.util.close_preview_autocmd({ "CursorMoved", "BufHidden" }, winnr)
+		return bufnr, winnr
+	end)
+end
 return {
 	on_attach = on_attach,
 }

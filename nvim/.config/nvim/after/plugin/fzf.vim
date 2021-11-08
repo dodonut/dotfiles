@@ -32,13 +32,13 @@ let g:fzf_action = {
 
 let opt = { 'options':['--info=inline', '--preview', '~/.config/scripts/fzfpreview {}']    }
 
-nnoremap <leader>ev <cmd>call fzf#vim#files('~/.config/nvim', opt)<cr>
-nnoremap <leader>fg <cmd>Rg<cr>
-nnoremap <leader>fl <cmd>Lines<cr>
-nnoremap <leader>fb <cmd>Buffers<cr>
-nnoremap <leader>fk <cmd>Maps<cr>
-nnoremap <leader>fh <cmd>Helptags<cr>
-nnoremap <leader>fc <cmd>Commands<cr>
-nnoremap <leader>fs <cmd>Snippets<cr>
-nnoremap <c-p> <cmd>call CtrlP_fzf()<cr>
-nnoremap <c-f> :Files<cr>
+" nnoremap <leader>ev <cmd>call fzf#vim#files('~/.config/nvim', opt)<cr>
+" nnoremap <leader>fg <cmd>Rg<cr>
+" nnoremap <leader>fl <cmd>Lines<cr>
+" nnoremap <leader>fb <cmd>Buffers<cr>
+" nnoremap <leader>fk <cmd>Maps<cr>
+" nnoremap <leader>fh <cmd>Helptags<cr>
+" nnoremap <leader>fc <cmd>Commands<cr>
+" nnoremap <leader>fs <cmd>Snippets<cr>
+" nnoremap <c-p> <cmd>call CtrlP_fzf()<cr>
+" nnoremap <c-f> :Files<cr>

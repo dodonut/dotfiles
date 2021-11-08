@@ -1,3 +1,6 @@
+local lspkind = require("lspkind")
+lspkind.init()
+
 -- Setup nvim-cmp.
 local cmp = require("cmp")
 
@@ -18,20 +21,34 @@ cmp.setup({
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
 		["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
 	},
-	sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
-		-- { name = 'vsnip' }, -- For vsnip users.
-		-- { name = 'luasnip' }, -- For luasnip users.
+	sources = {
+		{ name = "nvim_lua" },
+		{ name = "nvim_lsp", max_item_count = 10 },
 		{ name = "ultisnips" }, -- For ultisnips users.
-		-- { name = 'snippy' }, -- For snippy users.
-	}, {
-		{ name = "buffer" },
-	}),
-    -- cmdline = {
-    --     name = "/",
-    --     sources = {
-    --         {name ="buffer"}
-    --     }
-    -- }
+		{ name = "path" },
+		{ name = "buffer", keyword_length = 5 },
+	},
+	formatting = {
+		format = lspkind.cmp_format({
+			with_text = true,
+			menu = {
+				buffer = "[buf]",
+				nvim_lsp = "[LSP]",
+				nvim_lua = "[api]",
+				path = "[path]",
+				ultisnips = "[snip]",
+			},
+		}),
+	},
+    experimental = {
+        ghost_text = true
+    }
 })
 
+-- Add vim-dadbod-completion in sql files
+vim.cmd [[
+  augroup DadbodSql
+    au!
+    autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer { sources = { { name = 'vim-dadbod-completion' } } }
+  augroup END
+]]
