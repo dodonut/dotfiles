@@ -3,7 +3,7 @@ material.setup({
 	borders = true,
 })
 
-vim.g.material_style = "darker"
+vim.g.material_style = "deep ocean"
 -- avalailable colors
 -- darker
 -- lighter

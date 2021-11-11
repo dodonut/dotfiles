@@ -13,7 +13,7 @@ return require("packer").startup({
 
 		-- lsp
 		use("neovim/nvim-lspconfig")
-		use("kabouzeid/nvim-lspinstall")
+		-- use("kabouzeid/nvim-lspinstall")
 
 		use("ray-x/lsp_signature.nvim")
 		-- improve lsp
@@ -153,5 +153,10 @@ return require("packer").startup({
 		use("rcarriga/nvim-dap-ui")
 		use("theHamsta/nvim-dap-virtual-text")
 		use("nvim-telescope/telescope-dap.nvim")
+        
+
+        use 'preservim/vimux'
+        use 'tpope/vim-dispatch'
+        use 'tpope/vim-dotenv'
 	end,
 })

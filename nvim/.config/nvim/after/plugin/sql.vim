@@ -37,25 +37,35 @@ nmap <leader>dbb <Plug>(DBExeLine)
 
 " stored locally a credentials file which the function use
 " down below is just an example to the format
-let g:dadbods = []
-let db = {
-        \"name": "Test Postgres DB",
-        \"url": "postgresql://postgres:@localhost/postgres"
-        \}
+let g:dbs = {
+\  'test postgres db': 'postgresql://postgres:12345@localhost/postgres'
+\ }
 
-call add(g:dadbods, db)
+" \  'postgres template': 'postgresql://username:password@localhost/database',
+" \  'oracle template': 'oracle:username/password@localhost:port/database'
+"
+"
+" obsolete since dbui takes care of it
+" let g:dadbods = []
+" let dbitem = {
+"         \"name": "Test Postgres DB",
+"         \"url": "postgresql://postgres:12345@localhost/postgres"
+"         \}
 
-" default database
-let g:db = g:dadbods[0].url
+" call add(g:dadbods, dbitem)
 
+" let opts = {'title':'Select Database', 'w': 50, 'h':10}
 
-command! DBSelect :call quickui#listbox#open(map(copy(g:dadbods), {k,v -> v.name}), {
-			\"callback": 'DBSelected'
-			\})
+" function! OpenMenuDBSelect(list, opts, fun) 
+"     let i = quickui#listbox#open(map(copy(a:list), {k,v -> v.name}), a:opts)
+"     if i != -1
+"         call a:fun(a:list[i].name, a:list[i].url)
+"     endif
+" endfunction
 
-func! DBSelected(id, result)
-	if a:result != -1
-		let b:db = g:dadbods[a:result-1].url
-		echomsg 'DB ' . g:dadbods[a:result-1].name . ' is selected.'
-	endif
-endfunc
+" command! DBSelect :call OpenMenuDBSelect(g:dadbods, opts, function('DBSelected'))
+
+" func! DBSelected(name, url)
+"     let b:db = a:url
+"     echomsg 'DB ' . a:name . ' is selected.'
+" endfunc

@@ -1,6 +1,11 @@
 if has('nvim')
-    let test#strategy='neovim'
-    let test#neovim#term_position = 'vertical'
+    " let test#strategy='neovim'
+  let test#strategy = {
+    \ 'nearest': 'neovim',
+    \ 'file':    'dispatch',
+    \ 'suite':   'basic',
+  \}
+    " let test#neovim#term_position = 'vertical'
 else
     let test#strategy='vimterminal'
 endif

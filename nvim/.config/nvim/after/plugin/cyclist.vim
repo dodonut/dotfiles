@@ -21,7 +21,7 @@ call cyclist#add_listchar_option_set('busy', {
         \ 'space': '␣',
         \ 'trail': '-',
         \ 'extends': '☛',
-        \ 'precedes': '☚',    
+        \ 'precedes': '☚',
         \ 'conceal': '┊',
         \ 'nbsp': '☠',
         \ })
