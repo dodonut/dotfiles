@@ -41,6 +41,7 @@ return require("packer").startup({
 		use("tpope/vim-surround")
 		--git plugin
 		use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
+        use 'tpope/vim-fugitive'
 
 		-- diffview for better diff on commit
 		use("sindrets/diffview.nvim")

@@ -66,7 +66,7 @@ function M.builtin()
   require("telescope.builtin").builtin()
 end
 
-function M.git_files()
+function M.browse_dir()
   local path = vim.fn.expand "%:h"
   if path == "" then
     path = nil
@@ -87,7 +87,15 @@ function M.git_files()
     },
   }
 
-  require("telescope.builtin").git_files(opts)
+  vim.cmd[[
+    silent! !git rev-parse --is-inside-work-tree
+  ]]
+  if vim.v.shell_error == 0 then
+      require("telescope.builtin").git_files(opts)
+  else
+      require('telescope.builtin').find_files(opts)
+  end
+
 end
 
 function M.lsp_code_actions()

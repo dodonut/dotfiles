@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-JAR="$HOME/dev/jdt/plugins/org.eclipse.equinox.launcher_*.jar"
+JAR="$HOME/dev/source-proj/jdt/plugins/org.eclipse.equinox.launcher_*.jar"
 GRADLE_HOME=$GRADLE_HOME/bin/gradle $JAVA_HOME/bin/java \
   -Declipse.application=org.eclipse.jdt.ls.core.id1 \
   -Dosgi.bundles.defaultStartLevel=4 \
@@ -9,9 +9,9 @@ GRADLE_HOME=$GRADLE_HOME/bin/gradle $JAVA_HOME/bin/java \
   -Dlog.level=ALL \
   -Xms1g \
   -Xmx2G \
-  -javaagent:$HOME/dev/jdt/plugins/lombok.jar \
+  -javaagent:$HOME/dev/source-proj/jdt/plugins/lombok.jar \
   -jar $(echo "$JAR") \
-  -configuration "$HOME/dev/jdt/config_linux" \
+  -configuration "$HOME/dev/source-proj/jdt/config_linux" \
   -data "${1:-$HOME/workspace}" \
   --add-modules=ALL-SYSTEM \
   --add-opens java.base/java.util=ALL-UNNAMED \

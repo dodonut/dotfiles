@@ -38,8 +38,16 @@ nmap <leader>dbb <Plug>(DBExeLine)
 " stored locally a credentials file which the function use
 " down below is just an example to the format
 let g:dbs = {
-\  'test postgres db': 'postgresql://postgres:12345@localhost/postgres'
+\  'test postgres': 'postgresql://postgres:12345@localhost/postgres'
 \ }
+
+let g:db_ui_table_helpers = {
+\   'postgresql': {
+\     'List': 'select * from "{table}" order by id asc',
+\     'Test': 'select * from "{table}" order by id asc'
+\   }
+\ }
+
 
 " \  'postgres template': 'postgresql://username:password@localhost/database',
 " \  'oracle template': 'oracle:username/password@localhost:port/database'

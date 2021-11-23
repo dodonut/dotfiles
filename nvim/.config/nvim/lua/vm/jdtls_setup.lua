@@ -6,7 +6,7 @@ function M.setup()
 	local root_markers = { "gradlew" }
 	local root_dir = require("jdtls.setup").find_root(root_markers)
 	local home = os.getenv("HOME")
-
+	local telescope_mapper = require("vm.telescope.mappings")
 	-- local capabilities = {
 	--     workspace = {
 	--         configuration = true
@@ -28,6 +28,14 @@ function M.setup()
 		capabilities = custom_cap,
 		on_attach = on_attach,
 	}
+
+	local formatpath = function()
+		if root_dir == nil then
+			return ""
+		else
+			return root_dir .. "/code_style.xml"
+		end
+	end
 
 	config.settings = {
 		java = {
@@ -67,18 +75,25 @@ function M.setup()
 					},
 				},
 			},
+			format = {
+				settings = {
+					url = formatpath(),
+					profile = "Work",
+				},
+			},
 		},
 	}
-
+	print(config)
 
 	config.cmd = { "java-lsp.sh", workspace_folder }
+	config.filetypes = { "java" }
 	config.on_init = function(client, _)
 		vim.notify("workspace/didChangeConfiguration", { settings = config.settings })
 	end
-    -- if root_dir ~= nil then
-		-- config.settings['java.format.settings.url'] = root_dir .. '/code_style.xml',
-		-- config.settings['java.format.settings.profile'] = "WorkStyle",
-    -- end
+	-- if root_dir ~= nil then
+	-- config.settings['java.format.settings.url'] = root_dir .. '/code_style.xml',
+	-- config.settings['java.format.settings.profile'] = "WorkStyle",
+	-- end
 
 	-- local jar_patterns = {
 	--     '/dev/microsoft/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar',
@@ -98,7 +113,15 @@ function M.setup()
 	local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
 	extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 	config.init_options = {
-		-- bundles = bundles;
+		bundles = {
+
+			vim.fn.glob(
+				"$HOME/dev/source-proj/java-extension/com.microsoft.java.test.plugin/target/com.microsoft.java.test.plugin-*.jar"
+			),
+			vim.fn.glob(
+				"$HOME/dev/source-proj/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"
+			),
+		},
 		extendedClientCapabilities = extendedClientCapabilities,
 	}
 
@@ -133,15 +156,16 @@ function M.setup()
 	-- 			return true
 	-- 		end,
 	-- 	}):find()
-    -- end
+	-- end
 
-    vim.cmd[[
+	vim.cmd([[
     command! -buffer JdtCompile lua require('jdtls').compile()
     command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()
     command! -buffer JdtJol lua require('jdtls').jol()
     command! -buffer JdtBytecode lua require('jdtls').javap()
     command! -buffer JdtJshell lua require('jdtls').jshell()
-    ]]
+    command! -buffer JdtRefreshDebugConfigs lua require('jdtls.dap').setup_dap_main_class_configs()
+    ]])
 	-- Server
 	require("jdtls").start_or_attach(config)
 end

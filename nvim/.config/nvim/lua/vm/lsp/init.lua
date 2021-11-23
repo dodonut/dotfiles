@@ -62,16 +62,17 @@ local custom_attach = function(client, bufnr)
 
 	inoremap("<c-s>", "<cmd> lua vim.lsp.buf.signature_help<cr> ", opts)
 	nnoremap("<space>cr", "<cmd> lua vim.lsp.buf.rename<cr>", opts)
-	telescope_mapper("<space>ca", "lsp_code_actions", nil, true)
+	-- telescope_mapper("<space>ca", "lsp_code_actions", nil, true)
 	nnoremap("gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	nnoremap("gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
 	nnoremap("gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	-- nnoremap("<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+	nnoremap("<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 	nnoremap("<space>d", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
 	nnoremap("<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
 	nnoremap("gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	nnoremap("<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 	nnoremap("K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+    nnoremap("<F3>", "<cmd> call MyFormatting()<cr>", opts)
 	inoremap("<c-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
 
 	telescope_mapper("gr", "lsp_references", nil, true)
@@ -79,9 +80,12 @@ local custom_attach = function(client, bufnr)
 	telescope_mapper("<space>wd", "lsp_document_symbols", { ignore_filename = true }, true)
 	telescope_mapper("<space>ww", "lsp_dynamic_workspace_symbols", { ignore_filename = true }, true)
 
-	if filetype ~= "lua" then
-		nnoremap("K", "<cmd> lua vim.lsp.buf.hover<cr>", opts)
-	end
+    nnoremap("K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+
+    if filetype == "java" then
+        require'jdtls.setup'.add_commands()
+        require'jdtls'.setup_dap({hotcodereplace = 'auto'})
+    end
 
 	vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
 
@@ -100,7 +104,7 @@ local custom_attach = function(client, bufnr)
 		vim.cmd([[
       augroup lsp_document_codelens
         au! * <buffer>
-        autocmd BufWritePost,CursorHold <buffer> lua vim.lsp.codelens.refresh()
+        autocmd BufWritePost,BufEnter <buffer> lua vim.lsp.codelens.refresh()
       augroup END
     ]])
 	end
@@ -117,6 +121,7 @@ updated_capabilities = require("cmp_nvim_lsp").update_capabilities(updated_capab
 
 local servers = {
 	vimls = true,
+    yamlls = true,
 	-- JSON = true,
 	-- jdtls = {
 	-- 	cmd = {

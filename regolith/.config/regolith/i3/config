@@ -1,0 +1,9 @@
+assign [class="jetbrains-idea-ce"] $ws1
+assign [class="Brave-browser"] $ws2
+assign [class="Slack"] $ws8
+assign [class="whatsdesk"] $ws8
+assign [class="Microsoft Teams - Preview"] $ws9
+assign [class="Cisco AnyConnect Secure Mobility Client"] $ws19
+
+bindsym $mod+Ctrl+Left exec i3-msg move workspace to output right
+bindsym $mod+Ctrl+Right exec i3-msg move workspace to output right

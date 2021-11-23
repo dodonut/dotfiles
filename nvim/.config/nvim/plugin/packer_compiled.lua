@@ -341,6 +341,11 @@ _G.packer_plugins = {
     path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/vim-easy-align",
     url = "https://github.com/junegunn/vim-easy-align"
   },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
+  },
   ["vim-quickui"] = {
     loaded = true,
     path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/vim-quickui",

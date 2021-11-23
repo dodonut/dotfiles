@@ -13,11 +13,13 @@ local function split(line, sep)
 end
 
 local SourceFiles = function()
-	local pre = "~/.config/nvim/"
-	local dd = {
-		tostring(pre .. "after/plugin/"),
-		tostring(pre .. "lua/tscope"),
-		tostring(pre .. "lua")
+	local prepath = "~/.config/nvim/"
+	local directories = {
+		tostring(prepath .. "after/plugin/"),
+		tostring(prepath .. "lua/vm"),
+		tostring(prepath .. "lua/vm/lsp"),
+		tostring(prepath .. "lua/vm/telescope"),
+		tostring(prepath .. "lua")
 	}
 	local sourcedirs = function(dirs)
         for _, i in pairs(dirs) do
@@ -27,7 +29,8 @@ local SourceFiles = function()
             end
         end
 	end
-    sourcedirs(dd)
+    sourcedirs(directories)
+    vim.notify('Source success!')
 end
 
 return {
