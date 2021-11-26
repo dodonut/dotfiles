@@ -4,6 +4,8 @@ if not has_lsp then
 end
 
 local lspconfig_util = require("lspconfig.util")
+local dap = require'dap'
+local javadap = require("vm.jdtls_setup").get_dap_config
 
 -- TJ LSPSTATUS
 -- local nvim_status = require "lsp-status"
@@ -72,7 +74,7 @@ local custom_attach = function(client, bufnr)
 	nnoremap("gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	nnoremap("<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 	nnoremap("K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-    nnoremap("<F3>", "<cmd> call MyFormatting()<cr>", opts)
+	nnoremap("<F3>", "<cmd> call MyFormatting()<cr>", opts)
 	inoremap("<c-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
 
 	telescope_mapper("gr", "lsp_references", nil, true)
@@ -80,12 +82,17 @@ local custom_attach = function(client, bufnr)
 	telescope_mapper("<space>wd", "lsp_document_symbols", { ignore_filename = true }, true)
 	telescope_mapper("<space>ww", "lsp_dynamic_workspace_symbols", { ignore_filename = true }, true)
 
-    nnoremap("K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+	nnoremap("K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
 
-    if filetype == "java" then
-        require'jdtls.setup'.add_commands()
-        require'jdtls'.setup_dap({hotcodereplace = 'auto'})
-    end
+	if filetype == "java" then
+		require("jdtls").setup_dap({ hotcodereplace = "auto" })
+		require("jdtls.dap").setup_dap_main_class_configs()
+		require("jdtls.setup").add_commands()
+		javadap(function(conf)
+			dap.configurations.java = conf
+			print("Debugger is ready")
+		end)
+	end
 
 	vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
 
@@ -121,17 +128,8 @@ updated_capabilities = require("cmp_nvim_lsp").update_capabilities(updated_capab
 
 local servers = {
 	vimls = true,
-    yamlls = true,
-	-- JSON = true,
-	-- jdtls = {
-	-- 	cmd = {
-	-- 		"java-lsp",
-	-- 	},
-
-	-- 	-- This is the default if not provided, you can remove it. Or adjust as needed.
-	-- 	-- One dedicated LSP server & client will be started per unique root_dir
-	-- root_dir = function() return require("jdtls.setup").find_root({ "gradlew" }) end,
-	-- },
+	yamlls = true,
+    jsonls = true,
 
 	-- cmake = (1 == vim.fn.executable "cmake-language-server"),
 

@@ -83,28 +83,6 @@ require("telescope").setup {
       use_highlighter = false,
       minimum_grep_characters = 6,
     },
-
-    -- TODO: see later what the hop is
-    -- hop = {
-    --   -- keys define your hop keys in order; defaults to roughly lower- and uppercased home row
-    --   keys = { "a", "s", "d", "f", "g", "h", "j", "k", "l", ";" }, -- ... and more
-
-    --   -- Highlight groups to link to signs and lines; the below configuration refers to demo
-    --   -- sign_hl typically only defines foreground to possibly be combined with line_hl
-    --   sign_hl = { "WarningMsg", "Title" },
-
-    --   -- optional, typically a table of two highlight groups that are alternated between
-    --   line_hl = { "CursorLine", "Normal" },
-
-    --   -- options specific to `hop_loop`
-    --   -- true temporarily disables Telescope selection highlighting
-    --   clear_selection_hl = false,
-    --   -- highlight hopped to entry with telescope selection highlight
-    --   -- note: mutually exclusive with `clear_selection_hl`
-    --   trace_entry = true,
-    --   -- jump to entry where hoop loop was started from
-    --   reset_selection = true,
-    -- },
   },
 }
 

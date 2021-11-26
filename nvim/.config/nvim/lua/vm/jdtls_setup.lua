@@ -1,24 +1,144 @@
 local M = {}
 
+function M.execute_buf_command(command, callback)
+	vim.lsp.buf_request(0, "workspace/executeCommand", command, function(err, res)
+		if callback then
+			callback(err, res)
+		elseif err then
+			print("Execute command failed: " .. err.message)
+		end
+	end)
+end
+
+function M.execute_command(command, callback)
+	if type(command) == "string" then
+		command = { command = command }
+	end
+
+	M.execute_buf_command(command, function(err, res)
+		assert(not err, err and (err.message or Log.ins(err)))
+		callback(res)
+	end)
+end
+
+--[[
+-- Starts the dubug session and returns the port
+--
+-- @Param callback {function(port: number)}
+--]]
+function M.start_debug_session(callback)
+	M.execute_command("vscode.java.startDebugSession", callback)
+end
+
+--[[
+-- Returns all the main classes in the project
+--
+-- @Param callback {function(main_classes: List<List<String>)}
+-- { {
+--     filePath = "/home/s1n7ax/Workspace/demo/src/main/java/com/example/demo/DemoApplication.java",
+--     mainClass = "com.example.demo.DemoApplication",
+--     projectName = "demo"
+-- } }
+--]]
+function M.resolve_main_classes(callback)
+	M.execute_command("vscode.java.resolveMainClass", callback)
+end
+
+--[[
+-- Returns classpath for the given main class
+--
+-- @Param main_class {string} of which classpath should be returned
+-- @Param callback {function(classpath: List<List<String>>)}
+-- { {},
+-- {
+--     "/home/s1n7ax/Workspace/demo/bin/main",
+--     "/home/s1n7ax/.gradle/.../spring-boot-starter-web/2.5.4/2bef2cedf/spring-boot-starter-web-2.5.4.jar",
+-- }
+--]]
+function M.resolve_class_path(main_class, project_name, callback)
+	M.execute_command({
+		command = "vscode.java.resolveClasspath",
+		arguments = { main_class, project_name },
+	}, callback)
+end
+
+--[[
+-- Returns list of main class and classpath map
+--
+-- @Param callback {function(classpaths: List<Map>)}
+--]]
+function M.resolve_class_paths(callback)
+	local classpaths = {}
+
+	local function resolve_all_class_paths(class_iter)
+		local class_info = class_iter.next()
+
+		if not class_info then
+			return callback(classpaths)
+		end
+
+		M.resolve_class_path(class_info.mainClass, class_info.projectName, function(class_path)
+			table.insert(classpaths, { class_info = class_info, class_path = class_path })
+
+			resolve_all_class_paths(class_iter)
+		end)
+	end
+
+	M.resolve_main_classes(function(main_class_info)
+		local index = 1
+
+		local main_class_iter = {
+			next = function()
+				local temp_index = index
+				index = index + 1
+				return main_class_info[temp_index]
+			end,
+		}
+
+		resolve_all_class_paths(main_class_iter)
+	end)
+end
+
+--[[
+-- Returns dap java debug configuration
+--
+-- @Param callback {function(config: Map)}
+--]]
+function M.get_dap_config(callback)
+	-- the call on startDebugSession already return the main classes
+	-- change later
+	M.resolve_class_paths(function(class_paths_info)
+		local conf = {}
+
+		for index, classpath_info in ipairs(class_paths_info) do
+			local main_class = classpath_info.class_info.mainClass
+			local project_name = classpath_info.class_info.projectName
+			local class_paths = classpath_info.class_path
+
+			table.insert(conf, {
+				name = string.format("(%d) Launch -> %s -> %s", index, project_name, main_class),
+				projectName = project_name,
+				mainClass = main_class,
+				classPaths = vim.tbl_flatten(class_paths),
+				modulePaths = {},
+				request = "launch",
+				type = "java",
+				javaExec = os.getenv("JAVA_HOME") .. "/bin/java",
+			})
+		end
+
+		callback(conf)
+	end)
+end
+
 function M.setup()
+	local dap = require("dap")
 	local on_attach = require("vm.lsp").on_attach
 	local custom_cap = require("vm.lsp").capabilities
-	local root_markers = { "gradlew" }
+	local root_markers = { "gradlew", ".git" }
 	local root_dir = require("jdtls.setup").find_root(root_markers)
 	local home = os.getenv("HOME")
 	local telescope_mapper = require("vm.telescope.mappings")
-	-- local capabilities = {
-	--     workspace = {
-	--         configuration = true
-	--     },
-	--     textDocument = {
-	--         completion = {
-	--             completionItem = {
-	--                 snippetSupport = true
-	--             }
-	--         }
-	--     }
-	-- }
 
 	local workspace_folder = home .. "/.workspace-" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
 	local config = {
@@ -29,13 +149,13 @@ function M.setup()
 		on_attach = on_attach,
 	}
 
-	local formatpath = function()
-		if root_dir == nil then
-			return ""
-		else
-			return root_dir .. "/code_style.xml"
-		end
-	end
+	-- local formatpath = function()
+	-- 	if root_dir == nil then
+	-- 		return ""
+	-- 	else
+	-- 		return root_dir .. "/code_style.xml"
+	-- 	end
+	-- end
 
 	config.settings = {
 		java = {
@@ -75,88 +195,37 @@ function M.setup()
 					},
 				},
 			},
-			format = {
-				settings = {
-					url = formatpath(),
-					profile = "Work",
-				},
-			},
+			-- format = {
+			-- 	settings = {
+			-- 		url = formatpath(),
+			-- 		profile = "Work",
+			-- 	},
+			-- },
 		},
 	}
-	print(config)
 
 	config.cmd = { "java-lsp.sh", workspace_folder }
 	config.filetypes = { "java" }
 	config.on_init = function(client, _)
 		vim.notify("workspace/didChangeConfiguration", { settings = config.settings })
 	end
-	-- if root_dir ~= nil then
-	-- config.settings['java.format.settings.url'] = root_dir .. '/code_style.xml',
-	-- config.settings['java.format.settings.profile'] = "WorkStyle",
-	-- end
 
-	-- local jar_patterns = {
-	--     '/dev/microsoft/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar',
-	--     '/dev/dgileadi/vscode-java-decompiler/server/*.jar',
-	--     '/dev/microsoft/vscode-java-test/server/*.jar',
-	-- }
+	local bundles = {
+		-- https://github.com/microsoft/java-debug
+		vim.fn.glob(
+			"$HOME/dev/source-proj/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"
+		),
+	}
 
-	-- local bundles = {}
-	-- for _, jar_pattern in ipairs(jar_patterns) do
-	--   for _, bundle in ipairs(vim.split(vim.fn.glob(home .. jar_pattern), '\n')) do
-	--     if not vim.endswith(bundle, 'com.microsoft.java.test.runner.jar') then
-	--       table.insert(bundles, bundle)
-	--     end
-	--   end
-	-- end
+	--https://github.com/microsoft/vscode-java-test
+	vim.list_extend(bundles, vim.split(vim.fn.glob("$HOME/dev/source-proj/vscode-java-test/server/*.jar"), "\n"))
 
 	local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
 	extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 	config.init_options = {
-		bundles = {
-
-			vim.fn.glob(
-				"$HOME/dev/source-proj/java-extension/com.microsoft.java.test.plugin/target/com.microsoft.java.test.plugin-*.jar"
-			),
-			vim.fn.glob(
-				"$HOME/dev/source-proj/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"
-			),
-		},
+		bundles = bundles,
 		extendedClientCapabilities = extendedClientCapabilities,
 	}
-
-	-- UI
-	-- local finders = require("telescope.finders")
-	-- local sorters = require("telescope.sorters")
-	-- local actions = require("telescope.actions")
-	-- local pickers = require("telescope.pickers")
-	-- require("jdtls.ui").pick_one_async = function(items, prompt, label_fn, cb)
-	-- 	local opts = {}
-	-- 	pickers.new(opts, {
-	-- 		prompt_title = prompt,
-	-- 		finder = finders.new_table({
-	-- 			results = items,
-	-- 			entry_maker = function(entry)
-	-- 				return {
-	-- 					value = entry,
-	-- 					display = label_fn(entry),
-	-- 					ordinal = label_fn(entry),
-	-- 				}
-	-- 			end,
-	-- 		}),
-	-- 		sorter = sorters.get_generic_fuzzy_sorter(),
-	-- 		attach_mappings = function(prompt_bufnr)
-	-- 			actions.goto_file_selection_edit:replace(function()
-	-- 				local selection = actions.get_selected_entry(prompt_bufnr)
-	-- 				actions.close(prompt_bufnr)
-
-	-- 				cb(selection.value)
-	-- 			end)
-
-	-- 			return true
-	-- 		end,
-	-- 	}):find()
-	-- end
 
 	vim.cmd([[
     command! -buffer JdtCompile lua require('jdtls').compile()
@@ -165,7 +234,15 @@ function M.setup()
     command! -buffer JdtBytecode lua require('jdtls').javap()
     command! -buffer JdtJshell lua require('jdtls').jshell()
     command! -buffer JdtRefreshDebugConfigs lua require('jdtls.dap').setup_dap_main_class_configs()
+    command! -buffer JdtTestClass lua require('jdtls').test_class()
+    command! -buffer JdtTestNearest lua require('jdtls').test_nearest_method()
     ]])
+
+	dap.adapters.java = function(callback)
+		M.start_debug_session(function(port)
+			callback({ type = "server", host = "127.0.0.1", port = port })
+		end)
+	end
 	-- Server
 	require("jdtls").start_or_attach(config)
 end

@@ -39,4 +39,7 @@ nnoremap <c-y> 4<c-y>
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
-command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+vnoremap > >gv
+vnoremap < <gv
+
+cmap w!! %!sudo tee > /dev/null %

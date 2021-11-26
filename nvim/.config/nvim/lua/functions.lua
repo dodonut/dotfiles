@@ -16,10 +16,10 @@ local SourceFiles = function()
 	local prepath = "~/.config/nvim/"
 	local directories = {
 		tostring(prepath .. "after/plugin/"),
-		tostring(prepath .. "lua/vm"),
 		tostring(prepath .. "lua/vm/lsp"),
 		tostring(prepath .. "lua/vm/telescope"),
-		tostring(prepath .. "lua")
+		tostring(prepath .. "lua/vm"),
+
 	}
 	local sourcedirs = function(dirs)
         for _, i in pairs(dirs) do

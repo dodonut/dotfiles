@@ -42,7 +42,7 @@ map_tele("<space>f/", "grep_last_search", {
 })
 
 -- Files
-map_tele("<c-p>", "browse_dir")
+map_tele("<c-p>", "git_files")
 map_tele("<space>fg", "live_grep")
 -- map_tele("<space>fo", "oldfiles")
 map_tele("<space>fd", "fd")
