@@ -45,11 +45,11 @@ local config = {
 		-- Disable sections and component separators
 		component_separators = "",
 		section_separators = "",
-		theme = {
-			normal = { c = { fg = colors.fg, bg = colors.bg } },
-			inactive = { c = { fg = colors.fg, bg = colors.bg } },
-		},
-        -- theme = 'material-nvim'
+		-- theme = {
+		-- 	normal = { c = { fg = colors.fg, bg = colors.bg } },
+		-- 	inactive = { c = { fg = colors.fg, bg = colors.bg } },
+		-- },
+        theme = 'material-nvim'
 	},
 	sections = {
 		-- these are to remove the defaults

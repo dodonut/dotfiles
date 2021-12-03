@@ -138,7 +138,6 @@ function M.setup()
 	local root_markers = { "gradlew", ".git" }
 	local root_dir = require("jdtls.setup").find_root(root_markers)
 	local home = os.getenv("HOME")
-	local telescope_mapper = require("vm.telescope.mappings")
 
 	local workspace_folder = home .. "/.workspace-" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
 	local config = {
@@ -149,13 +148,13 @@ function M.setup()
 		on_attach = on_attach,
 	}
 
-	-- local formatpath = function()
-	-- 	if root_dir == nil then
-	-- 		return ""
-	-- 	else
-	-- 		return root_dir .. "/code_style.xml"
-	-- 	end
-	-- end
+	local formatpath = function()
+		if root_dir == nil then
+			return ""
+		else
+			return root_dir .. "/code_style.xml"
+		end
+	end
 
 	config.settings = {
 		java = {
@@ -195,10 +194,11 @@ function M.setup()
 					},
 				},
 			},
+            -- have to figure it out
 			-- format = {
 			-- 	settings = {
 			-- 		url = formatpath(),
-			-- 		profile = "Work",
+			-- 		profile = "teste",
 			-- 	},
 			-- },
 		},

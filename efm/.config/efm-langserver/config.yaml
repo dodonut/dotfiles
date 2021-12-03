@@ -1,0 +1,19 @@
+version: 2
+root-markers:
+  - .git/
+lint-debounce: 1s
+commands:
+  - command: gpedit
+
+tools:
+  shShellcheck: &shShellcheck
+    lint-command: 'shellcheck -f gcc -x'
+    lint-source: 'shellcheck'
+    lint-formats:
+      - '%f:%l:%c: %trror: %m'
+      - '%f:%l:%c: %tarning: %m'
+      - '%f:%l:%c: %tote: %m'
+
+languages:
+  sh:
+    - <<: *shShellcheck

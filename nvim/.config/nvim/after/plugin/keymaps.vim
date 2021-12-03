@@ -42,4 +42,7 @@ xmap ga <Plug>(EasyAlign)
 vnoremap > >gv
 vnoremap < <gv
 
-cmap w!! %!sudo tee > /dev/null %
+nnoremap <A-Up> :resize +3<cr>
+nnoremap <A-Down> :resize -3<cr>
+
+command! OpenLspLog :vsplit ~/.cache/nvim/lsp.log

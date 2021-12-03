@@ -41,7 +41,7 @@ return require("packer").startup({
 		use("tpope/vim-surround")
 		--git plugin
 		use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
-        use 'tpope/vim-fugitive'
+		use("tpope/vim-fugitive")
 
 		-- diffview for better diff on commit
 		use("sindrets/diffview.nvim")
@@ -154,10 +154,16 @@ return require("packer").startup({
 		use("rcarriga/nvim-dap-ui")
 		use("theHamsta/nvim-dap-virtual-text")
 		use("nvim-telescope/telescope-dap.nvim")
-        
 
-        use 'preservim/vimux'
-        use 'tpope/vim-dispatch'
-        use 'tpope/vim-dotenv'
+        --tmux integration
+		use("preservim/vimux")
+        --async run
+		use("tpope/vim-dispatch")
+		use("tpope/vim-dotenv")
+
+        -- for bash script, use the shellcheck cli to give the diagnostics
+		use("mattn/efm-langserver")
+        --useful functions
+        use 'tpope/vim-scriptease'
 	end,
 })

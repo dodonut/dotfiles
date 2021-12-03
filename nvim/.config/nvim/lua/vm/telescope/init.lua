@@ -56,14 +56,17 @@ function M.git_files()
 		path = nil
 	end
 
-	local width = 0.7
+	local width = 0.4
 
 	local opts = themes.get_dropdown({
 		winblend = 10,
 		previewer = false,
 		shorten_path = false,
 		layout_strategy = "vertical",
-
+		path_display = function(opt, p)
+			local tail = require("telescope.utils").path_tail(p)
+			return string.format("%s - %s", tail, p)
+		end,
 		cwd = path,
 
 		layout_config = {

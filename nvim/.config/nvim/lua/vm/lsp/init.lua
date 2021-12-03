@@ -4,7 +4,7 @@ if not has_lsp then
 end
 
 local lspconfig_util = require("lspconfig.util")
-local dap = require'dap'
+local dap = require("dap")
 local javadap = require("vm.jdtls_setup").get_dap_config
 
 -- TJ LSPSTATUS
@@ -129,8 +129,8 @@ updated_capabilities = require("cmp_nvim_lsp").update_capabilities(updated_capab
 local servers = {
 	vimls = true,
 	yamlls = true,
-    jsonls = true,
-
+	jsonls = true,
+	bashls = true,
 	-- cmake = (1 == vim.fn.executable "cmake-language-server"),
 
 	-- clangd = {
@@ -233,6 +233,20 @@ vim.cmd([[
         autocmd FileType java lua require('vm.jdtls_setup').setup()
     augroup end
     ]])
+
+-- this will make efm take place after jdtls
+-- since jdtls is not part of lspconfig
+vim.schedule(function()
+	lspconfig.efm.setup({
+		settings = {
+			rootMarkers = { ".git" },
+			filetypes = {
+				"sh",
+			},
+		},
+	})
+end)
+vim.schedule(function() P(updated_capabilities) end)
 
 return {
 	on_init = custom_init,
