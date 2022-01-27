@@ -131,7 +131,11 @@ function M.get_dap_config(callback)
 	end)
 end
 
+
 function M.setup()
+
+    -- stop efm on jdtls server
+
 	local dap = require("dap")
 	local on_attach = require("vm.lsp").on_attach
 	local custom_cap = require("vm.lsp").capabilities
@@ -194,19 +198,20 @@ function M.setup()
 					},
 				},
 			},
-            -- have to figure it out
-			-- format = {
-			-- 	settings = {
-			-- 		url = formatpath(),
-			-- 		profile = "teste",
-			-- 	},
-			-- },
+			format = {
+				settings = {
+					-- url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+                    url = formatpath()
+				},
+			},
 		},
 	}
 
+    P('teste')
+    P(config.settings.java.format)
 	config.cmd = { "java-lsp.sh", workspace_folder }
 	config.filetypes = { "java" }
-	config.on_init = function(client, _)
+	config.on_init = function(_, _)
 		vim.notify("workspace/didChangeConfiguration", { settings = config.settings })
 	end
 

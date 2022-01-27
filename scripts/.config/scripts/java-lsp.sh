@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# snapshots - https://download.eclipse.org/jdtls/snapshots/?d
+# lombok - https://projectlombok.org/download
 JAR="$HOME/dev/source-proj/jdt/plugins/org.eclipse.equinox.launcher_*.jar"
 GRADLE_HOME=$GRADLE_HOME/bin/gradle $JAVA_HOME/bin/java \
   -Declipse.application=org.eclipse.jdt.ls.core.id1 \

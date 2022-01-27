@@ -1,4 +1,5 @@
 if not pcall(require, "nvim-tree") then
+  print('nvim-tree not installed')
 	return
 end
 

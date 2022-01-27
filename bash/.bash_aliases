@@ -16,7 +16,6 @@ export JDTLS_CONFIG=$HOME/dev/jdt/config_linux
 export WORKSPACE=$HOME/workspace
 export RANGER_LOAD_DEFAULT_RC=false
 
-export SPRING_PROFILES_ACTIVE=qa
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$(go env GOPATH)/bin
 

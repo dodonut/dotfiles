@@ -30,3 +30,7 @@ nnoremap <leader>gc :DiffviewClose<cr>
 nnoremap <leader>gD :DiffviewOpen master<cr>
 " nnoremap <leader>gl :Neogit log<cr>
 
+set nocompatible
+filetype plugin indent on
+let g:mergetool_layout = 'bmr'
+let g:mergetool_prefer_revision = 'local'

@@ -1,3 +1,8 @@
+if not pcall(require, 'lspkind') then
+    print 'lspking not installed'
+    return
+end
+
 local lspkind = require("lspkind")
 lspkind.init()
 
@@ -19,13 +24,13 @@ cmp.setup({
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.close(),
 		["<c-y>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
-		["<cr>"] = cmp.mapping.close(),
+		["<cr>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 		["<c-q>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 		["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
 	},
 	sources = {
-		{ name = "nvim_lua" },
-		{ name = "nvim_lsp", max_item_count = 10 },
+		{ name = "nvim_lua", ft = {'lua'} },
+		{ name = "nvim_lsp" },
 		{ name = "ultisnips" }, -- For ultisnips users.
 		{ name = "path" },
 		{ name = "buffer", keyword_length = 5 },

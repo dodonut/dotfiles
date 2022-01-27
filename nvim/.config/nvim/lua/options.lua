@@ -16,7 +16,7 @@ opt.wildmode = 'longest:full,full'
 opt.wildoptions = 'pum'
 
 
-opt.modifiable = true
+opt.modifiable     = true
 opt.background     = 'dark' -- dark background
 opt.showmode       = false
 opt.showcmd        = true
@@ -34,7 +34,8 @@ opt.splitright     = true  -- Prefer windows splitting to the right
 opt.splitbelow     = true  -- Prefer windows splitting to the bottom
 opt.updatetime     = 1000  -- Make updates happen faster
 opt.hlsearch       = false -- I wouldn't use this without my DoNoHL function
--- opt.scrolloff      = 10    -- Make it so there are always ten lines below my cursor
+opt.scrolloff   = 10    -- Make it so there are always ten lines below my cursor
+
 
 -- Tabs
 opt.autoindent     = true
@@ -58,14 +59,14 @@ opt.belloff        = 'all' -- Just turn the dang bell off
 
 opt.clipboard      = 'unnamedplus'
 
-opt.inccommand     = 'split'
+opt.inccommand     = 'split' -- open a little window for subs
 opt.swapfile       = false -- Living on the edge
 opt.shada          = { "!", "'1000", "<50", "s10", "h" }
 
 opt.undofile       = true
 opt.mouse          = 'n'
 
-opt.formatoptions = opt.formatoptions
+opt.formatoptions  = opt.formatoptions
                     - 'a'     -- Auto formatting is BAD.
                     - 't'     -- Don't auto format my code. I got linters for that.
                     + 'c'     -- In general, I like it when comments respect textwidth
@@ -77,8 +78,8 @@ opt.formatoptions = opt.formatoptions
                     - '2'     -- I'm not in gradeschool anymore
 
 -- set joinspaces
-opt.joinspaces = false         -- Two spaces and grade school, we're done
+opt.joinspaces     = false         -- Two spaces and grade school, we're done
 
--- set fillchars=eob:~
-opt.fillchars = { eob = "~" }
+-- set fillchars   = eob:~
+opt.fillchars      = { eob = "~" }
 

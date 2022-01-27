@@ -30,7 +30,7 @@ local SourceFiles = function()
         end
 	end
     sourcedirs(directories)
-    vim.notify('Source success!')
+    print('Source success!')
 end
 
 return {

@@ -14,8 +14,6 @@ nnoremap <c-right> :bnext<cr>
 nnoremap <c-left> :bprevious<cr>
 nnoremap <right> :tabnext<cr>
 nnoremap <left> :tabprevious<cr>
-"nnoremap <right> :bnext<cr>
-"nnoremap <left> :bprevious<cr>
 
 " close tab or buffer
 nnoremap <leader>x :close<cr>
@@ -32,17 +30,14 @@ vnoremap ; :
 
 nnoremap <C-n> :tabnew<cr>
 
-nnoremap <leader>sv <cmd>lua require('functions').SourceFiles()<cr>
 nnoremap <c-e> 4<c-e>
 nnoremap <c-y> 4<c-y>
-
-nmap ga <Plug>(EasyAlign)
-xmap ga <Plug>(EasyAlign)
 
 vnoremap > >gv
 vnoremap < <gv
 
 nnoremap <A-Up> :resize +3<cr>
 nnoremap <A-Down> :resize -3<cr>
+nnoremap <A-Left> :vert resize -5<cr>
+nnoremap <A-Right> :vert resize +5<cr>
 
-command! OpenLspLog :vsplit ~/.cache/nvim/lsp.log

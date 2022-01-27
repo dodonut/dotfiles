@@ -42,6 +42,7 @@ return require("packer").startup({
 		--git plugin
 		use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
 		use("tpope/vim-fugitive")
+		use("samoshkin/vim-mergetool")
 
 		-- diffview for better diff on commit
 		use("sindrets/diffview.nvim")
@@ -107,14 +108,12 @@ return require("packer").startup({
 
 		-- shows all diagnostics across files
 		use({
-			"folke/lsp-trouble.nvim",
-			cmd = "LspTrouble",
+			"folke/trouble.nvim",
+			requires = "kyazdani42/nvim-web-devicons",
 			config = function()
-				-- Can use P to toggle auto movement
-				require("trouble").setup({
-					auto_preview = false,
-					auto_fold = true,
-				})
+                require("trouble").setup({
+                    auto_open = false
+                })
 			end,
 		})
 
@@ -155,15 +154,15 @@ return require("packer").startup({
 		use("theHamsta/nvim-dap-virtual-text")
 		use("nvim-telescope/telescope-dap.nvim")
 
-        --tmux integration
+		--tmux integration
 		use("preservim/vimux")
-        --async run
+		--async run
 		use("tpope/vim-dispatch")
 		use("tpope/vim-dotenv")
 
-        -- for bash script, use the shellcheck cli to give the diagnostics
-		use("mattn/efm-langserver")
-        --useful functions
-        use 'tpope/vim-scriptease'
+		-- for bash script, use the shellcheck cli to give the diagnostics
+		-- use("mattn/efm-langserver")
+		--useful functions
+		use("tpope/vim-scriptease")
 	end,
 })

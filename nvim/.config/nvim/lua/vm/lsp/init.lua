@@ -7,19 +7,11 @@ local lspconfig_util = require("lspconfig.util")
 local dap = require("dap")
 local javadap = require("vm.jdtls_setup").get_dap_config
 
--- TJ LSPSTATUS
--- local nvim_status = require "lsp-status"
-
 local telescope_mapper = require("vm.telescope.mappings")
--- local handlers = require "vm.lsp.handlers"
 
 -- Can set this lower if needed.
 -- require("vim.lsp.log").set_level("debug")
 -- require("vim.lsp.log").set_level("trace")
-
--- local status = require "tj.lsp.status"
-
--- status.activate()
 
 local custom_init = function(client)
 	client.config.flags = client.config.flags or {}
@@ -27,22 +19,14 @@ local custom_init = function(client)
 end
 
 local filetype_attach = setmetatable({
-	go = function(client)
-		vim.cmd([[
-      augroup lsp_buf_format
-        au! BufWritePre <buffer>
-        autocmd BufWritePre <buffer> :lua vim.lsp.buf.formatting_sync()
-      augroup END
-    ]])
-	end,
-	java = function(client)
-		vim.cmd([[
-        augroup jdtls_lsp
-            autocmd!
-            autocmd FileType java lua require'vm.jdtls_setup'.setup()
-        augroup end
-        ]])
-	end,
+	-- go = function(client)
+	-- 	vim.cmd([[
+	-- augroup lsp_buf_format
+	-- au! BufWritePre <buffer>
+	-- autocmd BufWritePre <buffer> :lua vim.lsp.buf.formatting_sync()
+	-- augroup END
+	-- ]])
+	-- end,
 }, {
 	__index = function()
 		return function() end
@@ -125,53 +109,53 @@ local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
 -- updated_capabilities = vim.tbl_deep_extend("keep", updated_capabilities, nvim_status.capabilities)
 updated_capabilities.textDocument.codeLens = { dynamicRegistration = false }
 updated_capabilities = require("cmp_nvim_lsp").update_capabilities(updated_capabilities)
-
+local util = require("lspconfig.util")
+local efm_settings = {
+	settings = {
+		root_dir = function(fname)
+			return util.root_pattern(".git")(fname) or vim.fn.getcwd()
+		end,
+		languages = {
+			sh = {
+				lintCommand = "shellcheck -f gcc -x -",
+				lintStdin = true,
+				lintFormats = { "%f=%l:%c: %trror: %m", "%f=%l:%c: %tarning: %m", "%f=%l:%c: %tote: %m" },
+			},
+		},
+		filetypes = { "sh" },
+	},
+}
 local servers = {
+    bashls = true,
 	vimls = true,
 	yamlls = true,
 	jsonls = true,
-	bashls = true,
-	-- cmake = (1 == vim.fn.executable "cmake-language-server"),
+    -- efm = efm_settings,
 
-	-- clangd = {
-	--   cmd = {
-	--     "clangd",
-	--     "--background-index",
-	--     "--suggest-missing-includes",
-	--     "--clang-tidy",
-	--     "--header-insertion=iwyu",
-	--   },
-	--   -- Required for lsp-status
-	--   init_options = {
-	--     clangdFileStatus = true,
-	--   },
-	--   -- handlers = nvim_status.extensions.clangd.setup(),
-	-- },
+	gopls = {
+	  -- root_dir = function(fname)
+	  --   local Path = require "plenary.path"
 
-	-- gopls = {
-	--   root_dir = function(fname)
-	--     local Path = require "plenary.path"
+	  --   local absolute_cwd = Path:new(vim.loop.cwd()):absolute()
+	  --   local absolute_fname = Path:new(fname):absolute()
 
-	--     local absolute_cwd = Path:new(vim.loop.cwd()):absolute()
-	--     local absolute_fname = Path:new(fname):absolute()
+	  --   if string.find(absolute_cwd, "/cmd/", 1, true) and string.find(absolute_fname, absolute_cwd, 1, true) then
+	  --     return absolute_cwd
+	  --   end
 
-	--     if string.find(absolute_cwd, "/cmd/", 1, true) and string.find(absolute_fname, absolute_cwd, 1, true) then
-	--       return absolute_cwd
-	--     end
+	  --   return lspconfig_util.root_pattern("go.mod", ".git")(fname)
+	  -- end,
 
-	--     return lspconfig_util.root_pattern("go.mod", ".git")(fname)
-	--   end,
+	  settings = {
+	    gopls = {
+	      codelenses = { test = true },
+	    },
+	  },
 
-	--   settings = {
-	--     gopls = {
-	--       codelenses = { test = true },
-	--     },
-	--   },
-
-	--   flags = {
-	--     debounce_text_changes = 200,
-	--   },
-	-- },
+	  flags = {
+	    debounce_text_changes = 200,
+	  },
+	},
 
 	-- tsserver = {
 	--   cmd = { "typescript-language-server", "--stdio" },
@@ -204,16 +188,20 @@ local setup_server = function(server, config)
 		},
 	}, config)
 
-	if server == "jdtls" then
-		lspconfig[server].start_or_attach(config)
-	else
-		lspconfig[server].setup(config)
-	end
+	lspconfig[server].setup(config)
 end
+
 
 for server, config in pairs(servers) do
 	setup_server(server, config)
 end
+
+vim.cmd([[
+    augroup jdtls_lsp
+        autocmd!
+        autocmd FileType java lua require('vm.jdtls_setup').setup()
+    augroup end
+    ]])
 
 -- Load lua configuration from nlua.
 require("nlua.lsp.nvim").setup(lspconfig, {
@@ -227,26 +215,6 @@ require("nlua.lsp.nvim").setup(lspconfig, {
 	},
 })
 
-vim.cmd([[
-    augroup jdtls_lsp
-        autocmd!
-        autocmd FileType java lua require('vm.jdtls_setup').setup()
-    augroup end
-    ]])
-
--- this will make efm take place after jdtls
--- since jdtls is not part of lspconfig
-vim.schedule(function()
-	lspconfig.efm.setup({
-		settings = {
-			rootMarkers = { ".git" },
-			filetypes = {
-				"sh",
-			},
-		},
-	})
-end)
-vim.schedule(function() P(updated_capabilities) end)
 
 return {
 	on_init = custom_init,

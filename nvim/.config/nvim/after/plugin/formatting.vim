@@ -7,5 +7,5 @@ function! MyFormatting()
     else
         silent execute 'lua vim.lsp.buf.formatting_sync()'
     endif
-    :lua vim.notify("Format Success!")
+    echo 'Format success!'
 endfunction

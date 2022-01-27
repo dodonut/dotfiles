@@ -1,4 +1,6 @@
 version: 2
+log-file: /home/tqi_vsousa/.logs/efmls.log
+log-level: 1
 root-markers:
   - .git/
 lint-debounce: 1s

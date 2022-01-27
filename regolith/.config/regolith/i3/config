@@ -666,8 +666,10 @@ set_from_resource $i3-wm.program.2 i3-wm.program.2 :
 exec --no-startup-id $i3-wm.program.2
 set_from_resource $i3-wm.program.3 i3-wm.program.3 :
 exec --no-startup-id $i3-wm.program.3
+exec --no-startup-id greenclip daemon
 
 
+assign [class="Code"] $ws1
 assign [class="jetbrains-idea-ce"] $ws1
 assign [class="Brave-browser"] $ws2
 assign [class="Slack"] $ws8
@@ -678,4 +680,10 @@ assign [class="Cisco AnyConnect Secure Mobility Client"] $ws19
 bindsym $mod+Ctrl+Left exec i3-msg move workspace to output right
 bindsym $mod+Ctrl+Right exec i3-msg move workspace to output right
 
+bindsym $mod+Ctrl+Up exec i3-msg move workspace to output up
+bindsym $mod+Ctrl+Down exec i3-msg move workspace to output down
 #
+# greenclip https://github.com/erebe/greenclip
+set $greenclip ~/.local/bin/greenclip
+bindsym $mod+Shift+v exec rofi -modi "clipboard:$greenclip print" -show clipboard
+exec --no-startup-id $greenclip daemon

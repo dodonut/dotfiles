@@ -20,7 +20,6 @@ vim.cmd [[nnoremap <silent> <A-h> :lua require('dap.ui.widgets').hover()<CR>]]
 
 vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
 -- set signs for debug
-local dap_ui = require "dapui"
 
 require("dapui").setup({
   icons = { expanded = "▾", collapsed = "▸" },
@@ -62,16 +61,3 @@ require("dapui").setup({
   },
   windows = { indent = 1 },
 })
-
--- dap.listeners.after.event_initialized["dapui_config"] = function()
---   dap_ui.open()
--- end
-
--- dap.listeners.before.event_terminated["dapui_config"] = function()
---   dap_ui.close()
--- end
-
--- dap.listeners.before.event_exited["dapui_config"] = function()
---   dap_ui.close()
--- end
-

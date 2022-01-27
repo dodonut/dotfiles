@@ -3,8 +3,7 @@ set -euo pipefail
 IFS=$'\n\t'
 
 read -r aaa
-if [1==1]
-if [ "$aaa" -eq 1 ]; then
+if [[  $aaa < "test" ]]; then
     echo a
 fi
 

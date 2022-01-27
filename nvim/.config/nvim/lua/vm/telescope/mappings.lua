@@ -1,3 +1,8 @@
+if not pcall(require, 'telescope') then
+  print 'telescope not installed'
+  return
+end
+
 
 local sorters = require "telescope.sorters"
 

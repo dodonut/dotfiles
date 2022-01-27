@@ -13,6 +13,7 @@ end
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 local themes = require("telescope.themes")
+local utils = require("lspconfig.util")
 
 local M = {}
 
@@ -64,10 +65,11 @@ function M.git_files()
 		shorten_path = false,
 		layout_strategy = "vertical",
 		path_display = function(opt, p)
-			local tail = require("telescope.utils").path_tail(p)
+			local tail = require('telescope.utils').path_tail(p)
 			return string.format("%s - %s", tail, p)
 		end,
 		cwd = path,
+        file_ignore_patterns = {'%.class'},
 
 		layout_config = {
 			width = width,
@@ -98,8 +100,10 @@ end
 function M.live_grep()
 	require("telescope.builtin").live_grep({
 		-- shorten_path = true,
-		previewer = false,
+        cwd = utils.root_pattern(".git")(vim.fn.expand("%")) or vim.fn.getcwd(),
+        previewer = false,
 		fzf_separator = "|>",
+        additional_args = function() return {"--hidden"} end
 	})
 end
 
@@ -134,7 +138,7 @@ function M.project_search()
 	require("telescope.builtin").find_files({
 		previewer = false,
 		layout_strategy = "vertical",
-		cwd = require("nvim_lsp.util").root_pattern(".git")(vim.fn.expand("%:p")),
+		cwd = utils.root_pattern(".git")(vim.fn.expand("%")) or vim.fn.getcwd(),
 	})
 end
 
