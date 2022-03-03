@@ -76,9 +76,7 @@ function M.git_files()
 		},
 	})
 
-	vim.cmd([[
-    silent! !git rev-parse --is-inside-work-tree
-  ]])
+    os.execute('git rev-parse --is-inside-work-tree')
 	if vim.v.shell_error == 0 then
 		require("telescope.builtin").git_files(opts)
 	else
@@ -242,11 +240,22 @@ function M.lsp_implementations()
 	})
 end
 
+function M.ultisnips()
+	require("telescope").extensions.ultisnips.ultisnips{}
+end
+
+function M.zoxide()
+	require("telescope").extensions.zoxide.list{}
+end
+
+function M.repo()
+	require("telescope").extensions.repo.list{}
+end
 return setmetatable({}, {
 	__index = function(_, k)
 		reloader()
 
-		local has_custom, custom = pcall(require, string.format("tj.telescope.custom.%s", k))
+		local has_custom, custom = pcall(require, string.format("vm.telescope.custom.%s", k))
 
 		if M[k] then
 			return M[k]

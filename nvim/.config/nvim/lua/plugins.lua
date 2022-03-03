@@ -13,13 +13,14 @@ return require("packer").startup({
 
 		-- lsp
 		use("neovim/nvim-lspconfig")
-		-- use("kabouzeid/nvim-lspinstall")
+		use("williamboman/nvim-lsp-installer")
 
 		use("ray-x/lsp_signature.nvim")
 		-- improve lsp
 		-- use("glepnir/lspsaga.nvim")
 		-- colors for lsp errors
 		use("folke/lsp-colors.nvim")
+		use("folke/tokyonight.nvim")
 		-- completion
 		use({
 			"hrsh7th/cmp-nvim-lsp",
@@ -32,6 +33,10 @@ return require("packer").startup({
 			},
 		})
 		use("onsails/lspkind-nvim")
+		use({ "voldikss/vim-floaterm", config = {
+
+			vim.cmd([[ nnoremap <S-t> :FloatermNew<cr>]]),
+		} })
 		-- lsp for java
 		-- ultisnips
 		use({ "sirver/UltiSnips", requires = "honza/vim-snippets" })
@@ -47,7 +52,9 @@ return require("packer").startup({
 		-- diffview for better diff on commit
 		use("sindrets/diffview.nvim")
 		-- signs for git hunks
-		use("lewis6991/gitsigns.nvim")
+		use({
+			"lewis6991/gitsigns.nvim",
+		})
 		-- colors
 		-- use("christianchiarulli/nvcode-color-schemes.vim")
 		use("marko-cerovac/material.nvim")
@@ -60,8 +67,6 @@ return require("packer").startup({
 		--lua
 		use("rafcamlet/nvim-luapad")
 		use("norcalli/nvim_utils")
-		use("tjdevries/nlua.nvim")
-		use("euclidianAce/BetterLua.vim")
 
 		--tree sitter
 		use({
@@ -81,10 +86,12 @@ return require("packer").startup({
 		use({
 			"nvim-telescope/telescope.nvim",
 			requires = {
-				{ "nvim-lua/popup.nvim" },
-				{ "nvim-lua/plenary.nvim" },
-				{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-				{ "fhill2/telescope-ultisnips.nvim" },
+				"nvim-lua/popup.nvim",
+				"nvim-lua/plenary.nvim",
+				"nvim-telescope/telescope-fzf-native.nvim",
+				run = "make",
+				"fhill2/telescope-ultisnips.nvim",
+				"jvgrootveld/telescope-zoxide",
 			},
 		})
 
@@ -104,6 +111,9 @@ return require("packer").startup({
 		use({
 			"RishabhRD/nvim-cheat.sh",
 			requires = { "RishabhRD/popfix" },
+			config = {
+				vim.cmd([[  nnoremap <leader>sc :Cheat<cr>]]),
+			},
 		})
 
 		-- shows all diagnostics across files
@@ -111,9 +121,9 @@ return require("packer").startup({
 			"folke/trouble.nvim",
 			requires = "kyazdani42/nvim-web-devicons",
 			config = function()
-                require("trouble").setup({
-                    auto_open = false
-                })
+				require("trouble").setup({
+					auto_open = false,
+				})
 			end,
 		})
 
@@ -139,7 +149,6 @@ return require("packer").startup({
 			"dstein64/vim-startuptime",
 			cmd = "StartupTime",
 		})
-
 		--sql
 		use("tpope/vim-dadbod")
 		use("kristijanhusak/vim-dadbod-completion")
@@ -150,9 +159,14 @@ return require("packer").startup({
 		--debugger
 		use("mfussenegger/nvim-jdtls")
 		use("mfussenegger/nvim-dap")
-		use("rcarriga/nvim-dap-ui")
-		use("theHamsta/nvim-dap-virtual-text")
-		use("nvim-telescope/telescope-dap.nvim")
+		use({
+			"rcarriga/nvim-dap-ui",
+			requires = {
+				"theHamsta/nvim-dap-virtual-text",
+				"nvim-telescope/telescope-dap.nvim",
+				"leoluz/nvim-dap-go",
+			},
+		})
 
 		--tmux integration
 		use("preservim/vimux")
@@ -161,8 +175,20 @@ return require("packer").startup({
 		use("tpope/vim-dotenv")
 
 		-- for bash script, use the shellcheck cli to give the diagnostics
-		-- use("mattn/efm-langserver")
+		use("mattn/efm-langserver")
 		--useful functions
 		use("tpope/vim-scriptease")
+
+		use({ "hashivim/vim-terraform" })
+
+		use({
+			"sudormrfbin/cheatsheet.nvim",
+
+			requires = {
+				{ "nvim-telescope/telescope.nvim" },
+				{ "nvim-lua/popup.nvim" },
+				{ "nvim-lua/plenary.nvim" },
+			},
+		})
 	end,
 })

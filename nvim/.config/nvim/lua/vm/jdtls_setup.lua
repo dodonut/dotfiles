@@ -198,17 +198,15 @@ function M.setup()
 					},
 				},
 			},
-			format = {
-				settings = {
-					-- url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
-                    url = formatpath()
-				},
-			},
+			-- format = {
+			-- 	settings = {
+			-- 		-- url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+                    -- url = formatpath()
+			-- 	},
+			-- },
 		},
 	}
 
-    P('teste')
-    P(config.settings.java.format)
 	config.cmd = { "java-lsp.sh", workspace_folder }
 	config.filetypes = { "java" }
 	config.on_init = function(_, _)

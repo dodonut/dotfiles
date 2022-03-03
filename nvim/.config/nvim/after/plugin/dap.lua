@@ -7,16 +7,20 @@ local dap = require('dap')
 
 dap.set_log_level "TRACE"
 
-vim.cmd [[nnoremap <silent> <F7> :lua require'dap'.step_into()<CR>]]
-vim.cmd [[nnoremap <silent> <F8> :lua require'dap'.step_over()<CR>]]
-vim.cmd [[nnoremap <silent> <F9> :lua require'dap'.continue()<CR>]]
-vim.cmd [[nnoremap <silent> <F5> :lua require'dap'.up();require'dapui'.open()<CR>]]
-vim.cmd [[nnoremap <silent> <F12> :lua require'dap'.terminate();require'dapui'.close()<CR>]]
+vim.cmd [[
+nnoremap <silent> <F7> :lua require'dap'.step_into()<CR>
+nnoremap <silent> <F8> :lua require'dap'.step_over()<CR>
+nnoremap <silent> <F9> :lua require'dap'.continue();require'dap'.up();require'dapui'.open()<CR>
+nnoremap <silent> <F5> :lua require'dap'.up();require'dapui'.open()<CR>
+nnoremap <silent> <A-b> :lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <silent> <A-B> :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+nnoremap <silent> <A-o> :lua require'dap'.repl.open()<CR>
+nnoremap <silent> <A-h> :lua require('dap.ui.widgets').hover()<CR>
+]]
 
-vim.cmd [[nnoremap <silent> <A-b> :lua require'dap'.toggle_breakpoint()<CR>]]
-vim.cmd [[nnoremap <silent> <A-B> :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>]]
-vim.cmd [[nnoremap <silent> <A-o> :lua require'dap'.repl.open()<CR>]]
-vim.cmd [[nnoremap <silent> <A-h> :lua require('dap.ui.widgets').hover()<CR>]]
+vim.cmd [[]]
+vim.cmd [[]]
+vim.cmd [[]]
 
 vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
 -- set signs for debug

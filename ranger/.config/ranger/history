@@ -8,5 +8,5 @@ mkdir ./config/scripts
 open_with 
 rename .config
 rename config
-delete
 
+delete

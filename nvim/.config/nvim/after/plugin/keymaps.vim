@@ -14,6 +14,7 @@ nnoremap <c-right> :bnext<cr>
 nnoremap <c-left> :bprevious<cr>
 nnoremap <right> :tabnext<cr>
 nnoremap <left> :tabprevious<cr>
+nnoremap <C-n> :tabnew<cr>
 
 " close tab or buffer
 nnoremap <leader>x :close<cr>
@@ -28,11 +29,11 @@ nnoremap ; :
 vnoremap : ;
 vnoremap ; :
 
-nnoremap <C-n> :tabnew<cr>
 
 nnoremap <c-e> 4<c-e>
 nnoremap <c-y> 4<c-y>
 
+"keeps selected while shifting
 vnoremap > >gv
 vnoremap < <gv
 
@@ -40,4 +41,6 @@ nnoremap <A-Up> :resize +3<cr>
 nnoremap <A-Down> :resize -3<cr>
 nnoremap <A-Left> :vert resize -5<cr>
 nnoremap <A-Right> :vert resize +5<cr>
+
+
 

@@ -3,8 +3,11 @@ if not pcall(require, "nvim-tree") then
 	return
 end
 
-vim.api.nvim_command("nnoremap <leader>k :NvimTreeToggle<cr>")
-vim.api.nvim_command(" let g:nvim_tree_group_empty = 1")
+vim.cmd[[ 
+nnoremap <leader>k :NvimTreeToggle<cr>
+let g:nvim_tree_group_empty = 1
+autocmd bufenter * if (winnr("$") == 1 && expand('%') == 'NvimTree') | q | endif
+]]
 -- following options are the default
 -- each of these are documented in `:help nvim-tree.OPTION_NAME`
 require'nvim-tree'.setup {
@@ -12,10 +15,10 @@ require'nvim-tree'.setup {
   hijack_netrw        = true,
   open_on_setup       = false,
   ignore_ft_on_setup  = {},
-  auto_close          = false,
+  auto_close          = true,
   open_on_tab         = false,
   hijack_cursor       = false,
-  update_cwd          = false,
+  update_cwd          = true,
   update_to_buf_dir   = {
     enable = false,
     auto_open = false,
@@ -39,7 +42,7 @@ require'nvim-tree'.setup {
     args = {}
   },
   filters = {
-    dotfiles = false,
+    dotfiles = true,
     custom = {}
   },
   view = {

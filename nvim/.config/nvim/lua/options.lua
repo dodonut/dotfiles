@@ -1,19 +1,19 @@
 
-local opt = vim.opt
+local opt          = vim.opt
 
 
 
 -- Ignore compiled files
 
-opt.wildmode = {'longest', 'list', 'full'}
+opt.wildmode       = {'longest', 'list', 'full'}
 
 -- Cool floating window popup menu for completion on command line
-opt.pumblend = 17
+opt.pumblend       = 17
 
-opt.wildmenu = true
-opt.wildmode = 'longest:full,full'
+opt.wildmenu       = true
+opt.wildmode       = 'longest:full,full'
 
-opt.wildoptions = 'pum'
+opt.wildoptions    = 'pum'
 
 
 opt.modifiable     = true
@@ -34,7 +34,7 @@ opt.splitright     = true  -- Prefer windows splitting to the right
 opt.splitbelow     = true  -- Prefer windows splitting to the bottom
 opt.updatetime     = 1000  -- Make updates happen faster
 opt.hlsearch       = false -- I wouldn't use this without my DoNoHL function
-opt.scrolloff   = 10    -- Make it so there are always ten lines below my cursor
+opt.scrolloff      = 10    -- Make it so there are always ten lines below my cursor
 
 
 -- Tabs
@@ -81,5 +81,5 @@ opt.formatoptions  = opt.formatoptions
 opt.joinspaces     = false         -- Two spaces and grade school, we're done
 
 -- set fillchars   = eob:~
-opt.fillchars      = { eob = "~" }
+-- opt.fillchars      = { eob = "~", vert = "|" }
 

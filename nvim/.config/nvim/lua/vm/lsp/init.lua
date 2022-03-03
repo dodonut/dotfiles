@@ -3,6 +3,11 @@ if not has_lsp then
 	return
 end
 
+local has_lsp, lspinstaller = pcall(require, "nvim-lsp-installer")
+if not has_lsp then
+	return
+end
+
 local lspconfig_util = require("lspconfig.util")
 local dap = require("dap")
 local javadap = require("vm.jdtls_setup").get_dap_config
@@ -68,16 +73,6 @@ local custom_attach = function(client, bufnr)
 
 	nnoremap("K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
 
-	if filetype == "java" then
-		require("jdtls").setup_dap({ hotcodereplace = "auto" })
-		require("jdtls.dap").setup_dap_main_class_configs()
-		require("jdtls.setup").add_commands()
-		javadap(function(conf)
-			dap.configurations.java = conf
-			print("Debugger is ready")
-		end)
-	end
-
 	vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
 
 	-- Set autocommands conditional on server_capabilities
@@ -100,8 +95,28 @@ local custom_attach = function(client, bufnr)
     ]])
 	end
 
+	if filetype == "java" then
+		require("jdtls").setup_dap({ hotcodereplace = "auto" })
+		require("jdtls.dap").setup_dap_main_class_configs()
+		require("jdtls.setup").add_commands()
+		javadap(function(conf)
+			dap.configurations.java = conf
+			print("Debugger is ready")
+		end)
+	end
+    if filetype == "go" then
+        require('dap-go').setup()
+        print('Debuggger ready')
+    end
 	-- Attach any filetype specific options to the client
-	filetype_attach[filetype](client)
+        filetype_attach[filetype](client)
+
+        vim.cmd([[
+          augroup lsp_buf_format
+            au! BufWritePre <buffer>
+            autocmd BufWritePre <buffer> :lua vim.lsp.buf.formatting_sync()
+          augroup END
+        ]])
 end
 
 local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -109,68 +124,91 @@ local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
 -- updated_capabilities = vim.tbl_deep_extend("keep", updated_capabilities, nvim_status.capabilities)
 updated_capabilities.textDocument.codeLens = { dynamicRegistration = false }
 updated_capabilities = require("cmp_nvim_lsp").update_capabilities(updated_capabilities)
+
 local util = require("lspconfig.util")
-local efm_settings = {
-	settings = {
-		root_dir = function(fname)
-			return util.root_pattern(".git")(fname) or vim.fn.getcwd()
-		end,
-		languages = {
-			sh = {
-				lintCommand = "shellcheck -f gcc -x -",
-				lintStdin = true,
-				lintFormats = { "%f=%l:%c: %trror: %m", "%f=%l:%c: %tarning: %m", "%f=%l:%c: %tote: %m" },
-			},
+local root_dir = function(fname)
+	return util.root_pattern(".git")(fname) or vim.fn.getcwd()
+end
+
+local java_config = {
+	java = {
+		referencesCodelens = {
+			enable = true,
 		},
-		filetypes = { "sh" },
+		implementationCodelens = {
+			enable = true,
+		},
 	},
 }
+local bundles = {
+	-- https://github.com/microsoft/java-debug
+	vim.fn.glob(
+		"$HOME/dev/source-proj/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"
+	),
+}
+
+--https://github.com/microsoft/vscode-java-test
+vim.list_extend(bundles, vim.split(vim.fn.glob("$HOME/dev/source-proj/vscode-java-test/server/*.jar"), "\n"))
+
+local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
+extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+java_config.init_options = {
+	bundles = bundles,
+	extendedClientCapabilities = extendedClientCapabilities,
+}
+
 local servers = {
-    bashls = true,
+	terraformls = true,
+	tflint = true,
+	bashls = true,
+	groovyls = {
+		settings = {
+			root_dir = root_dir,
+		},
+	},
 	vimls = true,
 	yamlls = true,
 	jsonls = true,
-    -- efm = efm_settings,
-
-	gopls = {
-	  -- root_dir = function(fname)
-	  --   local Path = require "plenary.path"
-
-	  --   local absolute_cwd = Path:new(vim.loop.cwd()):absolute()
-	  --   local absolute_fname = Path:new(fname):absolute()
-
-	  --   if string.find(absolute_cwd, "/cmd/", 1, true) and string.find(absolute_fname, absolute_cwd, 1, true) then
-	  --     return absolute_cwd
-	  --   end
-
-	  --   return lspconfig_util.root_pattern("go.mod", ".git")(fname)
-	  -- end,
-
-	  settings = {
-	    gopls = {
-	      codelenses = { test = true },
-	    },
-	  },
-
-	  flags = {
-	    debounce_text_changes = 200,
-	  },
+	jdtls = java_config,
+	efm = {
+		settings = {
+			root_dir = root_dir,
+			languages = {
+				sh = {
+					lintCommand = "shellcheck -f gcc -x -",
+					lintStdin = true,
+					lintFormats = { "%f=%l:%c: %trror: %m", "%f=%l:%c: %tarning: %m", "%f=%l:%c: %tote: %m" },
+				},
+			},
+			filetypes = { "sh" },
+			-- cmd = {"efm-langserver", "-c", "~/.config/efm-langserver/config.yaml"}
+		},
 	},
+	sumneko_lua = {
+		settings = {
+			Lua = {
+				diagnostics = {
+					globals = {
+						"vim",
+					},
+				},
+			},
+		},
+	},
+	gopls = {
+		settings = {
+			gopls = {
+				codelenses = { test = true },
+			},
+		},
 
-	-- tsserver = {
-	--   cmd = { "typescript-language-server", "--stdio" },
-	--   filetypes = {
-	--     "javascript",
-	--     "javascriptreact",
-	--     "javascript.jsx",
-	--     "typescript",
-	--     "typescriptreact",
-	--     "typescript.tsx",
-	--   },
-	-- },
+		flags = {
+			debounce_text_changes = 200,
+		},
+	},
 }
 
-local setup_server = function(server, config)
+local setup_server = function(server_name, config)
 	if not config then
 		return
 	end
@@ -178,7 +216,6 @@ local setup_server = function(server, config)
 	if type(config) ~= "table" then
 		config = {}
 	end
-
 	config = vim.tbl_deep_extend("force", {
 		on_init = custom_init,
 		on_attach = custom_attach,
@@ -187,34 +224,30 @@ local setup_server = function(server, config)
 			debounce_text_changes = 50,
 		},
 	}, config)
+	-- config.on_init = function(_, _)
+	-- 	vim.notify("workspace/didChangeConfiguration", { settings = config.settings })
+	-- end
 
-	lspconfig[server].setup(config)
+	-- from the manual to automatic
+	-- lspinstaller[server].setup(config)
+	local server_available, server = lspinstaller.get_server(server_name)
+	if server_available then
+		server:on_ready(function()
+			server:setup(config)
+		end)
+		if not server:is_installed() then
+			-- Queue the server to be installed.
+			print("installing server " .. server_name)
+			server:install()
+		end
+	else
+		print("Not available", server_name)
+	end
 end
-
 
 for server, config in pairs(servers) do
 	setup_server(server, config)
 end
-
-vim.cmd([[
-    augroup jdtls_lsp
-        autocmd!
-        autocmd FileType java lua require('vm.jdtls_setup').setup()
-    augroup end
-    ]])
-
--- Load lua configuration from nlua.
-require("nlua.lsp.nvim").setup(lspconfig, {
-	on_init = custom_init,
-	on_attach = custom_attach,
-	capabilities = updated_capabilities,
-
-	globals = {
-		-- Custom
-		"RELOAD",
-	},
-})
-
 
 return {
 	on_init = custom_init,

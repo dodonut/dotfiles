@@ -125,9 +125,20 @@ alias luamake=/home/tqi_vsousa/dev/lua-language-server/3rd/luamake/luamake
 
 
 
+#sourcing files
 # General bash aliases
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
+fi
+
+# General bash export
+if [ -f ~/.bash_export ]; then
+    . ~/.bash_export
+fi
+
+# General bash local configs not to be on repo
+if [ -f ~/.local.bash ]; then
+    . ~/.local.bash
 fi
 
 # General bash functions
@@ -138,3 +149,10 @@ fi
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/tqi_vsousa/.sdkman"
 [[ -s "/home/tqi_vsousa/.sdkman/bin/sdkman-init.sh" ]] && source "/home/tqi_vsousa/.sdkman/bin/sdkman-init.sh"
+
+# Added by serverless binary installer
+export PATH="$HOME/.serverless/bin:$PATH"
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+

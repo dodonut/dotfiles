@@ -1,5 +1,3 @@
-
-
 local function split(line, sep)
 	if sep == nil then
 		sep = "\n"

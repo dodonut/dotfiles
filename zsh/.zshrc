@@ -53,3 +53,7 @@ export PATH=$HOME/.config/scripts:/opt/oracle/instantclient_21_3:$PATH
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/tqi_vsousa/.sdkman"
 [[ -s "/home/tqi_vsousa/.sdkman/bin/sdkman-init.sh" ]] && source "/home/tqi_vsousa/.sdkman/bin/sdkman-init.sh"
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+

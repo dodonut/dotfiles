@@ -53,8 +53,7 @@ map_tele("<space>fg", "live_grep")
 map_tele("<space>fd", "fd")
 --TODO see this func project_search
 -- map_tele("<space>pp", "project_search")
-map_tele("<space>fe", "file_browser")
-
+-- map_tele("<space>fe", "file_browser")
 -- Nvim
 map_tele("<space>fb", "buffers")
 map_tele("<space>fa", "installed_plugins")
@@ -64,8 +63,11 @@ map_tele("<space>fh", "help_tags")
 map_tele("<space>fk", "keymaps")
 -- quite unusual
 map_tele("<space>vo", "vim_options")
-
 -- Telescope Meta
 map_tele("<space>fB", "builtin")
+map_tele("<space>fs", "ultisnips")
+-- not so useful
+-- map_tele("<space>fz", "zoxide")
+-- map_tele("<space>fr", "repo")
 
 return map_tele

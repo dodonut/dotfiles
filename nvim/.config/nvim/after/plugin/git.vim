@@ -21,6 +21,13 @@ require('neogit').setup {
         diffview = true
         }
     }
+
+if not pcall(require, 'gitsigns') then
+    print('gitsigns not installed')
+    return
+end
+
+require'gitsigns'.setup{}
 EOF
 
 
