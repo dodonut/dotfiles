@@ -5,8 +5,9 @@ mkdir scripts
 mkdir -p .config/scripts
 mkdir .config/scripts
 mkdir ./config/scripts
-open_with 
 rename .config
 rename config
 
 delete
+open_with 
+rename refresh-token
