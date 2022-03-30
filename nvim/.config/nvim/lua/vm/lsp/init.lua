@@ -8,9 +8,8 @@ if not has_lsp then
 	return
 end
 
+
 local lspconfig_util = require("lspconfig.util")
-local dap = require("dap")
-local javadap = require("vm.jdtls_setup").get_dap_config
 
 local telescope_mapper = require("vm.telescope.mappings")
 
@@ -95,19 +94,22 @@ local custom_attach = function(client, bufnr)
     ]])
 	end
 
-	if filetype == "java" then
-		require("jdtls").setup_dap({ hotcodereplace = "auto" })
-		require("jdtls.dap").setup_dap_main_class_configs()
-		require("jdtls.setup").add_commands()
-		javadap(function(conf)
-			dap.configurations.java = conf
-			print("Debugger is ready")
-		end)
+	local has_dap, dap = pcall(require, "dap")
+	if has_lsp then
+		if filetype == "java" then
+			require("jdtls").setup_dap({ hotcodereplace = "auto" })
+			require("jdtls.dap").setup_dap_main_class_configs()
+			require("jdtls.setup").add_commands()
+			javadap(function(conf)
+				dap.configurations.java = conf
+				print("Debugger is ready")
+			end)
+		end
+	    if filetype == "go" then
+		require('dap-go').setup()
+		print('Debuggger ready')
+	    end
 	end
-    if filetype == "go" then
-        require('dap-go').setup()
-        print('Debuggger ready')
-    end
 	-- Attach any filetype specific options to the client
         filetype_attach[filetype](client)
 
@@ -150,12 +152,12 @@ local bundles = {
 --https://github.com/microsoft/vscode-java-test
 vim.list_extend(bundles, vim.split(vim.fn.glob("$HOME/dev/source-proj/vscode-java-test/server/*.jar"), "\n"))
 
-local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
-extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
-java_config.init_options = {
-	bundles = bundles,
-	extendedClientCapabilities = extendedClientCapabilities,
-}
+--local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
+--extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+--java_config.init_options = {
+--	bundles = bundles,
+--	extendedClientCapabilities = extendedClientCapabilities,
+--}
 
 local servers = {
 	terraformls = true,

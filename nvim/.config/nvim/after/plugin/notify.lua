@@ -3,6 +3,11 @@ if not pcall(require, 'plenary') then
   return
 end
 
+if not pcall(require, 'notify') then
+  print 'notify not installed'
+  return
+end
+
 local log = require("plenary.log").new {
   plugin = "notify",
   level = "debug",

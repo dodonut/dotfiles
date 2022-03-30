@@ -2,7 +2,7 @@
 " open fugitive in a tab
 command! Gt execute "Gtabedit :"
 
-
+function NeogitSetup() 
 lua << EOF
 
 if not pcall(require, 'neogit') then
@@ -10,17 +10,17 @@ if not pcall(require, 'neogit') then
     return
 end
 
-if not pcall(require, 'diffview') then
-    print('diffview not installed')
-    return
-end
+--if not pcall(require, 'diffview') then
+ --   print('diffview not installed')
+  --  return
+--end
 
-require('neogit').setup {
-    disable_commit_confirmation=true,
-    integrations = {
-        diffview = true
-        }
-    }
+--require('neogit').setup {
+--    disable_commit_confirmation=true,
+    --integrations = {
+     --   diffview = true
+      --  }
+    --}
 
 if not pcall(require, 'gitsigns') then
     print('gitsigns not installed')
@@ -41,3 +41,25 @@ set nocompatible
 filetype plugin indent on
 let g:mergetool_layout = 'bmr'
 let g:mergetool_prefer_revision = 'local'
+
+endfunction
+
+" neogit_setup()
+
+function! Fugitive() 
+
+    function! GCommit()
+        message=input("Message >")
+       :G add .
+       :G commit -m message
+    endfunction
+
+nnoremap <leader>gg :G<cr>
+nnoremap <leader>gd :DiffviewOpen<cr>
+nnoremap <leader>gx :DiffviewClose<cr>
+nnoremap <leader>gc :call GCommit()<cr>
+nnoremap <leader>gD :DiffviewOpen master<cr>
+    
+endfunction
+
+call Fugitive()

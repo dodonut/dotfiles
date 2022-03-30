@@ -91,10 +91,9 @@ require("telescope").setup({
 	},
 })
 
-require("telescope").load_extension("dap")
-require("telescope").load_extension("notify")
+-- require("telescope").load_extension("dap")
+-- require("telescope").load_extension("notify")
 
--- pcall(require("telescope").load_extension, "fzy_native")
 require("telescope").load_extension("fzf")
 require("telescope").load_extension("ultisnips")
-require("telescope").load_extension("zoxide")
+-- require("telescope").load_extension("zoxide")
