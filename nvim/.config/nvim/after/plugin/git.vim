@@ -51,7 +51,8 @@ function! Fugitive()
     function! GCommit()
         let message=input("Message > ")
        :G add .
-       :G commit -m message
+       :silent G commit -m message
+
     endfunction
 
 nnoremap <leader>gg :G<cr>
