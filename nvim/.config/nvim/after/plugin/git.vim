@@ -49,7 +49,7 @@ endfunction
 function! Fugitive() 
 
     function! GCommit()
-        message=input("Message >")
+        let message=input("Message > ")
        :G add .
        :G commit -m message
     endfunction
