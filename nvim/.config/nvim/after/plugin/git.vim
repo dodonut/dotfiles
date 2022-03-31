@@ -1,6 +1,6 @@
 
 " open fugitive in a tab
-command! Gt execute "Gtabedit :"
+" command! Gt execute "Gtabedit :"
 
 function NeogitSetup() 
 lua << EOF
@@ -10,17 +10,17 @@ if not pcall(require, 'neogit') then
     return
 end
 
---if not pcall(require, 'diffview') then
- --   print('diffview not installed')
-  --  return
---end
+if not pcall(require, 'diffview') then
+    print('diffview not installed')
+    return
+end
 
---require('neogit').setup {
---    disable_commit_confirmation=true,
-    --integrations = {
-     --   diffview = true
-      --  }
-    --}
+require('neogit').setup {
+    disable_commit_confirmation=true,
+    integrations = {
+        diffview = true
+        }
+    }
 
 if not pcall(require, 'gitsigns') then
     print('gitsigns not installed')
@@ -50,9 +50,10 @@ function! Fugitive()
 
     function! GCommit()
         let message=input("Message > ")
-       :G add .
-       :silent G commit -m message
-
+        :redraw
+        execute "!git add ."
+        :silent G commit -m a:message
+        echom "Done!"
     endfunction
 
 nnoremap <leader>gg :G<cr>
