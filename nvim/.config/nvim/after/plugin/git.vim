@@ -48,20 +48,20 @@ endfunction
 
 function! Fugitive() 
 
-    function! GCommit()
+    function! GPushAll()
         let message=input("Message > ")
         " add all files because git add . don't work in the way I open VC
         silent execute "!git add $(git rev-parse --show-cdup)"
         :redraw
         :silent G commit -m a:message
-        execute "!git push origin " . system('git branch')[2:-2]
+        silent execute "!git push -u origin " . system('git branch')[2:-2]
         echo "Done!"
     endfunction
 
 nnoremap <leader>gg :G<cr>
 nnoremap <leader>gd :DiffviewOpen<cr>
 nnoremap <leader>gx :DiffviewClose<cr>
-nnoremap <leader>gc :call GCommit()<cr>
+nnoremap <leader>gc :call GPushAll()<cr>
 nnoremap <leader>gD :DiffviewOpen master<cr>
     
 endfunction
