@@ -56,7 +56,7 @@ function! Fugitive()
         :redraw
         :silent G commit -m a:message
         let t=system("git branch")[2:-2]
-        :G push -u origin a:t
+        :G push -u origin t
         echo "Done!"
     endfunction
 
