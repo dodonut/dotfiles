@@ -52,9 +52,9 @@ function! Fugitive()
         let message=input("Message > ")
         " add all files because git add . don't work in the way I open VC
         silent execute "!git add $(git rev-parse --show-cdup)"
-        :redraw
-        :silent G commit -m a:message
+        silent G commit -m a:message
         silent execute "!git push -u origin " . system('git branch')[2:-2]
+        redraw
         echo "Done!"
     endfunction
 
