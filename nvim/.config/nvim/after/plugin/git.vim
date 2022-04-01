@@ -55,8 +55,8 @@ function! Fugitive()
         silent execute "!git add $(git rev-parse --show-cdup)"
         :redraw
         :silent G commit -m a:message
-        " let t=system("git branch")[2:-2]
-        :G push -u origin system("git branch")[2:-2]
+        let t=system("git branch")[2:-2]
+        :G push -u origin a:t
         echo "Done!"
     endfunction
 
