@@ -8,6 +8,6 @@ mkdir ./config/scripts
 rename .config
 rename config
 
-delete
 open_with 
 rename refresh-token
+delete

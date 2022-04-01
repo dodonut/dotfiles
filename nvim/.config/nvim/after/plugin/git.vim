@@ -49,11 +49,15 @@ endfunction
 function! Fugitive() 
 
     function! GCommit()
-        let message=input("Message > ")
+        " let message=input("Message > ")
+        let message='new git script'
+        " add all files because git add . don't work in the way I open VC
+        silent execute "!git add $(git rev-parse --show-cdup)"
         :redraw
-        execute "!git add ."
         :silent G commit -m a:message
-        echom "Done!"
+        " let t=system("git branch")[2:-2]
+        :G push -u orign system("git branch")[2:-2]
+        echo "Done!"
     endfunction
 
 nnoremap <leader>gg :G<cr>
