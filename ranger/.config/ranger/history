@@ -11,3 +11,5 @@ rename config
 open_with 
 rename refresh-token
 delete
+rename notification
+rename invoice

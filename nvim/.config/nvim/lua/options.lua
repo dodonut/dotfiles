@@ -1,8 +1,5 @@
 
 local opt          = vim.opt
-
-
-
 -- Ignore compiled files
 
 opt.wildmode       = {'longest', 'list', 'full'}
@@ -79,6 +76,8 @@ opt.formatoptions  = opt.formatoptions
 
 -- set joinspaces
 opt.joinspaces     = false         -- Two spaces and grade school, we're done
+opt.laststatus=3
+-- vim.cmd "set laststatus=3"
 
 -- set fillchars   = eob:~
 -- opt.fillchars      = { eob = "~", vert = "|" }

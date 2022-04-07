@@ -1,4 +1,5 @@
-"" operator mapping
+vim.cmd [[
+
 func! DBExe(...)
 	if !a:0
 		let &operatorfunc = matchstr(expand('<sfile>'), '[^. ]*$')
@@ -21,20 +22,6 @@ func! DBExe(...)
 	let &selection = sel_save
 	let @@ = reg_save
 endfunction
-
-
-nnoremap <leader>dt :DBUIToggle<cr>
-
-
-xnoremap <expr> <Plug>(DBExe)     DBExe()
-nnoremap <expr> <Plug>(DBExe)     DBExe()
-nnoremap <expr> <Plug>(DBExeLine) DBExe() . '_'
-
-xmap <leader>db  <Plug>(DBExe)
-nmap <leader>db  <Plug>(DBExe)
-omap <leader>db  <Plug>(DBExe)
-nmap <leader>dbb <Plug>(DBExeLine)
-
 " stored locally a credentials file which the function use
 " down below is just an example to the format
 let g:dbs = {
@@ -77,3 +64,6 @@ let g:db_ui_table_helpers = {
 "     let b:db = a:url
 "     echomsg 'DB ' . a:name . ' is selected.'
 " endfunc
+]]
+
+

@@ -1,6 +1,6 @@
-if not pcall(require, 'lspkind') then
-    print 'lspking not installed'
-    return
+if not pcall(require, "lspkind") then
+	print("lspking not installed")
+	return
 end
 
 local lspkind = require("lspkind")
@@ -28,34 +28,21 @@ cmp.setup({
 		["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
 	},
 	sources = {
-		{ name = "nvim_lua", ft = {'lua'} },
+		{ name = "nvim_lua", ft = { "lua" } },
 		{ name = "nvim_lsp" },
 		{ name = "ultisnips" }, -- For ultisnips users.
 		{ name = "path" },
 		{ name = "buffer", keyword_length = 5 },
 	},
-	formatting = {
-		format = lspkind.cmp_format({
-			with_text = true,
-			menu = {
-				buffer = "[buf]",
-				nvim_lsp = "[LSP]",
-				nvim_lua = "[api]",
-				path = "[path]",
-				ultisnips = "[snip]",
-			},
-		}),
-	},
 	experimental = {
 		ghost_text = true,
 		native_menu = false,
-	},
+	}, -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 })
 
 -- Add vim-dadbod-completion in sql files
-vim.cmd([[
-  augroup DadbodSql
-    au!
-    autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer { sources = { { name = 'vim-dadbod-completion' } } }
-  augroup END
-]])
+local id = vim.api.nvim_create_augroup("DadbodSql", { clear = true })
+vim.api.nvim_create_autocmd(
+	"FileType",
+	{ pattern = {"sql", "mysql", "plsql"}, command = ":lua require('cmp').setup.buffer { sources = { { name = 'vim-dadbod-completion' } } }", group = id }
+)

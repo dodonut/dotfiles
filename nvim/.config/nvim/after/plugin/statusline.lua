@@ -201,12 +201,7 @@ ins_left({
 -- Add components to right sections
 ins_right({
 	function()
-		return vim.api.nvim_exec(
-			[[
-            echo TestStatus()
-        ]],
-			true
-		)
+		return require('after.plugin.neomake').test_status()
 	end,
 })
 

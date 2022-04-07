@@ -8,7 +8,6 @@ if not has_lsp then
 	return
 end
 
-
 local lspconfig_util = require("lspconfig.util")
 
 local telescope_mapper = require("vm.telescope.mappings")
@@ -23,14 +22,14 @@ local custom_init = function(client)
 end
 
 local filetype_attach = setmetatable({
-	-- go = function(client)
-	-- 	vim.cmd([[
-	-- augroup lsp_buf_format
-	-- au! BufWritePre <buffer>
-	-- autocmd BufWritePre <buffer> :lua vim.lsp.buf.formatting_sync()
-	-- augroup END
-	-- ]])
-	-- end,
+	go = function(client)
+		local id = vim.api.nvim_create_augroup("lsp_buf_format_go", { clear = true })
+		-- vim.api.nvim_create_autocmd("BufWritePre", {pattern = "*.go", command = ":lua require'functions'.org_imports_go(3000)", group = id})
+		vim.api.nvim_create_autocmd(
+			"BufWritePre",
+			{ pattern = "*.go", command = ":lua vim.lsp.buf.formatting_sync()", group = id }
+		)
+	end,
 }, {
 	__index = function()
 		return function() end
@@ -50,19 +49,17 @@ local custom_attach = function(client, bufnr)
 	local opts = { noremap = true, silent = true }
 	local filetype = vim.api.nvim_buf_get_option(0, "filetype")
 
-	inoremap("<c-s>", "<cmd> lua vim.lsp.buf.signature_help<cr> ", opts)
-	nnoremap("<space>cr", "<cmd> lua vim.lsp.buf.rename<cr>", opts)
 	-- telescope_mapper("<space>ca", "lsp_code_actions", nil, true)
 	nnoremap("gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	nnoremap("gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
 	nnoremap("gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	nnoremap("<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+	nnoremap("<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 	nnoremap("<space>d", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
 	nnoremap("<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
 	nnoremap("gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	nnoremap("<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 	nnoremap("K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-	nnoremap("<F3>", "<cmd> call MyFormatting()<cr>", opts)
+	nnoremap("<F3>", "<cmd> lua MyFormatting()<cr>", opts)
 	inoremap("<c-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
 
 	telescope_mapper("gr", "lsp_references", nil, true)
@@ -76,22 +73,26 @@ local custom_attach = function(client, bufnr)
 
 	-- Set autocommands conditional on server_capabilities
 	if client.resolved_capabilities.document_highlight then
-		vim.cmd([[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]])
+		local id = vim.api.nvim_create_augroup("lsp_doc_hightlight", { clear = true })
+		vim.api.nvim_create_autocmd(
+			"CursorHold",
+			{ pattern = "<buffer>", command = "lua vim.lsp.buf.document_highlight()", group = id }
+		)
+		vim.api.nvim_create_autocmd(
+			"CursorMoved",
+			{ pattern = "<buffer>", command = "lua vim.lsp.buf.clear_references()", group = id }
+		)
 	end
 
 	if client.resolved_capabilities.code_lens then
 		vim.cmd([[
-      augroup lsp_document_codelens
-        au! * <buffer>
-        autocmd BufWritePost,BufEnter <buffer> lua vim.lsp.codelens.refresh()
-      augroup END
-    ]])
+          augroup lsp_document_codelens
+            au! * <buffer>
+            autocmd BufWritePost,BufEnter <buffer> lua vim.lsp.codelens.refresh()
+          augroup END
+        ]])
+		-- local id = vim.api.nvim_create_augroup("lsp_doc_codelens", {clear = true})
+		-- vim.api.nvim_create_autocmd({"BufWritePost", "BufEnter"}, {pattern = "<buffer>", command = ":lua vim.lsp.buf.codelens.refresh()", group = id})
 	end
 
 	local has_dap, dap = pcall(require, "dap")
@@ -100,25 +101,19 @@ local custom_attach = function(client, bufnr)
 			require("jdtls").setup_dap({ hotcodereplace = "auto" })
 			require("jdtls.dap").setup_dap_main_class_configs()
 			require("jdtls.setup").add_commands()
+			local javadap = require("vm.jdtls_setup").get_dap_config
 			javadap(function(conf)
 				dap.configurations.java = conf
 				print("Debugger is ready")
 			end)
 		end
-	    if filetype == "go" then
-		require('dap-go').setup()
-		print('Debuggger ready')
-	    end
+		if filetype == "go" then
+			require("dap-go").setup()
+			print("Debuggger ready")
+		end
 	end
 	-- Attach any filetype specific options to the client
-        filetype_attach[filetype](client)
-
-        vim.cmd([[
-          augroup lsp_buf_format
-            au! BufWritePre <buffer>
-            autocmd BufWritePre <buffer> :lua vim.lsp.buf.formatting_sync()
-          augroup END
-        ]])
+	filetype_attach[filetype](client)
 end
 
 local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -126,6 +121,19 @@ local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
 -- updated_capabilities = vim.tbl_deep_extend("keep", updated_capabilities, nvim_status.capabilities)
 updated_capabilities.textDocument.codeLens = { dynamicRegistration = false }
 updated_capabilities = require("cmp_nvim_lsp").update_capabilities(updated_capabilities)
+
+-- Load lua configuration from nlua.
+require("nlua.lsp.nvim").setup(lspconfig, {
+	on_init = custom_init,
+	on_attach = custom_attach,
+	capabilities = updated_capabilities,
+
+	globals = {
+		"vim",
+		-- Custom
+		"RELOAD",
+	},
+})
 
 local util = require("lspconfig.util")
 local root_dir = function(fname)
@@ -152,12 +160,12 @@ local bundles = {
 --https://github.com/microsoft/vscode-java-test
 vim.list_extend(bundles, vim.split(vim.fn.glob("$HOME/dev/source-proj/vscode-java-test/server/*.jar"), "\n"))
 
---local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
---extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
---java_config.init_options = {
---	bundles = bundles,
---	extendedClientCapabilities = extendedClientCapabilities,
---}
+local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
+extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+java_config.init_options = {
+	bundles = bundles,
+	extendedClientCapabilities = extendedClientCapabilities,
+}
 
 local servers = {
 	terraformls = true,

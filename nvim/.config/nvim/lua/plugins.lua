@@ -1,3 +1,10 @@
+-- autoinstall
+local id = vim.api.nvim_create_augroup("packer_auto_update", { clear = true })
+vim.api.nvim_create_autocmd(
+	"BufWritePost",
+	{ pattern = "plugins.lua", command = "source <afile> | PackerSync", group = id }
+)
+
 return require("packer").startup({
 	function(use) -- plug manager
 		use("wbthomason/packer.nvim")
@@ -53,23 +60,27 @@ return require("packer").startup({
 		use({ "tanvirtin/vgit.nvim" })
 
 		-- diffview for better diff on commit
-		use("sindrets/diffview.nvim")
+		-- use("sindrets/diffview.nvim")
 		-- signs for git hunks
 		use({
 			"lewis6991/gitsigns.nvim",
+			config = function()
+				require("gitsigns").setup()
+			end,
 		})
-		-- colors
-		--use("marko-cerovac/material.nvim")
 
-		----fzf comparizon
-		--use({ "junegunn/fzf.vim", requires = "junegunn/fzf", run = "fzf#install()" })
-		-- help char for end of line and blank spaces
+		-- colors
+		use("marko-cerovac/material.nvim")
+
 		use("tjdevries/cyclist.vim")
 
 		--lua
 		use("rafcamlet/nvim-luapad")
+		use({ "tjdevries/nlua.nvim" })
 		use("norcalli/nvim_utils")
+		use({ "euclidianAce/BetterLua.vim" })
 
+		use({ "benmills/vim-golang-alternate" })
 		--tree sitter
 		use({
 			"nvim-treesitter/nvim-treesitter",
@@ -83,6 +94,16 @@ return require("packer").startup({
 			config = function()
 				require("nvim-tree").setup({})
 			end,
+		})
+
+		use({
+			"nvim-neo-tree/neo-tree.nvim",
+			branch = "v2.x",
+			requires = {
+				"nvim-lua/plenary.nvim",
+				"kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+				"MunifTanjim/nui.nvim",
+			},
 		})
 
 		use({
@@ -138,20 +159,12 @@ return require("packer").startup({
 			end,
 		})
 
-		--use({ "kevinhwang91/nvim-bqf", ft = "qf" })
+		use({ "kevinhwang91/nvim-bqf", ft = "qf" })
 
 		use("junegunn/vim-easy-align")
 
 		-- notifications
 		use("rcarriga/nvim-notify")
-
-		---- cursor hold lag and performance bug
-		--use({
-		--	"antoinemadec/FixCursorHold.nvim",
-		--	run = function()
-		--		vim.g.curshold_updatime = 1000
-		--	end,
-		--})
 
 		-- Better profiling output for startup.
 		use({
@@ -159,10 +172,14 @@ return require("packer").startup({
 			cmd = "StartupTime",
 		})
 		----sql
-		--use("tpope/vim-dadbod")
-		--use("kristijanhusak/vim-dadbod-completion")
-		--use("kristijanhusak/vim-dadbod-ui")
-		--use("skywind3000/vim-quickui")
+		use({
+			"tpope/vim-dadbod",
+			requires = {
+				"kristijanhusak/vim-dadbod-completion",
+				"kristijanhusak/vim-dadbod-ui",
+				"skywind3000/vim-quickui",
+			},
+		})
 
 		--async run
 		use("tpope/vim-dispatch")
@@ -171,7 +188,7 @@ return require("packer").startup({
 		-- for bash script, use the shellcheck cli to give the diagnostics
 		use("mattn/efm-langserver")
 		----useful functions
-		--use("tpope/vim-scriptease")
+		use("tpope/vim-scriptease")
 
 		use({ "hashivim/vim-terraform" })
 

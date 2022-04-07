@@ -40,7 +40,7 @@ local tokyo = function()
 		print("tokyonight not installed")
 		return
 	end
-	vim.cmd([[colorscheme tokyonight]])
+	vim.cmd "colorscheme tokyonight"
 end
 
 tokyo()

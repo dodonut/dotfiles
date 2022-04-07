@@ -1,18 +1,20 @@
-local a = function()
-	local bnr = vim.fn.bufnr("%")
-	local ns_id = vim.api.nvim_create_namespace("demo")
+local function org_imports_go(timeout_ms)
+  local context = { source = { organizeImports = true } }
+  vim.validate { context = { context, 't', true } }
+  local params = vim.lsp.util.make_range_params()
+  params.context = context
 
-	local line_num = 5
-	local col_num = 10
+  local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, timeout_ms)
+  if not result then return end
+  for _, v in pairs(result) do
+      result = v.result
+  end
 
-	local opts = {
-		end_line = 10,
-		id = 1,
-		virt_text = { { " demo", "ErrorMsg" } },
-		virt_text_pos = "eol",
-		virt_text_win_col = 50,
-	}
-	vim.api.nvim_buf_set_extmark(bnr, ns_id, line_num, col_num, opts)
+  if not result then return end
+  local edit = result[1].edit.documentChanges
+  print('edit')
+  P(edit)
+  vim.lsp.util.apply_workspace_edit(edit)
 end
 
-a()
+return org_imports_go

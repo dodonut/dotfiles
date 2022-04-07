@@ -1,9 +1,9 @@
+if vim.g.loaded_cyclist == false then
+    return
+end
 
-set list
-
-if !get(g:, 'loaded_cyclist', v:false)
-  finish
-endif
+vim.opt.list = true
+vim.cmd[[
 
 call cyclist#add_listchar_option_set('limited', {
         \ 'eol': '↲',
@@ -25,3 +25,5 @@ call cyclist#add_listchar_option_set('busy', {
         \ 'conceal': '┊',
         \ 'nbsp': '☠',
         \ })
+
+]]

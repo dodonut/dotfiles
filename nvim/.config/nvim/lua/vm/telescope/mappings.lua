@@ -50,7 +50,7 @@ map_tele("<space>f/", "grep_last_search", {
 map_tele("<c-p>", "git_files")
 map_tele("<space>fg", "live_grep")
 -- map_tele("<space>fo", "oldfiles")
-map_tele("<space>fd", "fd")
+-- map_tele("<space>fd", "fd")
 --TODO see this func project_search
 -- map_tele("<space>pp", "project_search")
 -- map_tele("<space>fe", "file_browser")
@@ -66,6 +66,7 @@ map_tele("<space>vo", "vim_options")
 -- Telescope Meta
 map_tele("<space>fB", "builtin")
 map_tele("<space>fs", "ultisnips")
+map_tele("<space>fdb", "list_breakpoints")
 -- not so useful
 -- map_tele("<space>fz", "zoxide")
 -- map_tele("<space>fr", "repo")

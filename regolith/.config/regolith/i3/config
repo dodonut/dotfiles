@@ -672,10 +672,12 @@ exec --no-startup-id greenclip daemon
 assign [class="Code"] $ws1
 assign [class="jetbrains-idea-ce"] $ws1
 assign [class="Brave-browser"] $ws2
+assign [class="Postman"] $ws3
+assign [class="DBeaver"] $ws19
 assign [class="Slack"] $ws8
 assign [class="whatsdesk"] $ws8
 assign [class="Microsoft Teams - Preview"] $ws9
-assign [class="Cisco AnyConnect Secure Mobility Client"] $ws19
+assign [class="Com.cisco.anyconnect.gui"] $ws19
 
 bindsym $mod+Ctrl+Left exec i3-msg move workspace to output left
 bindsym $mod+Ctrl+Right exec i3-msg move workspace to output right

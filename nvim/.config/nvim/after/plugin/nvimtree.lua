@@ -3,11 +3,14 @@ if not pcall(require, "nvim-tree") then
 	return
 end
 
-vim.cmd[[ 
-nnoremap <leader>k :NvimTreeToggle<cr>
-let g:nvim_tree_group_empty = 1
-autocmd bufenter * if (winnr("$") == 1 && expand('%') == 'NvimTree') | q | endif
-]]
+vim.g.nvim_tree_group_empty = 1
+
+-- autoclose the editor when the last window is the nvimtree
+local id = vim.api.nvim_create_augroup("autoclose_vim_nvimtree", { clear = true })
+vim.api.nvim_create_autocmd(
+	"bufenter",
+	{ pattern = "*", command = "if (winnr('$') == 1 && expand('%') == 'NvimTree_1') | q | endif", group = id }
+)
 -- following options are the default
 -- each of these are documented in `:help nvim-tree.OPTION_NAME`
 require'nvim-tree'.setup {
