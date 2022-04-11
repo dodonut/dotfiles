@@ -39,6 +39,7 @@ return require("packer").startup({
 				"hrsh7th/nvim-cmp",
 				"hrsh7th/cmp-path",
 				"hrsh7th/cmp-nvim-lua",
+				"hrsh7th/cmp-nvim-lsp",
 				"quangnguyen30192/cmp-nvim-ultisnips",
 			},
 		})
@@ -56,11 +57,7 @@ return require("packer").startup({
 		--neogit slowing neovim down -- figure out why
 		-- use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
 		use("tpope/vim-fugitive")
-		use("samoshkin/vim-mergetool")
-		use({ "tanvirtin/vgit.nvim" })
 
-		-- diffview for better diff on commit
-		-- use("sindrets/diffview.nvim")
 		-- signs for git hunks
 		use({
 			"lewis6991/gitsigns.nvim",
@@ -143,9 +140,6 @@ return require("packer").startup({
 		use({
 			"RishabhRD/nvim-cheat.sh",
 			requires = { "RishabhRD/popfix" },
-			config = {
-				vim.cmd([[  nnoremap <leader>sc :Cheat<cr>]]),
-			},
 		})
 
 		---- shows all diagnostics across files

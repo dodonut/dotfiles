@@ -23,9 +23,9 @@ cmp.setup({
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.close(),
-		["<c-y>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
+		["<Tab>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
 		["<c-q>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-		["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
+		-- ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
 	},
 	sources = {
 		{ name = "nvim_lua", ft = { "lua" } },
@@ -34,6 +34,10 @@ cmp.setup({
 		{ name = "path" },
 		{ name = "buffer", keyword_length = 5 },
 	},
+    confirm_opts = {
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = false
+    },
 	experimental = {
 		ghost_text = true,
 		native_menu = false,

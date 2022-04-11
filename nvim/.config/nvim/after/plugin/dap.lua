@@ -34,7 +34,7 @@ require("dapui").setup({
       -- { id = "stacks", size = 0.25 },
       { id = "watches", size = 0.33 },
     },
-    size = 40,
+    size = 60,
     position = "left", -- Can be "left", "right", "top", "bottom"
   },
   tray = {

@@ -59,10 +59,7 @@ map({'x', 'ga','<Plug>(EasyAlign)'})
 
 -- git
 map({'n', '<leader>gg',':G<cr>'})
-map({'n', '<leader>gd',':DiffviewOpen<cr>'})
-map({'n', '<leader>gx',':DiffviewClose<cr>'})
 map({'n', '<leader>gc',':lua require("functions").fugitive()<cr>'})
-map({'n', '<leader>gD',':DiffviewOpen master<cr>'})
 
 -- sql
 map({'n', '<leader>dt',':DBUIToggle<cr>'})
@@ -103,6 +100,9 @@ map({'n', '<space>dc',':lua require("dap").clear_breakpoints()<CR>'}, {noremap =
 --tree
 -- map({'n', '<leader>k',':NvimTreeToggle<cr>'})
 map({'n', '<leader>k',':Neotree filesystem reveal right toggle<cr>'})
+
+--cheat
+map({'n', '<leader>sc', ':Cheat<cr>'})
 
 --open log map
 vim.cmd [[
