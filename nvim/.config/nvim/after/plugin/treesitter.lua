@@ -9,9 +9,12 @@ require("nvim-treesitter.configs").setup({
 		disable = {},
 	},
 	indent = {
-		enable = false,
+		enable = true,
 		disable = {},
 	},
+    autopairs = {
+        enable = true,
+    },
 	ensure_installed = {
 		"java",
 		"c",

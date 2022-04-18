@@ -250,4 +250,32 @@ function M.setup()
 	require("jdtls").start_or_attach(config)
 end
 
+
+M.java_config = {
+	java = {
+		referencesCodelens = {
+			enable = true,
+		},
+		implementationCodelens = {
+			enable = true,
+		},
+	},
+}
+local bundles = {
+	-- https://github.com/microsoft/java-debug
+	vim.fn.glob(
+		"$HOME/dev/source-proj/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"
+	),
+}
+--https://github.com/microsoft/vscode-java-test
+vim.list_extend(bundles, vim.split(vim.fn.glob("$HOME/dev/source-proj/vscode-java-test/server/*.jar"), "\n"))
+
+local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
+extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+M.java_config.init_options = {
+	bundles = bundles,
+	extendedClientCapabilities = extendedClientCapabilities,
+}
+
+
 return M

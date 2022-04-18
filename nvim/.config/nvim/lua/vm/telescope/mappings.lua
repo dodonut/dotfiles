@@ -62,13 +62,12 @@ map_tele("<space>ff", "curbuf")
 map_tele("<space>fh", "help_tags")
 map_tele("<space>fk", "keymaps")
 -- quite unusual
-map_tele("<space>vo", "vim_options")
+map_tele("<space>fvo", "vim_options")
 -- Telescope Meta
 map_tele("<space>fB", "builtin")
 map_tele("<space>fs", "ultisnips")
 map_tele("<space>fdb", "list_breakpoints")
 -- not so useful
--- map_tele("<space>fz", "zoxide")
--- map_tele("<space>fr", "repo")
+map_tele("<space>fd", "diagnostics")
 
 return map_tele

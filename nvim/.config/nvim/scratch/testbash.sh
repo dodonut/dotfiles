@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
+
 set -euo pipefail
 IFS=$'\n\t'
 
 read -r aaa
-if [[  $aaa < test ]]; then
+if (( $aaa < test )); then
     echo a
 fi
 

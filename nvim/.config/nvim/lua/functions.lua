@@ -34,13 +34,17 @@ end
 
 function M.fugitive()
 	--add all files because git add . don't work in the way I open VC
-	vim.cmd([[
-        silent execute "!git add $(git rev-parse --show-toplevel)"
-        silent execute "G commit -m " . input("Message > ")
-        silent execute "!git push -u origin " . system('git branch | grep \*')[2:-2]
-        redraw
-        echo "Done!"
-	]])
+    local function gitupload()
+        vim.cmd([[
+            let s:message=input("Message > ")
+            silent execute "!git add $(git rev-parse --show-toplevel)"
+            silent execute "G commit -m " . s:message
+            "silent execute "!git push -u origin " . system('git branch | grep \*')[2:-2]
+            redraw
+            echo "Done!"
+        ]])
+    end
+    gitupload()
 end
 
 function M.fugitive2()

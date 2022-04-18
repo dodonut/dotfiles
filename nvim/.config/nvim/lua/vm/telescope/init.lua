@@ -52,10 +52,10 @@ function M.builtin()
 end
 
 function M.git_files()
-	local path = vim.fn.expand("%:h")
-	if path == "" then
-		path = nil
-	end
+	-- local path = vim.fn.expand("%:h")
+	-- if path == "" then
+	-- 	path = nil
+	-- end
 
 	local width = 0.4
 
@@ -68,7 +68,7 @@ function M.git_files()
 			local tail = require('telescope.utils').path_tail(p)
 			return string.format("%s - %s", tail, p)
 		end,
-		cwd = path,
+		-- cwd = path,
         file_ignore_patterns = {'%.class'},
 
 		layout_config = {

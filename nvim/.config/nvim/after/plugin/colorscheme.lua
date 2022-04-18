@@ -7,6 +7,7 @@ local material = function()
 	local material = require("material")
 	local colors = require("material.colors")
 	material.setup({
+        lualine_style = 'default',
 		contrast = {
 			sidebars = true,
 			floating_windows = false,
@@ -24,7 +25,7 @@ local material = function()
 	-- TODO: TESTE
 	-- todo: teste
 	-- Todo: teste
-	vim.g.material_style = "darker"
+	vim.g.material_style = "deep ocean"
 	-- avalailable colors
 	-- darker
 	-- lighter
@@ -43,4 +44,5 @@ local tokyo = function()
 	vim.cmd "colorscheme tokyonight"
 end
 
-tokyo()
+-- tokyo()
+material()

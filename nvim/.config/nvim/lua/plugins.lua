@@ -2,198 +2,228 @@
 local id = vim.api.nvim_create_augroup("packer_auto_update", { clear = true })
 vim.api.nvim_create_autocmd(
 	"BufWritePost",
-	{ pattern = "plugins.lua", command = "source <afile> | PackerSync", group = id }
+	{ pattern = "plugins.lua", command = "source <afile>", group = id }
 )
 
-return require("packer").startup({
-	function(use) -- plug manager
-		use("wbthomason/packer.nvim")
-		-- auto pairs
-		use("jiangmiao/auto-pairs")
-		-- foldmethods
-		use("tmhedberg/SimpylFold")
-		-- statusline
-		use("hoob3rt/lualine.nvim")
+local fn = vim.fn
 
-		-- lsp
-		use({
-			"neovim/nvim-lspconfig",
-			requires = {
-				"williamboman/nvim-lsp-installer",
-				"ray-x/lsp_signature.nvim",
-				"folke/lsp-colors.nvim",
-				"onsails/lspkind-nvim",
-			},
-		})
+-- Automatically install packer
+local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+if fn.empty(fn.glob(install_path)) > 0 then
+	PACKER_BOOTSTRAP = fn.system({
+		"git",
+		"clone",
+		"--depth",
+		"1",
+		"https://github.com/wbthomason/packer.nvim",
+		install_path,
+	})
+	print("Installing packer close and reopen Neovim...")
+	vim.cmd([[packadd packer.nvim]])
+end
+-- Use a protected call so we don't error out on first use
+local status_ok, packer = pcall(require, "packer")
+if not status_ok then
+	return
+end
 
-		-- improve lsp
-		-- use("glepnir/lspsaga.nvim")
-		-- colors for lsp errors
-		--
-		use("folke/tokyonight.nvim")
-		---- completion
-		use({
+return packer.startup(function(use) -- plug manager
+	use("wbthomason/packer.nvim")
+	-- auto pairs
+	-- use("jiangmiao/auto-pairs")
+    use { 'windwp/nvim-autopairs' }
+	-- statusline
+	use("hoob3rt/lualine.nvim")
+
+	-- lsp
+	use({
+		"neovim/nvim-lspconfig",
+		requires = {
+			"williamboman/nvim-lsp-installer",
+			"ray-x/lsp_signature.nvim",
+			"folke/lsp-colors.nvim",
+			"onsails/lspkind-nvim",
+		},
+	})
+
+	use("folke/tokyonight.nvim")
+	---- completion
+	use({
+		"hrsh7th/cmp-nvim-lsp",
+		requires = {
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/nvim-cmp",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-nvim-lsp",
-			requires = {
-				"hrsh7th/cmp-buffer",
-				"hrsh7th/nvim-cmp",
-				"hrsh7th/cmp-path",
-				"hrsh7th/cmp-nvim-lua",
-				"hrsh7th/cmp-nvim-lsp",
-				"quangnguyen30192/cmp-nvim-ultisnips",
-			},
-		})
-		use({ "voldikss/vim-floaterm", config = {
-			vim.cmd([[ nnoremap <S-t> :FloatermNew<cr>]]),
-		} })
-		-- ultisnips
-		use({ "sirver/UltiSnips", requires = "honza/vim-snippets" })
-		-- Easily comment out lines or objects
-		use("tpope/vim-commentary")
-		---- Surround text objects easily
-		use("tpope/vim-surround")
+			"hrsh7th/cmp-nvim-lsp-signature-help",
+			"quangnguyen30192/cmp-nvim-ultisnips",
+		},
+	})
+	use({ "voldikss/vim-floaterm", config = {
+		vim.cmd([[ nnoremap <S-t> :FloatermNew<cr>]]),
+	} })
+	-- ultisnips
+	use({ "sirver/UltiSnips", requires = "honza/vim-snippets" })
+	-- Easily comment out lines or objects
+	use("tpope/vim-commentary")
+	---- Surround text objects easily
+	use("tpope/vim-surround")
 
-		--git plugin
-		--neogit slowing neovim down -- figure out why
-		-- use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
-		use("tpope/vim-fugitive")
+	--git plugin
+	--neogit slowing neovim down -- figure out why
+	-- use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
+	use("tpope/vim-fugitive")
 
-		-- signs for git hunks
-		use({
-			"lewis6991/gitsigns.nvim",
-			config = function()
-				require("gitsigns").setup()
-			end,
-		})
+	-- signs for git hunks
+	use({
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
+		end,
+	})
 
-		-- colors
-		use("marko-cerovac/material.nvim")
+	-- colors
+	use("marko-cerovac/material.nvim")
 
-		use("tjdevries/cyclist.vim")
+	use("tjdevries/cyclist.vim")
 
-		--lua
-		use("rafcamlet/nvim-luapad")
-		use({ "tjdevries/nlua.nvim" })
-		use("norcalli/nvim_utils")
-		use({ "euclidianAce/BetterLua.vim" })
+	--lua
+	use("rafcamlet/nvim-luapad")
+	use({ "tjdevries/nlua.nvim" })
+	use("norcalli/nvim_utils")
+	use({ "euclidianAce/BetterLua.vim" })
 
-		use({ "benmills/vim-golang-alternate" })
-		--tree sitter
-		use({
-			"nvim-treesitter/nvim-treesitter",
-			run = ":TSUpdate",
-		})
+	use({ "benmills/vim-golang-alternate" })
+	--tree sitter
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		run = ":TSUpdate",
+	})
 
-		-- tree
-		use({
-			"kyazdani42/nvim-tree.lua",
-			requires = "kyazdani42/nvim-web-devicons",
-			config = function()
-				require("nvim-tree").setup({})
-			end,
-		})
+	use({
+		"rktjmp/highlight-current-n.nvim",
+		run = function()
+			require("highlight-current-n").setup({ highlight_group = "IncSearch" })
+		end,
+	})
 
-		use({
-			"nvim-neo-tree/neo-tree.nvim",
-			branch = "v2.x",
-			requires = {
-				"nvim-lua/plenary.nvim",
-				"kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-				"MunifTanjim/nui.nvim",
-			},
-		})
+	-- tree
+	use({
+		"kyazdani42/nvim-tree.lua",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("nvim-tree").setup({})
+		end,
+	})
 
-		use({
-			"nvim-telescope/telescope.nvim",
-			requires = {
-				"nvim-lua/popup.nvim",
-				"nvim-lua/plenary.nvim",
-				"fhill2/telescope-ultisnips.nvim",
-			},
-		})
+	use({
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v2.x",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+		},
+	})
 
-		use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+	use({
+		"nvim-telescope/telescope.nvim",
+		requires = {
+			"nvim-lua/popup.nvim",
+			"nvim-lua/plenary.nvim",
+			"fhill2/telescope-ultisnips.nvim",
+		},
+	})
 
-		-- look into how to make it work
-		--debugger
-		use({
-			"mfussenegger/nvim-jdtls",
-			requires = {
-				"mfussenegger/nvim-dap",
-				"rcarriga/nvim-dap-ui",
-				"theHamsta/nvim-dap-virtual-text",
-				"nvim-telescope/telescope-dap.nvim",
-				"leoluz/nvim-dap-go",
-			},
-		})
+	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
-		---- use('romgrk/barbar.nvim')
+	-- look into how to make it work
+	--debugger
+	use({
+		"mfussenegger/nvim-jdtls",
+		requires = {
+			"mfussenegger/nvim-dap",
+			"rcarriga/nvim-dap-ui",
+			"theHamsta/nvim-dap-virtual-text",
+			"nvim-telescope/telescope-dap.nvim",
+			"leoluz/nvim-dap-go",
+		},
+	})
 
-		-- testing
-		use({ "vim-test/vim-test" })
+	---- use('romgrk/barbar.nvim')
 
-		use({
-			"RishabhRD/nvim-lsputils",
-			requires = { "RishabhRD/popfix" },
-		})
-		-- cheat.sh nvim
-		use({
-			"RishabhRD/nvim-cheat.sh",
-			requires = { "RishabhRD/popfix" },
-		})
+	-- testing
+	use({ "vim-test/vim-test" })
 
-		---- shows all diagnostics across files
-		use({
-			"folke/trouble.nvim",
-			requires = "kyazdani42/nvim-web-devicons",
-			config = function()
-				require("trouble").setup({
-					auto_open = false,
-				})
-			end,
-		})
+	use({
+		"RishabhRD/nvim-lsputils",
+		requires = { "RishabhRD/popfix" },
+	})
+	-- cheat.sh nvim
+	use({
+		"RishabhRD/nvim-cheat.sh",
+		requires = { "RishabhRD/popfix" },
+	})
 
-		use({ "kevinhwang91/nvim-bqf", ft = "qf" })
+	---- shows all diagnostics across files
+	use({
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("trouble").setup({
+				auto_open = false,
+			})
+		end,
+	})
 
-		use("junegunn/vim-easy-align")
+	use({ "kevinhwang91/nvim-bqf", ft = "qf" })
 
-		-- notifications
-		use("rcarriga/nvim-notify")
+	use("junegunn/vim-easy-align")
 
-		-- Better profiling output for startup.
-		use({
-			"dstein64/vim-startuptime",
-			cmd = "StartupTime",
-		})
-		----sql
-		use({
-			"tpope/vim-dadbod",
-			requires = {
-				"kristijanhusak/vim-dadbod-completion",
-				"kristijanhusak/vim-dadbod-ui",
-				"skywind3000/vim-quickui",
-			},
-		})
+	-- notifications
+	use("rcarriga/nvim-notify")
 
-		--async run
-		use("tpope/vim-dispatch")
-		use("tpope/vim-dotenv")
+	-- Better profiling output for startup.
+	use({
+		"dstein64/vim-startuptime",
+		cmd = "StartupTime",
+	})
+	----sql
+	use({
+		"tpope/vim-dadbod",
+		requires = {
+			"kristijanhusak/vim-dadbod-completion",
+			"kristijanhusak/vim-dadbod-ui",
+			"skywind3000/vim-quickui",
+		},
+	})
 
-		-- for bash script, use the shellcheck cli to give the diagnostics
-		use("mattn/efm-langserver")
-		----useful functions
-		use("tpope/vim-scriptease")
+	--async run
+	use("tpope/vim-dispatch")
+	use("tpope/vim-dotenv")
 
-		use({ "hashivim/vim-terraform" })
+	-- for bash script, use the shellcheck cli to give the diagnostics
+	use("mattn/efm-langserver")
+	----useful functions
+	use("tpope/vim-scriptease")
 
-		use({
-			"sudormrfbin/cheatsheet.nvim",
+	use({ "hashivim/vim-terraform" })
 
-			requires = {
-				{ "nvim-telescope/telescope.nvim" },
-				{ "nvim-lua/popup.nvim" },
-				{ "nvim-lua/plenary.nvim" },
-			},
-		})
-	end,
-})
+	use({
+		"sudormrfbin/cheatsheet.nvim",
+
+		requires = {
+			{ "nvim-telescope/telescope.nvim" },
+			{ "nvim-lua/popup.nvim" },
+			{ "nvim-lua/plenary.nvim" },
+		},
+	})
+
+    use { 'jose-elias-alvarez/null-ls.nvim' }
+	-- Automatically set up your configuration after cloning packer.nvim
+	-- Put this at the end after all plugins
+	if PACKER_BOOTSTRAP then
+		require("packer").sync()
+	end
+end)

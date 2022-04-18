@@ -25,11 +25,14 @@ cmp.setup({
 		["<C-e>"] = cmp.mapping.close(),
 		["<Tab>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
 		["<c-q>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+		["<c-n>"] = cmp.mapping.select_next_item(),
+		["<c-p>"] = cmp.mapping.select_prev_item(),
 		-- ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
 	},
 	sources = {
 		{ name = "nvim_lua", ft = { "lua" } },
 		{ name = "nvim_lsp" },
+        { name = "nvim_lsp_signature_help" },
 		{ name = "ultisnips" }, -- For ultisnips users.
 		{ name = "path" },
 		{ name = "buffer", keyword_length = 5 },

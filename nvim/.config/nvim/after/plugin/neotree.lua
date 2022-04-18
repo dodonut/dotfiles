@@ -44,7 +44,7 @@
             highlight = "NeoTreeModified",
           },
           name = {
-            trailing_slash = false,
+            trailing_slash = true,
             use_git_status_colors = true,
           },
           git_status = {
@@ -64,7 +64,7 @@
           },
         },
         window = {
-          position = "left",
+          position = "right",
           width = 40,
           mappings = {
             ["<space>"] = "toggle_node",

@@ -108,3 +108,7 @@ map({'n', '<leader>sc', ':Cheat<cr>'})
 vim.cmd [[
 command! OpenLspLog :vsplit ~/.cache/nvim/lsp.log
 ]]
+
+-- highlight text
+map({'n', 'n', '<Plug>(highlight-current-n-n)'})
+map({'n', 'N', '<Plug>(highlight-current-n-N)'})

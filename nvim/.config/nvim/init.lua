@@ -1,7 +1,3 @@
-if require("vm.first_load")() then
-	return
-end
-
 vim.g.mapleader = ","
 vim.g.snippets = "ultisnips"
 vim.g.python3_host_prog = vim.fn.expand('/usr/bin/python3.6')
