@@ -17,4 +17,10 @@ local function org_imports_go(timeout_ms)
   vim.lsp.util.apply_workspace_edit(edit)
 end
 
-return org_imports_go
+local function fugitive()
+    local message = "test"
+    vim.api.nvim_exec("!git add $(git rev-parse --show-toplevel)", false)
+    vim.api.nvim_exec("!git commit -m " .. message, false)
+end
+
+fugitive()
