@@ -52,10 +52,6 @@ function M.builtin()
 end
 
 function M.git_files()
-	-- local path = vim.fn.expand("%:h")
-	-- if path == "" then
-	-- 	path = nil
-	-- end
 
 	local width = 0.4
 
@@ -76,7 +72,7 @@ function M.git_files()
 		},
 	})
 
-    os.execute('git rev-parse --is-inside-work-tree')
+    vim.fn.system('git rev-parse --is-inside-work-tree')
 	if vim.v.shell_error == 0 then
 		require("telescope.builtin").git_files(opts)
 	else

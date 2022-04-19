@@ -59,7 +59,7 @@ map({'x', 'ga','<Plug>(EasyAlign)'})
 
 -- git
 map({'n', '<leader>gg',':G<cr>'})
-map({'n', '<leader>gc',':lua require("functions").fugitive()<cr>'})
+map({'n', '<leader>gc',':lua require("functions").fugitive2()<cr>'})
 
 -- sql
 map({'n', '<leader>dt',':DBUIToggle<cr>'})
@@ -108,6 +108,9 @@ map({'n', '<leader>sc', ':Cheat<cr>'})
 vim.cmd [[
 command! OpenLspLog :vsplit ~/.cache/nvim/lsp.log
 ]]
+
+-- terminal
+map({'n', '<c-\\>', ':FloatermToggle<cr>'})
 
 -- highlight text
 map({'n', 'n', '<Plug>(highlight-current-n-n)'})

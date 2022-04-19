@@ -18,9 +18,14 @@ local function org_imports_go(timeout_ms)
 end
 
 local function fugitive()
-    local message = "test"
-    vim.api.nvim_exec("!git add $(git rev-parse --show-toplevel)", false)
-    vim.api.nvim_exec("!git commit -m " .. message, false)
+    local message = vim.fn.input("Message > ")
+    local branch = vim.fn.system("git branch | grep \\*")
+    vim.fn.system("git add $(git rev-parse --show-toplevel)")
+    vim.fn.system("git commit -m " .. message)
+    -- vim.fn.system("git push -u origin " .. string.sub(branch, 2, -2))
+
+    -- vim.api.nvim_exec("redraw", false)
+    print("Done!")
 end
 
 fugitive()

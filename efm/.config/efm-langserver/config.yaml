@@ -15,7 +15,12 @@ tools:
       - '%f:%l:%c: %trror: %m'
       - '%f:%l:%c: %tarning: %m'
       - '%f:%l:%c: %tote: %m'
+  stylua: &stylua
+    format-command: 'stylua'
+    format-stdin: true
 
 languages:
   sh:
     - <<: *sh-shellcheck
+  lua:
+    - <<: *stylua

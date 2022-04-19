@@ -7,5 +7,6 @@ end
 -- require("vim.lsp.log").set_level("debug")
 -- require("vim.lsp.log").set_level("trace")
 
+-- require('vm.lsp.null-ls')
 require('vm.lsp.lspinstaller')
 require('vm.lsp.handlers').setup()

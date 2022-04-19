@@ -43,14 +43,14 @@ M.setup = function ()
   })
 end
 M.filetype_attach = setmetatable({
-	go = function()
-		local id = vim.api.nvim_create_augroup("lsp_buf_format_go", { clear = true })
-		-- vim.api.nvim_create_autocmd("BufWritePre", {pattern = "*.go", command = ":lua require'functions'.org_imports_go(3000)", group = id})
-		vim.api.nvim_create_autocmd(
-			"BufWritePre",
-			{ pattern = "*.go", command = ":lua vim.lsp.buf.formatting_sync()", group = id }
-		)
-	end,
+	-- go = function()
+	-- 	local id = vim.api.nvim_create_augroup("lsp_buf_format_go", { clear = true })
+	-- 	-- vim.api.nvim_create_autocmd("BufWritePre", {pattern = "*.go", command = ":lua require'functions'.org_imports_go(3000)", group = id})
+	-- 	vim.api.nvim_create_autocmd(
+	-- 		"BufWritePre",
+	-- 		{ pattern = "*.go", command = ":lua vim.lsp.buf.formatting_sync()", group = id }
+	-- 	)
+	-- end,
 }, {
 	__index = function()
 		return function() end

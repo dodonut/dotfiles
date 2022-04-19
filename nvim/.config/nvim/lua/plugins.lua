@@ -1,9 +1,6 @@
 -- autoinstall
 local id = vim.api.nvim_create_augroup("packer_auto_update", { clear = true })
-vim.api.nvim_create_autocmd(
-	"BufWritePost",
-	{ pattern = "plugins.lua", command = "source <afile>", group = id }
-)
+vim.api.nvim_create_autocmd("BufWritePost", { pattern = "plugins.lua", command = "source <afile>", group = id })
 
 local fn = vim.fn
 
@@ -31,7 +28,7 @@ return packer.startup(function(use) -- plug manager
 	use("wbthomason/packer.nvim")
 	-- auto pairs
 	-- use("jiangmiao/auto-pairs")
-    use { 'windwp/nvim-autopairs' }
+	use({ "windwp/nvim-autopairs" })
 	-- statusline
 	use("hoob3rt/lualine.nvim")
 
@@ -60,9 +57,7 @@ return packer.startup(function(use) -- plug manager
 			"quangnguyen30192/cmp-nvim-ultisnips",
 		},
 	})
-	use({ "voldikss/vim-floaterm", config = {
-		vim.cmd([[ nnoremap <S-t> :FloatermNew<cr>]]),
-	} })
+	use({ "voldikss/vim-floaterm" })
 	-- ultisnips
 	use({ "sirver/UltiSnips", requires = "honza/vim-snippets" })
 	-- Easily comment out lines or objects
@@ -220,7 +215,6 @@ return packer.startup(function(use) -- plug manager
 		},
 	})
 
-    use { 'jose-elias-alvarez/null-ls.nvim' }
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then

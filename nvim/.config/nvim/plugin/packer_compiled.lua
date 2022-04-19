@@ -175,11 +175,6 @@ _G.packer_plugins = {
     path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/nui.nvim",
     url = "https://github.com/MunifTanjim/nui.nvim"
   },
-  ["null-ls.nvim"] = {
-    loaded = true,
-    path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
-    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
-  },
   ["nvim-autopairs"] = {
     loaded = true,
     path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
@@ -360,7 +355,6 @@ _G.packer_plugins = {
     url = "https://github.com/junegunn/vim-easy-align"
   },
   ["vim-floaterm"] = {
-    config = { "" },
     loaded = true,
     path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/vim-floaterm",
     url = "https://github.com/voldikss/vim-floaterm"
@@ -424,10 +418,6 @@ time([[Config for gitsigns.nvim]], false)
 time([[Config for trouble.nvim]], true)
 try_loadstring("\27LJ\2\nG\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\14auto_open\1\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
 time([[Config for trouble.nvim]], false)
--- Config for: vim-floaterm
-time([[Config for vim-floaterm]], true)
-
-time([[Config for vim-floaterm]], false)
 -- Config for: nvim-tree.lua
 time([[Config for nvim-tree.lua]], true)
 try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14nvim-tree\frequire\0", "config", "nvim-tree.lua")
