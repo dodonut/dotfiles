@@ -20,7 +20,7 @@ MyFormatting = function ()
 			vim.notify('Fail to format')
 		end
 	else
-		vim.lsp.buf.formatting_sync()
+		vim.lsp.buf.format()
 	end
 end
 

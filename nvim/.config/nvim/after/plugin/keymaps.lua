@@ -52,15 +52,13 @@ map({'n', '<a-up>',':resize +3<cr>'})
 map({'n', '<a-down>',':resize -3<cr>'})
 map({'n', '<a-left>',':vert resize -5<cr>'})
 map({'n', '<a-right>',':vert resize +5<cr>'})
-
 --easyalign
 map({'n', 'ga','<Plug>(EasyAlign)'})
 map({'x', 'ga','<Plug>(EasyAlign)'})
-
 -- git
 map({'n', '<leader>gg',':G<cr>'})
-map({'n', '<leader>gc',':lua require("functions").fugitive2()<cr>'})
-
+-- map({'n', '<leader>gc',':lua require("functions").fugitive2()<cr>'})
+map({'n', '<leader>gc',':G add . | G commit<cr>'})
 -- sql
 map({'n', '<leader>dt',':DBUIToggle<cr>'})
 map({'x', '<expr><Plug>(DBExe)','DBExe()'})
@@ -70,19 +68,15 @@ map({'x', '<leader>db','<Plug>(DBExe)'})
 map({'n', '<leader>db','<Plug>(DBExe)'})
 map({'o', '<leader>db','<Plug>(DBExe)'})
 map({'n', '<leader>dB','<Plug>(DBExeLine)'})
-
 -- SourceFiles
 map({'n', '<leader>sv','<cmd>lua require("functions").sourceFiles()<cr>'})
-
 --trouble
 map({'n', '<leader>tt','<cmd>TroubleToggle workspace_diagnostics<cr>'})
 map({'n', '<leader>tq','<cmd>TroubleToggle quickfix<cr>'})
-
 -- tests
 map({'n', '<space>tf',':TestFile<cr>'})
 map({'n', '<space>tn',':TestNearest<cr>'})
 map({'n', '<space>ts',':TestSuite<cr>'})
-
 --dap
 map({'n', '<F6>',':lua require"dap".step_back()<CR>'})
 map({'n', '<F7>',':lua require"dap".step_into()<CR>'})
@@ -100,18 +94,14 @@ map({'n', '<space>dc',':lua require("dap").clear_breakpoints()<CR>'}, {noremap =
 --tree
 -- map({'n', '<leader>k',':NvimTreeToggle<cr>'})
 map({'n', '<leader>k',':Neotree filesystem reveal right toggle<cr>'})
-
 --cheat
 map({'n', '<leader>sc', ':Cheat<cr>'})
-
 --open log map
 vim.cmd [[
 command! OpenLspLog :vsplit ~/.cache/nvim/lsp.log
 ]]
-
 -- terminal
 map({'n', '<c-\\>', ':FloatermToggle<cr>'})
-
 -- highlight text
 map({'n', 'n', '<Plug>(highlight-current-n-n)'})
 map({'n', 'N', '<Plug>(highlight-current-n-N)'})

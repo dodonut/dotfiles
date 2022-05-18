@@ -1,17 +1,18 @@
-
 local util = require("lspconfig.util")
 local root_dir = function(fname)
-	return util.root_pattern(".git")(fname) or vim.fn.getcwd()
+    return util.root_pattern(".git")(fname) or vim.fn.getcwd()
 end
 return {
-		settings = {
-			root_dir = root_dir,
-			languages = {
-				sh = {
-					lintCommand = "shellcheck -f gcc -x -",
-					lintStdin = true,
-					lintFormats = { "%f=%l:%c: %trror: %m", "%f=%l:%c: %tarning: %m", "%f=%l:%c: %tote: %m" },
-				},
-			},
-		},
-	}
+    settings = {
+        root_dir = root_dir,
+        languages = {
+            sh = {
+                lintCommand = "shellcheck -f gcc -x -",
+                lintStdin = true,
+                lintFormats = { "%f=%l:%c: %trror: %m", "%f=%l:%c: %tarning: %m", "%f=%l:%c: %tote: %m" },
+            },
+        },
+        filetypes = { "sh" },
+        -- cmd = {"efm-langserver", "-c", "~/.config/efm-langserver/config.yaml"}
+    },
+}

@@ -8,8 +8,24 @@ mkdir ./config/scripts
 rename .config
 rename config
 
-open_with 
 rename refresh-token
-delete
 rename notification
 rename invoice
+open_with 
+rename invoice-show
+rename email-account-list
+rename email-list-by-emailacc
+rename email-account-add-outlook
+rename api
+mkdir sqs
+rename outlook-create-rule
+delete
+rename outlook-list-refresh-token
+rename invoice-create
+rename evt-controller
+rename evt-email-desync
+rename evt-email-sync
+rename evt-att-password
+rename att-password-set
+rename att-set-password
+mkdir aws
