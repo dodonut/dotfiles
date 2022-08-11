@@ -134,6 +134,10 @@ M.custom_attach = function(client, bufnr)
 
     local has_dap, dap = pcall(require, "dap")
     if has_dap then
+        require("nvim-dap-virtual-text").setup({
+            only_first_definition = false,
+            all_references = true,
+        })
         if filetype == "java" then
             require("jdtls").setup_dap({ hotcodereplace = "auto" })
             require("jdtls.dap").setup_dap_main_class_configs()
@@ -146,6 +150,7 @@ M.custom_attach = function(client, bufnr)
         end
         if filetype == "go" then
             require("dap-go").setup()
+            nnoremap('<leader>dt','<cmd>lua require("dap-go").debug_test()<cr>', opts)
             print("Debuggger ready")
         end
     end

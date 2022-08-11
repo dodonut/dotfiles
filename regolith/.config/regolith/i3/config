@@ -671,7 +671,9 @@ exec --no-startup-id greenclip daemon
 
 assign [class="Code"] $ws1
 assign [class="jetbrains-idea-ce"] $ws1
+assign [class="jetbrains-goland"] $ws1
 assign [class="Brave-browser"] $ws2
+assign [class="Google-chrome"] $ws2
 assign [class="Postman"] $ws3
 assign [class="DBeaver"] $ws4
 assign [class="Slack"] $ws8

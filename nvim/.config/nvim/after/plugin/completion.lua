@@ -32,15 +32,19 @@ cmp.setup({
 	sources = {
 		{ name = "nvim_lua", ft = { "lua" } },
 		{ name = "nvim_lsp" },
-        { name = "nvim_lsp_signature_help" },
+		{ name = "nvim_lsp_signature_help" },
+		{ name = "dap" },
 		{ name = "ultisnips" }, -- For ultisnips users.
 		{ name = "path" },
 		{ name = "buffer", keyword_length = 5 },
 	},
-    confirm_opts = {
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = false
-    },
+	confirm_opts = {
+		behavior = cmp.ConfirmBehavior.Replace,
+		select = false,
+	},
+	enabled = function()
+		return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
+	end,
 	experimental = {
 		ghost_text = true,
 		native_menu = false,
@@ -51,5 +55,9 @@ cmp.setup({
 local id = vim.api.nvim_create_augroup("DadbodSql", { clear = true })
 vim.api.nvim_create_autocmd(
 	"FileType",
-	{ pattern = {"sql", "mysql", "plsql"}, command = ":lua require('cmp').setup.buffer { sources = { { name = 'vim-dadbod-completion' } } }", group = id }
+	{
+		pattern = { "sql", "mysql", "plsql" },
+		command = ":lua require('cmp').setup.buffer { sources = { { name = 'vim-dadbod-completion' } } }",
+		group = id,
+	}
 )

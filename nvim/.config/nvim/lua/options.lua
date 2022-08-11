@@ -76,6 +76,7 @@ opt.formatoptions  = opt.formatoptions
 -- set joinspaces
 opt.joinspaces     = false         -- Two spaces and grade school, we're done
 opt.laststatus     = 3
+opt.winbar = '%f'
 -- vim.cmd "set laststatus=3"
 
 -- set fillchars   = eob:~

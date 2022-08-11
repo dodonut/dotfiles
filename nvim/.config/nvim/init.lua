@@ -10,3 +10,4 @@ require 'vm.telescope.setup'
 require 'vm.telescope.mappings'
 require("options")
 require("plugins")
+

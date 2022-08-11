@@ -1,31 +1,50 @@
-search .config
-rename zsh
-search 
-mkdir scripts
-mkdir -p .config/scripts
-mkdir .config/scripts
-mkdir ./config/scripts
-rename .config
-rename config
-
-rename refresh-token
-rename notification
-rename invoice
-open_with 
-rename invoice-show
-rename email-account-list
-rename email-list-by-emailacc
-rename email-account-add-outlook
-rename api
-mkdir sqs
-rename outlook-create-rule
-delete
-rename outlook-list-refresh-token
-rename invoice-create
-rename evt-controller
-rename evt-email-desync
-rename evt-email-sync
-rename evt-att-password
-rename att-password-set
-rename att-set-password
 mkdir aws
+mkdir cron
+rename email-account-resync
+rename evt-attachment-existent
+rename evt-att-existent
+rename sls_billing_delivery_acc
+rename email-sync-process
+rename process-email-sync
+rename process-gmail
+rename company-search
+rename payment-set
+rename invoice-show-mail
+rename invoice-update
+mkdir lambda-invoke
+rename identify-cpnj-pantheon
+rename cpf-identify
+rename cnpj-identify
+shell git clone git@github.com:pagseguro-tilix/sls_identify_cpf_pantheon.git
+shell git clone git@github.com:pagseguro-tilix/sls_identify_cpf_apicpfcnpj.git
+shell git@github.com:pagseguro-tilix/sls_identify_cnpj_hubdesenvolvedor.git
+shell git clone git@github.com:pagseguro-tilix/sls_identify_cpf_hubdesenvolvedor.git
+shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_invoice_data_docker.git
+shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_set_payment_bank.git
+shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_outlook.git
+shell ! %s
+shell git clone git@github.com:pagseguro-tilix/pkg_helper_file.git
+shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_set_visualization.git
+shell git branch
+shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_show_attachment_mail.git
+shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_show_invoice.git
+shell echo qq
+open_with 0
+shell unzip
+shell unzip %
+open_with 
+shell unzip sls_identify_cnpj_apicpfcnpj.zip
+shell git clone git@github.com:pagseguro-tilix/sls_identify_cnpj_hubdesenvolvedor.git
+shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_add_account_gmail.git
+shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_create_company.git
+shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_list_company.git
+shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_disable_account.git
+shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_event_attachment_process_failed.git
+shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_attachment_not_invoice_event.git
+shell 
+shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_barcode_validate.git
+shell git checkout master_v2
+delete
+shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_create_rule_outlook.git
+shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_account_outlook_list_rule.git
+shell git checkout master
