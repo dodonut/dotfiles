@@ -16,7 +16,7 @@ function M.execute_command(command, callback)
 	end
 
 	M.execute_buf_command(command, function(err, res)
-		assert(not err, err and (err.message or Log.ins(err)))
+		assert(not err, err and (err.message))
 		callback(res)
 	end)
 end
@@ -131,14 +131,26 @@ function M.get_dap_config(callback)
 	end)
 end
 
+function M.additional_dap(dap)
+    require("nvim-dap-virtual-text").setup({
+        only_first_definition = false,
+        all_references = true,
+    })
+    M.get_dap_config(function(conf)
+        dap.configurations.java = conf
+        print("Debugger is ready")
+    end)
+    require("jdtls.dap").setup_dap_main_class_configs()
+end
+
 
 function M.setup()
 
     -- stop efm on jdtls server
 
 	local dap = require("dap")
-	local on_attach = require("vm.lsp").on_attach
-	local custom_cap = require("vm.lsp").capabilities
+	local on_attach = require("vm.lsp.handlers").on_attach
+	local custom_cap = require("vm.lsp.handlers").capabilities
 	local root_markers = { "gradlew", ".git" }
 	local root_dir = require("jdtls.setup").find_root(root_markers)
 	local home = os.getenv("HOME")
@@ -151,14 +163,6 @@ function M.setup()
 		capabilities = custom_cap,
 		on_attach = on_attach,
 	}
-
-	local formatpath = function()
-		if root_dir == nil then
-			return ""
-		else
-			return root_dir .. "/code_style.xml"
-		end
-	end
 
 	config.settings = {
 		java = {
@@ -198,12 +202,11 @@ function M.setup()
 					},
 				},
 			},
-			-- format = {
-			-- 	settings = {
-			-- 		-- url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
-                    -- url = formatpath()
-			-- 	},
-			-- },
+			format = {
+				settings = {
+					url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+				},
+			},
 		},
 	}
 
@@ -246,6 +249,9 @@ function M.setup()
 			callback({ type = "server", host = "127.0.0.1", port = port })
 		end)
 	end
+
+
+
 	-- Server
 	require("jdtls").start_or_attach(config)
 end

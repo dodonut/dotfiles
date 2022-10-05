@@ -182,15 +182,6 @@ return packer.startup(function(use) -- plug manager
 		"dstein64/vim-startuptime",
 		cmd = "StartupTime",
 	})
-	----sql
-	use({
-		"tpope/vim-dadbod",
-		requires = {
-			"kristijanhusak/vim-dadbod-completion",
-			"kristijanhusak/vim-dadbod-ui",
-			"skywind3000/vim-quickui",
-		},
-	})
 
 	--async run
 	use("tpope/vim-dispatch")
