@@ -68,13 +68,13 @@ map("n", "<leader>dr", require("dap").repl.open)
 map("n", "<leader>db", require("dap").toggle_breakpoint)
 map("n", "<leader>dB", function()
 	require("dap").set_breakpoint(vim.fn.input("[DAP] Condition > "))
-end)
+end, "breakpoint condition")
 map("v", "<leader>de", require("dapui").eval)
 map("n", "<leader>dE", function()
 	require("dapui").eval(vim.fn.input("[DAP] Expression > "))
 end)
 
-map("n", "<leader>k", ":Neotree filesystem reveal right toggle<cr>")
+map("n", "<leader>k", ":Neotree filesystem reveal left toggle<cr>")
 --cheat
 map("n", "<leader>sc", ":Cheat<cr>")
 --open log map

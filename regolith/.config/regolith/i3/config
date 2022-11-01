@@ -680,6 +680,7 @@ assign [class="Slack"] $ws8
 assign [class="whatsdesk"] $ws8
 assign [class="Microsoft Teams - Preview"] $ws9
 assign [class="Com.cisco.anyconnect.gui"] $ws19
+assign [class="Workspacesclient"] $ws5
 
 bindsym $mod+Ctrl+Left exec i3-msg move workspace to output left
 bindsym $mod+Ctrl+Right exec i3-msg move workspace to output right
