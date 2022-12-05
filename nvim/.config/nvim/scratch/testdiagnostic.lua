@@ -1,7 +1,7 @@
 local a = "test"
 
 function GlobFunc()
-    print('teste')
+	print("teste")
 	local mk_params = vim.lsp.util.make_position_params()
 	-- P(params)
 	local range = {
@@ -20,10 +20,10 @@ function GlobFunc()
 			{ range = range, message = "esse eh um textinho" },
 		},
 	}
-    mk_params.uri = param.uri
-    mk_params.diagnostics = param.diagnostics
+	mk_params.uri = param.uri
+	mk_params.diagnostics = param.diagnostics
 
-    -- P(param)
+	-- P(param)
 	-- || {
 	-- ||   position = {
 	-- ||     character = 2,
@@ -34,7 +34,7 @@ function GlobFunc()
 	-- ||   }
 	-- || }
 	vim.lsp.buf_request(0, "textDocument/publishDiagnostics", mk_params, function(err, result, ctx, config)
-        print('test')
-        print(err, result, ctx, config)
+		print("test")
+		print(err, result, ctx, config)
 	end)
 end

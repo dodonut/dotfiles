@@ -79,10 +79,10 @@ _G.packer_plugins = {
     path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/BetterLua.vim",
     url = "https://github.com/euclidianAce/BetterLua.vim"
   },
-  UltiSnips = {
+  LuaSnip = {
     loaded = true,
-    path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/UltiSnips",
-    url = "https://github.com/sirver/UltiSnips"
+    path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
   },
   catppuccin = {
     loaded = true,
@@ -119,15 +119,15 @@ _G.packer_plugins = {
     path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua",
     url = "https://github.com/hrsh7th/cmp-nvim-lua"
   },
-  ["cmp-nvim-ultisnips"] = {
-    loaded = true,
-    path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/cmp-nvim-ultisnips",
-    url = "https://github.com/quangnguyen30192/cmp-nvim-ultisnips"
-  },
   ["cmp-path"] = {
     loaded = true,
     path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
+  },
+  cmp_luasnip = {
+    loaded = true,
+    path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+    url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   ["cyclist.vim"] = {
     loaded = true,
@@ -165,10 +165,25 @@ _G.packer_plugins = {
     path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
     url = "https://github.com/onsails/lspkind-nvim"
   },
+  ["lspsaga.nvim"] = {
+    loaded = true,
+    path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
+    url = "https://github.com/glepnir/lspsaga.nvim"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/hoob3rt/lualine.nvim"
+  },
+  ["mason-lspconfig.nvim"] = {
+    loaded = true,
+    path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+    url = "https://github.com/williamboman/mason-lspconfig.nvim"
+  },
+  ["mason.nvim"] = {
+    loaded = true,
+    path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    url = "https://github.com/williamboman/mason.nvim"
   },
   ["material.nvim"] = {
     loaded = true,
@@ -247,11 +262,6 @@ _G.packer_plugins = {
     path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/nvim-jdtls",
     url = "https://github.com/mfussenegger/nvim-jdtls"
   },
-  ["nvim-lsp-installer"] = {
-    loaded = true,
-    path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer",
-    url = "https://github.com/williamboman/nvim-lsp-installer"
-  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -322,11 +332,6 @@ _G.packer_plugins = {
     path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
     url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
   },
-  ["telescope-ultisnips.nvim"] = {
-    loaded = true,
-    path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/telescope-ultisnips.nvim",
-    url = "https://github.com/fhill2/telescope-ultisnips.nvim"
-  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -382,11 +387,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/vim-scriptease",
     url = "https://github.com/tpope/vim-scriptease"
-  },
-  ["vim-snippets"] = {
-    loaded = true,
-    path = "/home/tqi_vsousa/.local/share/nvim/site/pack/packer/start/vim-snippets",
-    url = "https://github.com/honza/vim-snippets"
   },
   ["vim-startuptime"] = {
     commands = { "StartupTime" },

@@ -17,8 +17,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=
-HISTFILESIZE=
+HISTSIZE=5000
+HISTFILESIZE=10000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -101,11 +101,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
+#
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -120,30 +116,25 @@ fi
 
 alias luamake=/home/tqi_vsousa/dev/lua-language-server/3rd/luamake/luamake
 
-# exec zsh
-#  . "$HOME/.cargo/env"
-
-
-
 #sourcing files
 # General bash aliases
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+    . $HOME/.bash_aliases
 fi
 
 # General bash export
 if [ -f ~/.bash_export ]; then
-    . ~/.bash_export
+    . $HOME/.bash_export
 fi
 
 # General bash local configs not to be on repo
 if [ -f ~/.local.bash ]; then
-    . ~/.local.bash
+    . $HOME/.local.bash
 fi
 
 # General bash functions
 if [ -f ~/.bash_functions ]; then
-    . ~/.bash_functions
+    . $HOME/.bash_functions
 fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
@@ -156,3 +147,14 @@ export PATH="$HOME/.serverless/bin:$PATH"
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+eval "$(zoxide init bash)"
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -1,26 +1,25 @@
-
-local handlers = require'vm.lsp.handlers'
+-- local handlers = require("vm.lsp.handlers")
 -- Load lua configuration from nlua.
-require("nlua.lsp.nvim").setup(require('lspconfig'), {
-	on_init = handlers.custom_init,
-	on_attach = handlers.custom_attach,
-	capabilities = handlers.updated_capabilities,
+-- require("nlua.lsp.nvim").setup(require('lspconfig'), {
+-- 	on_init = handlers.custom_init,
+-- 	on_attach = handlers.custom_attach,
+-- 	capabilities = handlers.default_capabilities,
 
-	globals = {
-		"vim",
-		-- Custom
-		"RELOAD",
-	},
-})
+-- 	globals = {
+-- 		"vim",
+-- 		-- Custom
+-- 		"RELOAD",
+-- 	},
+-- })
 
 return {
-		settings = {
-			Lua = {
-				diagnostics = {
-					globals = {
-						"vim",
-					},
-				},
-			},
-		},
-	}
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = {
+                    "vim",
+                },
+            },
+        },
+    },
+}

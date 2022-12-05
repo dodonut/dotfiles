@@ -36,7 +36,9 @@ return packer.startup(function(use) -- plug manager
 	use({
 		"neovim/nvim-lspconfig",
 		requires = {
-			"williamboman/nvim-lsp-installer",
+			-- "williamboman/nvim-lsp-installer",
+            "williamboman/mason.nvim",
+            "williamboman/mason-lspconfig.nvim",
 			"ray-x/lsp_signature.nvim",
 			"folke/lsp-colors.nvim",
 			"onsails/lspkind-nvim",
@@ -46,20 +48,16 @@ return packer.startup(function(use) -- plug manager
 	use("folke/tokyonight.nvim")
 	---- completion
 	use({
-		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/nvim-cmp",
 		requires = {
 			"hrsh7th/cmp-buffer",
-			"hrsh7th/nvim-cmp",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"quangnguyen30192/cmp-nvim-ultisnips",
 		},
 	})
 	use({ "voldikss/vim-floaterm" })
-	-- ultisnips
-	use({ "sirver/UltiSnips", requires = "honza/vim-snippets" })
 	-- Easily comment out lines or objects
 	use("tpope/vim-commentary")
 	---- Surround text objects easily
@@ -120,7 +118,6 @@ return packer.startup(function(use) -- plug manager
 		requires = {
 			"nvim-lua/popup.nvim",
 			"nvim-lua/plenary.nvim",
-			"fhill2/telescope-ultisnips.nvim",
 		},
 	})
 
@@ -214,4 +211,6 @@ return packer.startup(function(use) -- plug manager
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
 	end
+
+    use({"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*", requires = {'saadparwaiz1/cmp_luasnip'}})
 end)

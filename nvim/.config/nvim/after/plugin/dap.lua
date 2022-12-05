@@ -21,7 +21,9 @@ vim.fn.sign_define("DapStopped", { text = "🍑", texthl = "", linehl = "", numh
 -- augroup END
 -- ]]
 
-require("dapui").setup({
+local dap, dapui = require("dap"), require("dapui")
+
+dapui.setup({
 	icons = { expanded = "▾", collapsed = "▸" },
 	mappings = {
 		-- Use a table to apply multiple mappings
@@ -64,17 +66,17 @@ require("dapui").setup({
 		max_type_length = nil, -- Can be integer or nil.
 	},
 })
+dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 
-local dap, dapui = require("dap"), require("dapui")
 dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()
 end
-dap.listeners.before.event_terminated["dapui_config"] = function()
-  dapui.close()
-end
-dap.listeners.before.event_exited["dapui_config"] = function()
-  dapui.close()
-end
+-- dap.listeners.before.event_terminated["dapui_config"] = function()
+--   dapui.close()
+-- end
+-- dap.listeners.before.event_exited["dapui_config"] = function()
+--   dapui.close()
+-- end
 
 
 dap.set_log_level("TRACE")

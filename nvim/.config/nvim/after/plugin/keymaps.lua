@@ -1,90 +1,82 @@
-local map = function(s, lhs, rhs, desc)
-	-- get the extra options
-	if desc then
-		desc = "[DAP] " .. desc
-	end
-	local opts = { noremap = true, desc = desc }
-	-- basic support for buffer-scoped keybindings
-	vim.keymap.set(s, lhs, rhs, opts)
-end
 
-map("t", "<c-j>", "<C-\\><C-n><C-w>j")
-map("t", "<c-k>", "<C-\\><C-n><C-w>k")
-map("t", "<c-l>", "<C-\\><C-n><C-w>l")
-map("n", "<c-h>", "<C-w>h")
-map("n", "<c-j>", "<C-w>j")
-map("n", "<c-k>", "<C-w>k")
-map("n", "<c-l>", "<C-w>l")
-map("n", "<leader>v", ":vs<cr>")
-map("n", "<leader>h", ":sp<cr>")
-map("n", "<c-right>", ":bnext<cr>")
-map("n", "<c-left>", ":bprevious<cr>")
-map("n", "<right>", ":tabnext<cr>")
-map("n", "<left>", ":tabprevious<cr>")
-map("n", "<c-n>", ":tabnew<cr>")
--- map('v', 'p', '"_dP')
-map("n", "<leader>x", ":close<cr>")
-map("n", "<leader>,", ":w!<cr>")
+Map("t", "<c-j>", "<C-\\><C-n><C-w>j")
+Map("t", "<c-k>", "<C-\\><C-n><C-w>k")
+Map("t", "<c-l>", "<C-\\><C-n><C-w>l")
+Map("n", "<c-h>", "<C-w>h")
+Map("n", "<c-j>", "<C-w>j")
+Map("n", "<c-k>", "<C-w>k")
+Map("n", "<c-l>", "<C-w>l")
+Map("n", "<leader>v", ":vs<cr>")
+Map("n", "<leader>h", ":sp<cr>")
+Map("n", "<c-right>", ":bnext<cr>")
+Map("n", "<c-left>", ":bprevious<cr>")
+Map("n", "<right>", ":tabnext<cr>")
+Map("n", "<left>", ":tabprevious<cr>")
+Map("n", "<c-n>", ":tabnew<cr>")
+-- Map('v', 'p', '"_dP')
+Map("n", "<leader>x", ":close<cr>")
+Map("n", "<leader>,", ":w!<cr>")
 --save and source
-map("n", "<space>ss", ":w!<cr> <bar> :so %<cr>")
--- greates remap everrrrrrr
-map("n", ":", ";")
-map("n", ";", ":")
-map("v", ":", ";")
-map("v", ";", ":")
+Map("n", "<space>ss", ":w!<cr> <bar> :so %<cr>")
+-- greates reMap everrrrrrr
+Map("n", ":", ";")
+Map("n", ";", ":")
+Map("v", ":", ";")
+Map("v", ";", ":")
 -- scroll
-map("n", "<c-e>", "4<c-e>")
-map("n", "<c-y>", "4<c-y>")
+Map("n", "<c-e>", "4<c-e>")
+Map("n", "<c-y>", "4<c-y>")
 -- keep selected while shifting
-map("v", "<", "<gv")
-map("v", ">", ">gv")
+Map("v", "<", "<gv")
+Map("v", ">", ">gv")
 --resize
-map("n", "<a-up>", ":resize +3<cr>")
-map("n", "<a-down>", ":resize -3<cr>")
-map("n", "<a-left>", ":vert resize -5<cr>")
-map("n", "<a-right>", ":vert resize +5<cr>")
+Map("n", "<a-up>", ":resize +3<cr>")
+Map("n", "<a-down>", ":resize -3<cr>")
+Map("n", "<a-left>", ":vert resize -5<cr>")
+Map("n", "<a-right>", ":vert resize +5<cr>")
 --easyalign
-map("n", "ga", "<Plug>(EasyAlign)")
-map("x", "ga", "<Plug>(EasyAlign)")
+Map("n", "ga", "<Plug>(EasyAlign)")
+Map("x", "ga", "<Plug>(EasyAlign)")
 -- git
-map("n", "<leader>gg", ":Neogit<cr>")
+Map("n", "<leader>gg", ":Neogit<cr>")
 -- SourceFiles
-map("n", "<leader>sv", '<cmd>lua require("functions").sourceFiles()<cr>')
+Map("n", "<leader>sv", '<cmd>lua require("functions").sourceFiles()<cr>')
 --trouble
-map("n", "<leader>tt", "<cmd>TroubleToggle workspace_diagnostics<cr>")
-map("n", "<leader>tq", "<cmd>TroubleToggle quickfix<cr>")
+Map("n", "<leader>tt", "<cmd>TroubleToggle workspace_diagnostics<cr>")
+Map("n", "<leader>tq", "<cmd>TroubleToggle quickfix<cr>")
 -- tests
-map("n", "<space>tf", ":TestFile<cr>")
-map("n", "<space>tn", ":TestNearest<cr>")
-map("n", "<space>ts", ":TestSuite<cr>")
+Map("n", "<space>tf", ":TestFile<cr>")
+Map("n", "<space>tn", ":TestNearest<cr>")
+Map("n", "<space>ts", ":TestSuite<cr>")
 --dap
-map("n", "<F6>", require("dap").step_back, "step_back")
-map("n", "<F7>", require("dap").step_into, "step_into")
-map("n", "<F8>", require("dap").step_over, "step_over")
-map("n", "<F9>", require("dap").step_out, "step_out")
-map("n", "<F11>", require("dap").continue, "continue")
-map("n", "<F12>", require("dap").terminate, "terminate")
-map("n", "<leader>dr", require("dap").repl.open)
-map("n", "<leader>db", require("dap").toggle_breakpoint)
-map("n", "<leader>dB", function()
-	require("dap").set_breakpoint(vim.fn.input("[DAP] Condition > "))
+Map("n", "<F6>", require("dap").step_back, "[DAP] step_back")
+Map("n", "<F7>", require("dap").step_into, "[DAP] step_into")
+Map("n", "<F8>", require("dap").step_over, "[DAP] step_over")
+Map("n", "<F9>", require("dap").step_out, "[DAP] step_out")
+Map("n", "<F11>", require("dap").continue, "[DAP] continue")
+Map("n", "<F12>", require("dap").terminate, "[DAP] terminate")
+Map("n", "<leader>dr", require("dap").repl.open, "[DAP] repl open")
+Map("n", "<leader>db", require("dap").toggle_breakpoint, "[DAP] toggle breakpoint")
+Map("n", "<leader>dB", function()
+	require("dap").set_breakpoint(vim.fn.input("[DAP] Condition > "), "[DAP] condition")
 end, "breakpoint condition")
-map("v", "<leader>de", require("dapui").eval)
-map("n", "<leader>dE", function()
-	require("dapui").eval(vim.fn.input("[DAP] Expression > "))
+Map("v", "<leader>de", require("dapui").eval, "[DAPUI] eval")
+Map("n", "<leader>dE", function()
+	require("dapui").eval(vim.fn.input("[DAP] Expression > "), "[DAPUI] expression")
 end)
+Map("n", "<leader>dT", "<cmd> lua require'dapui'.toggle()<cr>", "[DAPUI] toggle")
 
-map("n", "<leader>k", ":Neotree filesystem reveal left toggle<cr>")
+Map("n", "<leader>k", ":Neotree filesystem reveal left toggle<cr>")
 --cheat
-map("n", "<leader>sc", ":Cheat<cr>")
---open log map
+Map("n", "<leader>sc", ":Cheat<cr>")
+--open log Map
 vim.cmd([[
 command! OpenLspLog :vsplit ~/.cache/nvim/lsp.log
 ]])
 -- terminal
-map("n", "<c-\\>", ":FloatermToggle<cr>")
+Map("n", "<c-\\>", ":FloatermToggle<cr>")
 -- highlight text
-map("n", "n", "<Plug>(highlight-current-n-n)")
-map("n", "N", "<Plug>(highlight-current-n-N)")
+Map("n", "n", "<Plug>(highlight-current-n-n)")
+Map("n", "N", "<Plug>(highlight-current-n-N)")
 --Spectre
-map("n", "<leader>S", '<cmd>lua require("spectre").open()<CR>')
+Map("n", "<leader>S", '<cmd>lua require("spectre").open()<CR>')

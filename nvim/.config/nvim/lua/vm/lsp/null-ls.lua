@@ -13,7 +13,6 @@ null_ls.setup {
         diagnostics.shellcheck.with({
             filetypes = { "sh" }
         }),
-        formatting.stylua,
-        -- formatting.google_java_format
+        formatting.stylua
     }
 }

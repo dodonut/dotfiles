@@ -2,7 +2,7 @@
     "glossary": {
         "title": "example glossary",
 		"GlossDiv": {
-            title: S,
+            "title": 5,
 			GlossList: {
                 "GlossEntry": {
                     "ID": "SGML",

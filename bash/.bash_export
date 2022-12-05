@@ -10,4 +10,5 @@ export PATH=$PATH:$(go env GOPATH)/bin
 export LD_LIBRARY_PATH=/opt/oracle/instantclient_21_3:$LD_LIBRARY_PATH
 export PATH=$HOME/.config/scripts:/opt/oracle/instantclient_21_3:$PATH
 
-eval "$(zoxide init bash)"
+export PATH=$HOME/.local/bin:$PATH
+

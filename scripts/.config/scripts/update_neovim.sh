@@ -1,8 +1,10 @@
 #!/usr/bin/env sh
 
-cd /tmp
-wget https://github.com/neovim/neovim/releases/download/v0.7.2/nvim.appimage
+cd '/tmp' || exit
+wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 chmod u+x nvim.appimage
-mv nvim.appimage $HOME/.local/bin/vim
+./nvim.appimage --appimage-extract
+mv squashfs-root $HOME/.local/bin
+ln -s ./squashfs-root/usr/bin/nvim vim
 
 echo 'Done!'

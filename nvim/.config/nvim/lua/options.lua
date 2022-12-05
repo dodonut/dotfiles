@@ -75,7 +75,7 @@ opt.formatoptions = opt.formatoptions
 opt.joinspaces = false -- Two spaces and grade school, we're done
 opt.laststatus = 3
 --only on nvim8
--- opt.winbar = "%m%f"
+opt.winbar = "%m %f"
 
 -- set fillchars   = eob:~
 -- opt.fillchars      = { eob = "~", vert = "|" }
