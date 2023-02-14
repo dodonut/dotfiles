@@ -78,4 +78,12 @@ function M.list_breakpoints()
     vim.cmd "TroubleToggle quickfix"
 end
 
+
+function M.map(s, lhs, rhs, desc)
+	-- get the extra options
+	local opts = { noremap = true, desc = desc }
+	-- basic support for buffer-scoped keybindings
+	vim.keymap.set(s, lhs, rhs, opts)
+end
+
 return M

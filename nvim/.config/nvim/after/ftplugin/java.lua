@@ -8,6 +8,8 @@ if not status then
 end
 
 -- Determine OS
+
+local map = require("functions").map
 local home = os.getenv("HOME")
 if vim.fn.has("unix") == 1 then
     WORKSPACE_PATH = home .. "/workspace/"
@@ -50,8 +52,8 @@ if JAVA_DAP_ACTIVE then
     )
 end
 
-Nnoremap("<leader>tc", "<cmd> lua require'jdtls'.test_class()<cr>")
-Nnoremap("<leader>tnm", "<cmd> lua require'jdtls'.test_nearest_method()<cr>")
+map("n","<leader>tc", "<cmd> lua require'jdtls'.test_class()<cr>")
+map("n", "<leader>tnm", "<cmd> lua require'jdtls'.test_nearest_method()<cr>")
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
@@ -148,13 +150,13 @@ local config = {
                     enabled = "all", -- literals, all, none
                 },
             },
-            format = {
-                enabled = true,
-                settings = {
-                    profile = "GoogleStyle",
-                    url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
-                },
-            },
+            -- format = {
+            --     enabled = true,
+            --     settings = {
+            --         profile = "GoogleStyle",
+            --         url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+            --     },
+            -- },
         },
         signatureHelp = { enabled = true },
         completion = {
