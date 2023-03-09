@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+gitamp() {
+    echo "starting git"
+    git add . && git commit -m "$1" && git push
+}
+
+gitamp "$1"
