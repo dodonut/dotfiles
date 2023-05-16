@@ -37,13 +37,16 @@ return packer.startup(function(use) -- plug manager
 		"neovim/nvim-lspconfig",
 		requires = {
 			-- "williamboman/nvim-lsp-installer",
-            "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
 			"ray-x/lsp_signature.nvim",
 			"folke/lsp-colors.nvim",
 			"onsails/lspkind-nvim",
 		},
 	})
+    use {
+        "williamboman/mason.nvim",
+        run = ":MasonUpdate"
+    }
 
 	use("folke/tokyonight.nvim")
 	---- completion

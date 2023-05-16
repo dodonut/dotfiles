@@ -49,9 +49,9 @@ local catppuccin = function()
 	vim.cmd([[colorscheme catppuccin]])
 end
 
--- tokyo()
+tokyo()
 -- material()
-catppuccin()
+-- catppuccin()
 
 -- line color white so that I can see it
 vim.cmd[[highlight LineNr guifg=#B3B6B7]]

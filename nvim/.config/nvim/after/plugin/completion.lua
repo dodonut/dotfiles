@@ -30,8 +30,8 @@ cmp.setup({
         -- ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
     },
     sources = {
-        { name = "buffer", keyword_length = 5 },
-        { name = "nvim_lsp", keyword_length = 3 },
+        { name = "buffer", keyword_length = 3 },
+        { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
         { name = "nvim_lua", ft = { "lua" } },
         { name = "dap" },

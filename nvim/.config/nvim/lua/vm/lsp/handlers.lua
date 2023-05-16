@@ -66,6 +66,7 @@ M.filetype_attach = setmetatable({
         if JAVA_DAP_ACTIVE then
             require("jdtls").setup_dap({ hotcodereplace = "auto" })
             require("jdtls.dap").setup_dap_main_class_configs()
+            -- vim.lsp.codelens.refresh()
         end
         client.server_capabilities.document_formatting = false
     end,
@@ -133,15 +134,7 @@ M.custom_attach = function(client, bufnr)
             { pattern = "<buffer>", command = "lua vim.lsp.buf.clear_references()", group = id }
         )
     end
-
-    if client.server_capabilities.code_lens then
-        vim.cmd([[
-                      augroup lsp_document_codelens
-                        au! * <buffer>
-                        autocmd bufwritepost,bufenter <buffer> lua vim.lsp.codelens.refresh()
-                      augroup end
-                    ]])
-    end
+    client.server_capabilities.semanticTokensProvider = nil
 
     -- Attach any filetype specific options to the client
     M.filetype_attach[filetype](client)

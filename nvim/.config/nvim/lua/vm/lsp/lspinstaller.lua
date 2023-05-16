@@ -10,12 +10,13 @@ lspinstaller.on_server_ready(function(server)
         capabilities = handler.updated_capabilities,
     }
 
-    if server.name == "sumneko_lua" then
+    if server.name == "lua_ls" then
         local localopts = require("vm.lsp.settings.lua_config")
         opts = vim.tbl_deep_extend("force", localopts, opts)
     end
 
     if server.name == "jdtls" then
+        P('execute?')
         local localopts = require("vm.lsp.settings.jdtls_setup").java_config
         opts = vim.tbl_deep_extend("force", localopts, opts)
     end

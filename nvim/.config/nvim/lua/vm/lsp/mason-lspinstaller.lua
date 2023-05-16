@@ -17,9 +17,9 @@ require("mason-lspconfig").setup_handlers({
     ['jdtls'] = function ()
         -- local opts = require('vm.lsp.settings.jdtls_setup').java_config
     end,
-    ["sumneko_lua"] = function()
+    ["lua_ls"] = function()
         local settings = require('vm.lsp.settings.lua_config')
-        lspconfig.sumneko_lua.setup({
+        lspconfig.lua_ls.setup({
             on_attach = handler.custom_attach,
             capabilities = handler.default_capabilities,
             settings = settings.settings
