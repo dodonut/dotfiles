@@ -3,13 +3,13 @@ vim.fn.setenv("AWS_PROFILE", "bank-qa")
 vim.fn.setenv("AWS_REGION", "us-east-1")
 vim.fn.setenv("SPRING_PROFILES_ACTIVE", "qa")
 
-local handlers = require("vm.lsp.handlers")
+local handlers = require("vm.lsp")
 local status, jdtls = pcall(require, "jdtls")
 if not status then
     return
 end
 
-local map = require("functions").map
+local map = require("vm.functions").map
 local home = os.getenv("HOME")
 if vim.fn.has("unix") == 1 then
     WORKSPACE_PATH = home .. "/jdtls-workspace/"
@@ -31,29 +31,38 @@ local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 
 local workspace_dir = WORKSPACE_PATH .. project_name
 
-local jdtls_path = home .. "/.local/share/nvim/mason/packages/jdtls"
+local mason_packages_path = home .. '/.local/share/nvim/mason/packages'
+local jdtls_path = mason_packages_path .. "/jdtls"
 local lsp_server_path = jdtls_path .. "/" .. CONFIG
 local plugins_path = jdtls_path .. "/plugins"
 local jar_path = plugins_path .. "/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"
 local lombok_path = jdtls_path .. "/lombok.jar"
 local bundles = {}
 
+--[[
+for running tests:
+    - https://github.com/microsoft/vscode-java-test
+    - npm intall
+    - node scripts/buildJdtlsExt.js
+for debug:
+    - https://github.com/eclipse/eclipse.jdt.ls
+    - ./mvnw clean verify
+    ]]
 if JAVA_DAP_ACTIVE then
-    vim.list_extend(bundles, vim.split(vim.fn.glob(home .. "/.config/nvim/vscode-java-test/server/*.jar"), "\n"))
+    vim.list_extend(bundles, vim.split(vim.fn.glob(mason_packages_path .. "/java-test/extension/server/*.jar"), "\n"))
     vim.list_extend(
         bundles,
         vim.split(
             vim.fn.glob(
-                home
-                .. "/.config/nvim/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"
+                mason_packages_path .. '/java-debug-adapter/extension/server/*.jar'
             ),
             "\n"
         )
     )
+    map("n", "<leader>tc", "<cmd> lua require'jdtls'.test_class()<cr>", '[T]ests [C]lass')
+    map("n", "<leader>tnm", "<cmd> lua require'jdtls'.test_nearest_method()<cr>", '[T]est [N]earest [M]ethod')
 end
 
-map("n", "<leader>tc", "<cmd> lua require'jdtls'.test_class()<cr>")
-map("n", "<leader>tnm", "<cmd> lua require'jdtls'.test_nearest_method()<cr>")
 
 local config = {
     filetypes = { "java" },
@@ -167,8 +176,10 @@ local config = {
 }
 
 
-vim.cmd( "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)")
-vim.cmd( "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)")
+vim.cmd(
+    "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)")
+vim.cmd(
+    "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)")
 vim.cmd("command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()")
 vim.cmd("command! -buffer JdtBytecode lua require('jdtls').javap()")
 

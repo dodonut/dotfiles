@@ -13,17 +13,16 @@ R = function(name)
 end
 
 function Inoremap(lhs, rhs, opts, bufnr)
-    local _opts = opts or { noremap = true, silent = true }
-    local _bufnr = bufnr or vim.fn.bufnr()
-    vim.api.nvim_buf_set_keymap(_bufnr, "i", lhs, rhs, _opts)
+	local _opts = opts or { noremap = true, silent = true }
+	local _bufnr = bufnr or vim.fn.bufnr()
+	vim.api.nvim_buf_set_keymap(_bufnr, "i", lhs, rhs, _opts)
 end
 
-function Nnoremap(lhs, rhs, opts, bufnr)
-    local _opts = opts or { noremap = true, silent = true }
-    local _bufnr = bufnr or vim.fn.bufnr()
-    vim.api.nvim_buf_set_keymap(_bufnr, "n", lhs, rhs, _opts)
+function Nmap(lhs, rhs, opts, bufnr)
+	local _opts = opts or { noremap = true, silent = true }
+	local _bufnr = bufnr or vim.fn.bufnr()
+	vim.api.nvim_buf_set_keymap(_bufnr, "n", lhs, rhs, _opts)
 end
-
 
 Map = function(s, lhs, rhs, desc)
 	-- get the extra options

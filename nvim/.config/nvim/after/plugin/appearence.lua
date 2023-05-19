@@ -22,9 +22,6 @@ local material = function()
 		},
 	})
 
-	-- TODO: TESTE
-	-- todo: teste
-	-- Todo: teste
 	vim.g.material_style = "deep ocean"
 	-- avalailable colors
 	-- darker
@@ -45,13 +42,9 @@ local tokyo = function()
 end
 
 local catppuccin = function()
-	vim.g.catppuccin_flavour = "mocchiato" -- latte, frappe, macchiato, mocha
-	vim.cmd([[colorscheme catppuccin]])
+	vim.cmd([[colorscheme catppuccin]]) -- latte, frappe, macchiato, mocha
 end
 
-tokyo()
+-- tokyo()
 -- material()
--- catppuccin()
-
--- line color white so that I can see it
-vim.cmd[[highlight LineNr guifg=#B3B6B7]]
+catppuccin()
