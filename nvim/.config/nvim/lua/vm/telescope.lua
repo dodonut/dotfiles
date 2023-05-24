@@ -94,31 +94,30 @@ local utils = require("lspconfig.util")
 
 local M = {}
 
+local width = 0.5
+local noprev_opts = themes.get_dropdown({
+    winblend = 10,
+    previewer = false,
+    shorten_path = false,
+    layout_strategy = "vertical",
+    path_display = function(opt, p)
+        local tail = require('telescope.utils').path_tail(p)
+        return string.format("%s - %s", tail, p)
+    end,
+    -- cwd = path,
+    file_ignore_patterns = { '%.class' },
+
+    layout_config = {
+        width = width,
+    },
+})
+
 function M.git_files()
-    local width = 0.4
-
-    local opts = themes.get_dropdown({
-        winblend = 10,
-        previewer = false,
-        shorten_path = false,
-        layout_strategy = "vertical",
-        path_display = function(opt, p)
-            local tail = require('telescope.utils').path_tail(p)
-            return string.format("%s - %s", tail, p)
-        end,
-        -- cwd = path,
-        file_ignore_patterns = { '%.class' },
-
-        layout_config = {
-            width = width,
-        },
-    })
-
     vim.fn.system('git rev-parse --is-inside-work-tree')
     if vim.v.shell_error == 0 then
-        require("telescope.builtin").git_files(opts)
+        require("telescope.builtin").git_files(noprev_opts)
     else
-        require("telescope.builtin").find_files(opts)
+        require("telescope.builtin").find_files(noprev_opts)
     end
 end
 
@@ -141,9 +140,7 @@ function M.project_search()
 end
 
 function M.buffers()
-    require("telescope.builtin").buffers({
-        shorten_path = false,
-    })
+    require("telescope.builtin").buffers(noprev_opts)
 end
 
 function M.curbuf()
@@ -168,17 +165,37 @@ function M.search_all_files()
     })
 end
 
+function M.grep_prompt()
+    local text = function()
+        vim.cmd('noau normal! "vy"')
+        local text = vim.fn.getreg('v')
+        vim.fn.setreg('v', {})
+
+        text = string.gsub(text, "\n", "")
+        if #text > 0 then
+            return text
+        else
+            return ''
+        end
+    end
+
+    require("telescope.builtin").grep_string {
+        path_display = { "shorten" },
+        search = text(),
+    }
+end
+
 local sorters = require "telescope.sorters"
 
 TelescopeMapArgs = TelescopeMapArgs or {}
 
 -- stole from tj
-M.map_tele = function(key, f, options, buffer)
+M.map_tele = function(key, f, options, buffer, mode)
     local map_key = vim.api.nvim_replace_termcodes(key .. f, true, true, true)
 
     TelescopeMapArgs[map_key] = options or {}
 
-    local mode = "n"
+    local mode = mode or "n"
     local rhs = string.format("<cmd>lua R('vm.telescope')['%s'](TelescopeMapArgs['%s'])<CR>", f, map_key)
 
     local map_options = {
@@ -193,6 +210,7 @@ M.map_tele = function(key, f, options, buffer)
     end
 end
 
+local default_opts = { noremap = true, silent = true }
 -- Search
 M.map_tele("<c-p>", "git_files")
 M.map_tele("<leader>fg", "live_grep")
@@ -200,7 +218,12 @@ M.map_tele("<leader><space>", "buffers")
 M.map_tele("<leader>fa", "search_all_files")
 M.map_tele("<leader>ff", "curbuf")
 M.map_tele("<leader>fh", "help_tags")
-M.map_tele("<leader>fk", "keymaps")
-M.map_tele("<space>fd", "diagnostics")
-
+M.map_tele("<leader>fw", "grep_prompt", {
+    word_match = "-w",
+    short_path = true,
+    only_sort_text = true,
+    layout_strategy = "vertical",
+}, vim.api.nvim_get_current_buf(), "v")
+vim.api.nvim_set_keymap("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", default_opts)
+vim.api.nvim_set_keymap("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", default_opts)
 return M

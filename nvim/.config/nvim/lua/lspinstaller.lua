@@ -13,6 +13,7 @@ local servers = {
     clangd = {},
     gopls = {},
     jdtls = {},
+    cmake = {},
     -- java-test = {},
     -- java-debug_adapter = {},
     lua_ls = {
@@ -42,4 +43,6 @@ masonlspconfig.setup_handlers({
             settings = servers[server_name]
         })
     end,
+    jdtls = function() -- make sure that mason does not setup jdtls, and leave to ftplugin/java.lua
+    end
 })

@@ -30,10 +30,14 @@ map("n", "ga", "<Plug>(EasyAlign)")
 map("x", "ga", "<Plug>(EasyAlign)")
 -- git
 -- SourceFiles
-map("n", "<leader>sv", '<cmd>lua require("functions").sourceFiles()<cr>')
+map("n", "<leader>sv", '<cmd>lua require("vm.functions").sourceFiles()<cr>')
+map("n", "<leader>so", '<cmd>so %<cr>')
 
 map("n", ",t", ":Neotree filesystem reveal left toggle<cr>")
 -- terminal
 -- highlight text
 map("n", "n", "<Plug>(highlight-current-n-n)")
 map("n", "N", "<Plug>(highlight-current-n-N)")
+--diagnostics
+map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+map('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })

@@ -1,5 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocleader = ","
+vim.g.snippets = 'luasnip'
 
 require('vm.globals')
 
@@ -21,26 +22,11 @@ vim.opt.rtp:prepend(lazypath)
 --
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
-require('lazy').setup("custom.plugins", {
-    ui = {
-        icons = {
-            cmd = "⌘",
-            config = "🛠",
-            event = "📅",
-            ft = "📂",
-            init = "⚙",
-            keys = "🗝",
-            plugin = "🔌",
-            runtime = "💻",
-            source = "📄",
-            start = "🚀",
-            task = "📌",
-        },
-    },
-})
+require('lazy').setup("custom.plugins", {})
 
 require("options")
 require('keymaps')
 require('treesitter')
 require('lspinstaller')
 require('autocommands')
+require('luasnip.loaders.from_lua').load({ paths = './lua/custom/snippets' })

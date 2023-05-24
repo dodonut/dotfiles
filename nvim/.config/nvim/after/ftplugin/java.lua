@@ -18,7 +18,7 @@ else
     print("Unsupported system")
 end
 
-local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
+local root_markers = { "gradlew", ".git" }
 local root_dir = require("jdtls.setup").find_root(root_markers)
 if root_dir == "" then
     return
@@ -67,8 +67,6 @@ end
 local config = {
     filetypes = { "java" },
     cmd = {
-
-        -- 💀
         "java",
         "-Declipse.application=org.eclipse.jdt.ls.core.id1",
         "-Dosgi.bundles.defaultStartLevel=4",
@@ -124,13 +122,13 @@ local config = {
             references = {
                 includeDecompiledSources = true,
             },
-            -- format = {
-            --     enabled = true,
-            --     settings = {
-            --         profile = "GoogleStyle",
-            --         url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
-            --     },
-            -- },
+            format = {
+                enabled = true,
+                settings = {
+                    profile = "GoogleStyle",
+                    url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+                },
+            },
         },
         signatureHelp = { enabled = true },
         completion = {
@@ -174,7 +172,6 @@ local config = {
         extendedClientCapabilities = extendedClientCapabilities,
     },
 }
-
 
 vim.cmd(
     "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)")

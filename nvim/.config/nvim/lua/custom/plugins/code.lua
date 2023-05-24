@@ -11,6 +11,10 @@ return {
     'tpope/vim-surround',
     'tpope/vim-sleuth',
     "windwp/nvim-autopairs",
+    'vim-test/vim-test',
+    'Shatur/neovim-cmake',
+    -- 'cdelledonne/vim-cmake',
+
     require 'vm.autoformat',
     require 'vm.debug'
 }

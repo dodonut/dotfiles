@@ -2,7 +2,7 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
-luasnip.config.setup({})
+-- luasnip.config.setup({})
 
 cmp.setup({
     snippet = {
@@ -18,12 +18,12 @@ cmp.setup({
         ["<C-Space>"] = cmp.mapping.complete({}),
         ["<CR>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
+            select = false,
         }),
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
-            elseif luasnip.expand_or_locally_jumpable() then
+            elseif luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
             else
                 fallback()
@@ -39,9 +39,24 @@ cmp.setup({
             end
         end, { "i", "s" }),
     }),
+    formatting = {
+        source_names = {
+            nvim_lsp = "[LSP]",
+            luasnip = "[SNIP]",
+            nvim_lua = "[LSPL]",
+            path = "[PATH]"
+        },
+        duplicates = {
+            buffer = 1,
+            path = 1,
+            nvim_lsp = 0,
+            luasnip = 1,
+        }
+    },
     sources = {
         { name = "nvim_lsp" },
+        { name = "nvim_lua" },
         { name = "luasnip" },
         { name = 'path' }
-    },
+    }
 })

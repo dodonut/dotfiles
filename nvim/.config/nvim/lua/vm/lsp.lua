@@ -45,10 +45,12 @@ end
 
 M.filetype_attach = setmetatable({
   java = function(client)
+    local jdtls = require("jdtls")
     -- autocmd_format(false)
     if JAVA_DAP_ACTIVE then
-      require("jdtls").setup_dap({ hotcodereplace = "auto" })
-      require("jdtls.dap").setup_dap_main_class_configs()
+      jdtls.setup_dap({ hotcodereplace = "auto" })
+      jdtls.dap.setup_dap_main_class_configs()
+      jdtls.setup.add_commands()
       -- vim.lsp.codelens.refresh()
     end
   end,
@@ -89,9 +91,6 @@ M.custom_attach = function(client, bufnr)
   nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
   nmap("K", vim.lsp.buf.hover, "Hover Documentation")
   nmap("<A-k>", vim.lsp.buf.signature_help, "Signature Documentation")
-
-  -- nmap("]d", vim.diagnostic.goto_prev({ border = 'rounded' }), 'prev definition')
-  -- nmap("[d", vim.diagnostic.goto_next({ border = 'rounded' }), 'next definition')
 
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
