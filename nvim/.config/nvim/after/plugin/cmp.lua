@@ -3,7 +3,33 @@ local cmp = require("cmp")
 local luasnip = require("luasnip")
 
 -- luasnip.config.setup({})
-
+local kind_icons = {
+    Text = "",
+    Method = "m",
+    Function = "",
+    Constructor = "",
+    Field = "",
+    Variable = "",
+    Class = "",
+    Interface = "",
+    Module = "",
+    Property = "",
+    Unit = "",
+    Value = "",
+    Enum = "",
+    Keyword = "",
+    Snippet = "",
+    Color = "",
+    File = "",
+    Reference = "",
+    Folder = "",
+    EnumMember = "",
+    Constant = "",
+    Struct = "",
+    Event = "",
+    Operator = "",
+    TypeParameter = "",
+}
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -40,12 +66,18 @@ cmp.setup({
         end, { "i", "s" }),
     }),
     formatting = {
-        source_names = {
-            nvim_lsp = "[LSP]",
-            luasnip = "[SNIP]",
-            nvim_lua = "[LSPL]",
-            path = "[PATH]"
-        },
+        fields = { "kind", "abbr", "menu" },
+        format = function(entry, vim_item)
+            -- Kind icons
+            vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+            vim_item.menu = ({
+                nvim_lsp = "[LSP]",
+                luasnip = "[Snippet]",
+                buffer = "[Buffer]",
+                path = "[Path]",
+            })[entry.source.name]
+            return vim_item
+        end,
         duplicates = {
             buffer = 1,
             path = 1,
@@ -59,4 +91,17 @@ cmp.setup({
         { name = "luasnip" },
         { name = 'path' }
     }
+})
+-- Completion in dap repl
+cmp.setup({
+    enabled = function()
+        return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+            or require("cmp_dap").is_dap_buffer()
+    end
+})
+
+cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+    sources = {
+        { name = "dap" },
+    },
 })

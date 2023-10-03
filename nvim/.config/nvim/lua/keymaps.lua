@@ -9,35 +9,49 @@ map("n", "<c-k>", "<C-w>k")
 map("n", "<c-l>", "<C-w>l")
 map("n", "<leader>vs", ":vs<cr>", "[V]ertical [S]plit")
 map("n", "<leader>hs", ":sp<cr>", "[H]orizontal [S]plit")
+
+map("n", "<leader>mh", "<c-w>t<c-w>H", "[M]ove [H]orizontal split to vertical")
 -- greates remap everrrrrrr
 map("n", ":", ";")
 map("n", ";", ":")
 map("v", ":", ";")
 map("v", ";", ":")
 -- scroll
-map("n", "<c-e>", "4<c-e>")
-map("n", "<c-y>", "4<c-y>")
+map("n", "<c-e>", "4<c-e>", "scroll down")
+map("n", "<c-y>", "4<c-y>", "scroll up")
 -- keep selected while shifting
-map("v", "<", "<gv")
-map("v", ">", ">gv")
+map("v", "<", "<gv", "indenting backwards")
+map("v", ">", ">gv", "indenting forwards")
 --resize
-map("n", "<a-up>", ":resize +3<cr>")
-map("n", "<a-down>", ":resize -3<cr>")
-map("n", "<a-left>", ":vert resize -5<cr>")
-map("n", "<a-right>", ":vert resize +5<cr>")
+map("n", "<a-up>", ":resize +3<cr>", "[RESISE] up")
+map("n", "<a-down>", ":resize -3<cr>", "[RESISE] down")
+map("n", "<a-left>", ":vert resize -5<cr>", "[RESISE] left")
+map("n", "<a-right>", ":vert resize +5<cr>", "[RESISE] right")
 --easyalign
-map("n", "ga", "<Plug>(EasyAlign)")
-map("x", "ga", "<Plug>(EasyAlign)")
+map("n", "ga", "<Plug>(EasyAlign)", "[ALIGN]")
+map("x", "ga", "<Plug>(EasyAlign)", "[ALIGN]")
 -- git
 -- SourceFiles
-map("n", "<leader>sv", '<cmd>lua require("vm.functions").sourceFiles()<cr>')
-map("n", "<leader>so", '<cmd>so %<cr>')
+map("n", "<leader>sv", '<cmd>lua require("vm.functions").sourceFiles()<cr>', "[S]ource [V]im")
+map("n", "<leader>so", '<cmd>so %<cr>', "[S]ource [O]nly current file")
 
-map("n", ",t", ":Neotree filesystem reveal left toggle<cr>")
+map("n", "<localleader>t", ":Neotree filesystem reveal left toggle<cr>", "[T]ree reveal")
 -- terminal
 -- highlight text
 map("n", "n", "<Plug>(highlight-current-n-n)")
 map("n", "N", "<Plug>(highlight-current-n-N)")
 --diagnostics
-map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-map('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+map('n', ']d', vim.diagnostic.goto_prev, 'prev [D]iagnostic')
+map('n', '[d', vim.diagnostic.goto_next, 'next [D]iagnostic')
+
+map('n', '<leader>gl', ':G log<cr>', '[G]it [L]og')
+
+vim.keymap.set('v', '<leader>gl', function()
+  local visual_sel_lines = {
+    vim.fn.line('v'),
+    vim.fn.line('.')
+  }
+  local line_start = math.min(unpack(visual_sel_lines))
+  local line_end = math.max(unpack(visual_sel_lines))
+  vim.cmd("G log -L" .. line_start .. "," .. line_end .. ":%")
+end, { desc = '[G]it [L]og' })

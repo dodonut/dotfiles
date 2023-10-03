@@ -45,14 +45,14 @@ end
 
 M.filetype_attach = setmetatable({
   java = function(client)
+    vim.lsp.codelens.refresh()
     local jdtls = require("jdtls")
     -- autocmd_format(false)
     if JAVA_DAP_ACTIVE then
       jdtls.setup_dap({ hotcodereplace = "auto" })
       jdtls.dap.setup_dap_main_class_configs()
-      jdtls.setup.add_commands()
-      -- vim.lsp.codelens.refresh()
     end
+    jdtls.setup.add_commands()
   end,
 }, {
   __index = function()
@@ -66,7 +66,7 @@ M.custom_init = function(client)
   client.config.flags.allow_incremental_sync = true
 end
 
-local telescope_mapper = require("vm.telescope").map_tele
+local telescope_mapper = require("vm.telescope.functions").map_tele
 M.custom_attach = function(client, bufnr)
   -- Mappings.
   local opts = { noremap = true, silent = true }

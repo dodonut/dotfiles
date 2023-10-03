@@ -1,6 +1,3 @@
-mkdir aws
-mkdir cron
-rename email-account-resync
 rename evt-attachment-existent
 rename evt-att-existent
 rename sls_billing_delivery_acc
@@ -44,7 +41,10 @@ shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_attachment_n
 shell 
 shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_barcode_validate.git
 shell git checkout master_v2
-delete
 shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_create_rule_outlook.git
 shell git clone git@github.com:pagseguro-tilix/sls_billing_delivery_account_outlook_list_rule.git
 shell git checkout master
+mkdir multicom-adapter
+open_with%space
+rename src
+delete

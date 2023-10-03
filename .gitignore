@@ -1,4 +1,5 @@
 .local.bash
+!**/config.d/**
 
 # Created by https://www.toptal.com/developers/gitignore/api/c++,linux,node,vim,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=c++,linux,node,vim,visualstudiocode
@@ -8,7 +9,6 @@
 
 ### C++ ###
 # Prerequisites
-*.d
 
 # Compiled Object files
 *.slo

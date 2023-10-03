@@ -40,7 +40,11 @@ return {
 
         -- Only attach to clients that support document formatting
         if not client.server_capabilities.documentFormattingProvider then
-          return
+          -- jdtls config does not have this flag
+          if not client.name == 'jdtls' then
+            print('client *' .. client.name .. '* does not support document formatting!')
+            return
+          end
         end
 
         -- Tsserver usually works poorly. Sorry you work with bad languages

@@ -4,8 +4,9 @@ return {
         dependencies = {
             { "williamboman/mason.nvim", config = true },
             "williamboman/mason-lspconfig.nvim",
-            { "j-hui/fidget.nvim",       opts = {} },
+            { "j-hui/fidget.nvim",       branch = 'legacy', opts = {} },
             "folke/neodev.nvim",
+            "jose-elias-alvarez/null-ls.nvim"
         },
     },
     {
@@ -18,5 +19,6 @@ return {
         },
     },
     "mfussenegger/nvim-jdtls",
+    'hashivim/vim-terraform',
 
 }

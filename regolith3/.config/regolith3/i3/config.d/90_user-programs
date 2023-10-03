@@ -1,0 +1,34 @@
+#
+# assign fixed programs to workspaces
+assign [class="Code"] $ws1
+assign [class="jetbrains-idea-ce"] $ws1
+assign [class="jetbrains-goland"] $ws1
+assign [class="Brave-browser"] $ws2
+assign [class="Google-chrome"] $ws2
+assign [class="Postman"] $ws3
+assign [class="DBeaver"] $ws4
+assign [class="Slack"] $ws8
+assign [class="whatsdesk"] $ws8
+assign [class="Microsoft Teams - Preview"] $ws9
+assign [class="Com.cisco.anyconnect.gui"] $ws19
+assign [class="Workspacesclient"] $ws5
+assign [class="Spotify"] $ws6
+
+#transfer workspaces between monitors
+bindsym $mod+Ctrl+Left exec i3-msg move workspace to output left
+bindsym $mod+Ctrl+Right exec i3-msg move workspace to output right
+
+bindsym $mod+Ctrl+Up exec i3-msg move workspace to output up
+bindsym $mod+Ctrl+Down exec i3-msg move workspace to output down
+
+# # greenclip https://github.com/erebe/greenclip
+set $greenclip ~/.local/bin/greenclip
+bindsym $mod+Shift+v exec rofi -modi "clipboard:$greenclip print" -show clipboard
+exec --no-startup-id $greenclip daemon
+
+# filebrowser rofi has navigation
+bindsym $mod+$alt+f exec rofi -modi "filebrowser" -show filebrowser
+
+# screenshot selection with flameshot
+bindsym Ctrl+Shift+Print exec "/usr/bin/flameshot gui"
+

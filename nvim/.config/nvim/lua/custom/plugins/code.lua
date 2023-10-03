@@ -13,7 +13,7 @@ return {
     "windwp/nvim-autopairs",
     'vim-test/vim-test',
     'Shatur/neovim-cmake',
-    -- 'cdelledonne/vim-cmake',
+    'junegunn/vim-easy-align',
 
     require 'vm.autoformat',
     require 'vm.debug'

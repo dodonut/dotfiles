@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.g.maplocleader = ","
+vim.g.maplocalleader = ","
 vim.g.snippets = 'luasnip'
 
 require('vm.globals')
@@ -29,4 +29,6 @@ require('keymaps')
 require('treesitter')
 require('lspinstaller')
 require('autocommands')
+require('vm.telescope')
+require('vm.telescope.mappings')
 require('luasnip.loaders.from_lua').load({ paths = './lua/custom/snippets' })

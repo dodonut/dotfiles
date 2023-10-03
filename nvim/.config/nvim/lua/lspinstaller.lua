@@ -18,10 +18,8 @@ local servers = {
     -- java-debug_adapter = {},
     lua_ls = {
         Lua = {
-            workspace = {
-                workspace = { checkThirdParty = false },
-                telemetry = { enable = false },
-            },
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
             diagnostics = {
                 globals = {
                     "vim",
