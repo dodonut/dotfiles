@@ -3,9 +3,9 @@ local M = {}
 M.setup = function()
   local signs = {
     { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn",  text = "" },
-    { name = "DiagnosticSignHint",  text = "" },
-    { name = "DiagnosticSignInfo",  text = "" },
+    { name = "DiagnosticSignWarn", text = "" },
+    { name = "DiagnosticSignHint", text = "" },
+    { name = "DiagnosticSignInfo", text = "" },
   }
 
   for _, sign in ipairs(signs) do
@@ -50,7 +50,9 @@ M.filetype_attach = setmetatable({
     -- autocmd_format(false)
     if JAVA_DAP_ACTIVE then
       jdtls.setup_dap({ hotcodereplace = "auto" })
-      jdtls.dap.setup_dap_main_class_configs()
+      if jdtls.dap then
+        jdtls.dap.setup_dap_main_class_configs()
+      end
     end
     jdtls.setup.add_commands()
   end,
