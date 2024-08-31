@@ -14,7 +14,10 @@ return {
     'vim-test/vim-test',
     'Shatur/neovim-cmake',
     'junegunn/vim-easy-align',
+    'LintaoAmons/scratch.nvim',
+    "folke/neodev.nvim",
 
     require 'vm.autoformat',
-    require 'vm.debug'
+    require 'vm.debug',
+    require 'vm.tests'
 }

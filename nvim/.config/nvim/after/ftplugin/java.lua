@@ -84,8 +84,8 @@ if JAVA_DAP_ACTIVE then
             "\n"
         )
     )
-    map("n", "<leader>tc", "<cmd> lua require'jdtls'.test_class()<cr>", '[T]ests [C]lass')
-    map("n", "<leader>tnm", "<cmd> lua require'jdtls'.test_nearest_method()<cr>", '[T]est [N]earest [M]ethod')
+    -- map("n", "<leader>tc", "<cmd> lua require'jdtls'.test_class()<cr>", '[T]ests [C]lass')
+    -- map("n", "<leader>tnm", "<cmd> lua require'jdtls'.test_nearest_method()<cr>", '[T]est [N]earest [M]ethod')
 end
 
 
@@ -155,14 +155,14 @@ local config = {
             },
             format = {
                 enabled = true,
+                -- settings = {
+                --     profile = "GoogleStyle",
+                --     url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+                -- },
                 settings = {
                     profile = "GoogleStyle",
-                    url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+                    url = vim.fn.stdpath "config" .. "/lang-servers/intellij-java-google-style.xml"
                 },
-                -- settings = {
-                --     profile = "GoogleStyle_SK",
-                --     url = home .. "/dev/work/code_style.xml",
-                -- },
                 -- settings = {
                 --     profile = "Intellij",
                 --     url = home .. "/dev/work/code_style_v2.xml",

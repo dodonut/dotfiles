@@ -54,7 +54,6 @@ M.filetype_attach = setmetatable({
         jdtls.dap.setup_dap_main_class_configs()
       end
     end
-    jdtls.setup.add_commands()
   end,
 }, {
   __index = function()
@@ -72,7 +71,7 @@ local telescope_mapper = require("vm.telescope.functions").map_tele
 M.custom_attach = function(client, bufnr)
   -- Mappings.
   local opts = { noremap = true, silent = true }
-  local filetype = vim.api.nvim_buf_get_option(0, "filetype")
+  local filetype = vim.api.nvim_get_option_value("filetype", {})
   local nmap = function(keys, func, desc)
     if desc then
       desc = "LSP: " .. desc

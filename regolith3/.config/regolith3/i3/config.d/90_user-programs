@@ -11,7 +11,7 @@ assign [class="DBeaver"] $ws4
 assign [class="Slack"] $ws8
 assign [class="whatsdesk"] $ws8
 assign [class="Microsoft Teams - Preview"] $ws9
-assign [class="Com.cisco.anyconnect.gui"] $ws19
+assign [class="Com.cisco.secureclient.gui"] $ws19
 assign [class="Workspacesclient"] $ws5
 assign [class="Spotify"] $ws6
 

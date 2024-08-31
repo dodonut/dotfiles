@@ -31,9 +31,11 @@ M.sourceFiles = function()
 	print("Source success!")
 end
 
-function M.map(s, lhs, rhs, desc)
+
+
+function M.map(s, lhs, rhs, desc, opts)
 	-- get the extra options
-	local opts = { noremap = true, desc = desc }
+	local opts = opts or { noremap = true, desc = desc }
 	-- basic support for buffer-scoped keybindings
 	vim.keymap.set(s, lhs, rhs, opts)
 end

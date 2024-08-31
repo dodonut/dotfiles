@@ -14,8 +14,6 @@ local servers = {
     gopls = {},
     jdtls = {},
     cmake = {},
-    -- java-test = {},
-    -- java-debug_adapter = {},
     lua_ls = {
         Lua = {
             workspace = { checkThirdParty = false },
@@ -35,12 +33,13 @@ masonlspconfig.setup {
 
 masonlspconfig.setup_handlers({
     function(server_name) -- default handler (optional)
-        require("lspconfig")[server_name].setup({
-            on_attach = handler.custom_attach,
-            capabilities = handler.default_capabilities,
-            settings = servers[server_name]
-        })
+        if server_name ~= 'jdtls' then
+            require("lspconfig")[server_name].setup({
+                on_attach = handler.custom_attach,
+                capabilities = handler.default_capabilities,
+                settings = servers[server_name]
+            })
+        end
     end,
-    jdtls = function() -- make sure that mason does not setup jdtls, and leave to ftplugin/java.lua
-    end
+    jdtls = function() end, -- make sure that mason does not setup jdtls, and leave to ftplugin/java.lua
 })
