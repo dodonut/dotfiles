@@ -21,4 +21,21 @@ return {
             end,
         },
     },
+    {
+        "NeogitOrg/neogit",
+        dependencies = {
+            "nvim-lua/plenary.nvim",  -- required
+            "sindrets/diffview.nvim", -- optional - Diff integration
+        },
+        keys = {
+            {
+                "<leader>go",
+                function()
+                    require('neogit').open({ kind = 'split' })
+                end,
+                desc = '[G]it [O]pen'
+            }
+        },
+        config = true
+    }
 }

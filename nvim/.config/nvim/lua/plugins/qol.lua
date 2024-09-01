@@ -10,15 +10,6 @@ return {
         }
     },
     -- tree
-    {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v2.x",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-            "MunifTanjim/nui.nvim",
-        },
-    },
     'rktjmp/highlight-current-n.nvim',
     {
         "dstein64/vim-startuptime",
@@ -30,5 +21,12 @@ return {
             'RishabhRD/popfix'
         }
     },
-    'rafcamlet/nvim-luapad'
+    'rafcamlet/nvim-luapad',
+    {
+        'rcarriga/nvim-notify',
+        init = function()
+            vim.notify = require('notify')
+        end
+
+    }
 }

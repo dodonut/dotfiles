@@ -1,4 +1,13 @@
-local map = require 'vm.functions'.map
+local map = function(s, lhs, rhs, desc, opts)
+  local localopts = { noremap = true, desc = desc }
+
+  if opts then
+    for k, v in pairs(opts) do
+      localopts[k] = v
+    end
+  end
+  vim.keymap.set(s, lhs, rhs, localopts)
+end
 
 map("t", "<c-j>", "<C-\\><C-n><C-w>j")
 map("t", "<c-k>", "<C-\\><C-n><C-w>k")
@@ -41,10 +50,14 @@ map("n", "<localleader>t", ":Neotree filesystem reveal left toggle<cr>", "[T]ree
 map("n", "n", "<Plug>(highlight-current-n-n)")
 map("n", "N", "<Plug>(highlight-current-n-N)")
 --diagnostics
-map('n', ']d', vim.diagnostic.goto_prev, 'prev [D]iagnostic')
-map('n', '[d', vim.diagnostic.goto_next, 'next [D]iagnostic')
+vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = -1, float = true }) end,
+  { noremap = true, desc = 'prev [D]iagnostic' })
+
+vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = 1, float = true }) end,
+  { noremap = true, desc = 'next [D]iagnostic' })
 
 map('n', '<leader>gl', ':G log<cr>', '[G]it [L]og')
+
 
 vim.keymap.set('v', '<leader>gl', function()
   local visual_sel_lines = {

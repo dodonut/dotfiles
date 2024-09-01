@@ -16,7 +16,7 @@ M.sourceFiles = function()
 	local directories = {
 		tostring(prepath .. "after/plugin/"),
 		tostring(prepath .. "lua/vm/"),
-		tostring(prepath .. "lua/custom/plugins/"),
+		tostring(prepath .. "lua/plugins/"),
 		tostring(prepath .. "lua"),
 	}
 	local sourcedirs = function(dirs)
@@ -29,15 +29,6 @@ M.sourceFiles = function()
 	end
 	sourcedirs(directories)
 	print("Source success!")
-end
-
-
-
-function M.map(s, lhs, rhs, desc, opts)
-	-- get the extra options
-	local opts = opts or { noremap = true, desc = desc }
-	-- basic support for buffer-scoped keybindings
-	vim.keymap.set(s, lhs, rhs, opts)
 end
 
 return M
