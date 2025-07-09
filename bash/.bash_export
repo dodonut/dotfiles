@@ -1,8 +1,9 @@
 #!/bin/bash
 export GOROOT=/usr/local/go
+export GOBIN=$GOROOT/bin/
 export GOPATH=$HOME/go
 export GOPROXY=''
-export PATH=$PATH:$GOROOT:$GOPATH
+export PATH=$PATH:$GOROOT:$GOPATH:$GOBIN
 export XDG_CONFIG_HOME=$HOME/.config
 
 export LD_LIBRARY_PATH=/opt/oracle/instantclient_21_3:$LD_LIBRARY_PATH

@@ -10,7 +10,48 @@ return {
   'mfussenegger/nvim-dap',
   dependencies = {
     -- Creates a beautiful debugger UI
-    'rcarriga/nvim-dap-ui',
+    {
+      'rcarriga/nvim-dap-ui',
+      event = "VeryLazy",
+      opts = {
+        layouts = {
+          {
+            elements = {
+              {
+                id = "scopes",
+                size = 0.5
+              },
+              {
+                id = "breakpoints",
+                size = 0.5
+              },
+            },
+            position = "left",
+            size = 40
+          },
+          {
+            elements = {
+              {
+                id = "console",
+                size = 1
+              }
+            },
+            position = "bottom",
+            size = 15
+          }
+        },
+      },
+      keys = {
+        {
+          "<leader>dr",
+          function()
+            require('dapui').float_element('repl',
+              { width = 75, height = 15, enter = true, title = "  #######  REPL  #######  " })
+          end,
+          desc = "Debug: [R]epl [O]pen float window"
+        }
+      }
+    },
     'nvim-neotest/nvim-nio',
     'rcarriga/cmp-dap',
     -- Installs the debug adapters for you
@@ -46,15 +87,13 @@ return {
   init = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
+
     vim.fn.sign_define("DapBreakpoint", { text = "🔴", texthl = "", linehl = "", numhl = "" })
     vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "", linehl = "", numhl = "" })
-    vim.fn.sign_define("DapStopped", { text = "🍑", texthl = "", linehl = "DiffAdd", numhl = "" })
+    vim.fn.sign_define("DapStopped", { text = "", texthl = "", linehl = "DiffAdd", numhl = "" })
 
     require('mason-nvim-dap').setup()
-    dapui.setup()
-
-    -- toggle to see last session result. Without this ,you can't see session output in case of unhandled exception.
-    vim.keymap.set("n", "<F11>", dapui.toggle)
+    -- dapui.setup()
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close

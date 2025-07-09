@@ -8,6 +8,10 @@ return
         "MunifTanjim/nui.nvim",
     },
     opts = {
+        source_selector = {
+            winbar = false,
+            statusline = false
+        },
         filesystem = {
             use_libuv_file_watcher = true,
             follow_current_file = {
@@ -20,8 +24,16 @@ return
             follow_current_file = {
                 enabled = true,
                 leave_dirs_open = false
-
+            }
+        },
+        window = {
+            mappings = {
+                ["<c-v>"] = "open_vsplit",
+                ["<c-x>"] = "open_split",
             }
         }
+    },
+    keys = {
+        { "<localleader>t", ":Neotree filesystem reveal right toggle<cr>", "[T]ree reveal" }
     }
 }

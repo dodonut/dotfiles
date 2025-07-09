@@ -1,64 +1,10 @@
 return {
     {
         "neovim/nvim-lspconfig",
+        config = function() end, -- dont know why, but its required an EMPTY function for config
         dependencies = {
-            {
-                "williamboman/mason.nvim",
-                config = true,
-                opts = {
-                    ensure_installed = {
-                        "stylua",
-                        "shellcheck",
-                        "shfmt",
-                    }
-                }
-            },
-            {
-                "williamboman/mason-lspconfig.nvim",
-                init = function()
-                    require('mason').setup()
-                    local settings = {
-                        clangd = {},
-                        gopls = {},
-                        jdtls = {},
-                        cmake = {},
-                        lua_ls = {
-                            Lua = {
-                                workspace = { checkThirdParty = false },
-                                telemetry = { enable = false },
-                                diagnostics = {
-                                    globals = {
-                                        "vim",
-                                    },
-                                },
-                            },
-                        }
-                    }
-
-                    local attach = require("vm.lsp_attach")
-                    require('mason-lspconfig').setup({
-                        handlers = {
-                            function(server_name)
-                                require("lspconfig")[server_name].setup({
-                                    on_attach = attach.custom_attach,
-                                    capabilities = attach.default_capabilities,
-                                    settings = settings[server_name]
-                                })
-                            end,
-                            ['jdtls'] = function()
-                                require('java').setup()
-                                require("lspconfig")['jdtls'].setup({
-                                    on_attach = attach.custom_attach,
-                                    capabilities = attach.default_capabilities,
-                                })
-                            end
-                        },
-                        ensure_installed = settings
-                    })
-                end
-            },
             { "j-hui/fidget.nvim", opts = {} },
-            "jose-elias-alvarez/null-ls.nvim"
+            -- "jose-elias-alvarez/null-ls.nvim",
         },
     },
     -- "mfussenegger/nvim-jdtls",

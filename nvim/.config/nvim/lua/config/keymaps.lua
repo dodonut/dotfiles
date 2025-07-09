@@ -32,19 +32,18 @@ map("n", "<c-y>", "4<c-y>", "scroll up")
 map("v", "<", "<gv", "indenting backwards")
 map("v", ">", ">gv", "indenting forwards")
 --resize
-map("n", "<a-up>", ":resize +3<cr>", "[RESISE] up")
-map("n", "<a-down>", ":resize -3<cr>", "[RESISE] down")
-map("n", "<a-left>", ":vert resize -5<cr>", "[RESISE] left")
-map("n", "<a-right>", ":vert resize +5<cr>", "[RESISE] right")
+map("n", "<M-k>", "<C-W>+", "[RESISE] increase height")
+map("n", "<M-j>", "<C-W>-", "[RESISE] decrease height")
+map("n", "<M-h>", "<c-w>8<", "[RESISE] increase width")
+map("n", "<M-l>", "<c-w>8>", "[RESISE] decrease width")
 --easyalign
 map("n", "ga", "<Plug>(EasyAlign)", "[ALIGN]")
 map("x", "ga", "<Plug>(EasyAlign)", "[ALIGN]")
 -- git
 -- SourceFiles
-map("n", "<leader>sv", '<cmd>lua require("vm.functions").sourceFiles()<cr>', "[S]ource [V]im")
+map("n", "<leader>sv", '<cmd>lua require("config.custom.functions").sourceFiles()<cr>', "[S]ource [V]im")
 map("n", "<leader>so", '<cmd>so %<cr>', "[S]ource [O]nly current file")
 
-map("n", "<localleader>t", ":Neotree filesystem reveal left toggle<cr>", "[T]ree reveal")
 -- terminal
 -- highlight text
 map("n", "n", "<Plug>(highlight-current-n-n)")

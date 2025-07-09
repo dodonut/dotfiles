@@ -15,7 +15,8 @@ M.sourceFiles = function()
 	local prepath = "~/.config/nvim/"
 	local directories = {
 		tostring(prepath .. "after/plugin/"),
-		tostring(prepath .. "lua/vm/"),
+		tostring(prepath .. "lua/config/"),
+		tostring(prepath .. "lua/config/custom/"),
 		tostring(prepath .. "lua/plugins/"),
 		tostring(prepath .. "lua"),
 	}

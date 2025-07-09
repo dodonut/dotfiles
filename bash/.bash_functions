@@ -6,6 +6,6 @@ parse_git_branch() {
 function VimFiles() {
     pushd $(pwd) > /dev/null
     cd $HOME/.config/nvim
-    vim .;
+    vim;
     popd > /dev/null
 }

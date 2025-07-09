@@ -13,6 +13,4 @@ return {
     -- },
     -- homepage, caga no telescope
     -- { import = "lazyvim.plugins.extras.ui.mini-starter" },
-
-    require 'vm.autoformat',
 }

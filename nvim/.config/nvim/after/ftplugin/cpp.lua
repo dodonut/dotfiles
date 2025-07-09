@@ -1,0 +1,7 @@
+local bufnr = vim.api.nvim_get_current_buf()
+vim.api.nvim_buf_create_user_command(bufnr, 'CPRun', function(_)
+    vim.api.nvim_command(":!g++ % -o main && ./main < input.txt")
+end, { desc = 'Run program for competitive' })
+vim.api.nvim_buf_create_user_command(bufnr, 'CompileDebug', function(_)
+    vim.api.nvim_command(":!g++ -g -Wall -std=c++11 % -o main")
+end, { desc = 'Compile with debug flags' })

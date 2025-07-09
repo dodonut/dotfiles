@@ -1,10 +1,12 @@
--- figure out how to do specific for java
--- print('filetype java ')
--- local attach = require("vm.lsp_attach")
--- require('java').setup()
--- require("lspconfig")['jdtls'].setup({
---     on_attach = attach.custom_attach,
---     capabilities = attach.default_capabilities,
--- })
--- vim.keymap.set('n', "<leader>to", "<cmd>JavaTestViewLastReport<cr>",
---     { noremap = true, desc = "[T]est [O]pen last report" })
+vim.keymap.set('n', "<leader>to", "<cmd>JavaTestViewLastReport<cr>",
+    { noremap = true, desc = "Java [T]est [O]pen last report" })
+
+vim.keymap.set('n', "<leader>td", "<cmd>JavaTestDebugCurrentMethod<cr>",
+    { noremap = true, desc = "Java [T]est [D]ebug" })
+
+vim.keymap.set('n', "<leader>tr", "<cmd>JavaTestRunCurrentClass<cr>",
+    { noremap = true, desc = "Java [T]est [R]un for class" })
+
+vim.api.nvim_buf_create_user_command(vim.api.nvim_get_current_buf(), 'Gtest', function(_)
+    vim.api.nvim_command(":!./gradlew test")
+end, { desc = 'Run ./gradlew test' })
