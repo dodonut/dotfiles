@@ -153,5 +153,5 @@ eval "$(zoxide init bash)"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/tqi_vsousa/.sdkman"
-[[ -s "/home/tqi_vsousa/.sdkman/bin/sdkman-init.sh" ]] && source "/home/tqi_vsousa/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "/home/tqi_vsousa/.sdkman/bin/sdkman-init.sh"

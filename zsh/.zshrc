@@ -1,5 +1,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
+source $HOME/.exports
+
 # ZSH_THEME="agnoster"
 ZSH_THEME="robbyrussell"
 # ZSH_THEME="apple"
@@ -8,7 +10,7 @@ ZSH_THEME="robbyrussell"
 
 export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
-plugins=(git npm docker docker-compose terraform aws)
+plugins=(git npm docker docker-compose terraform aws   fast-syntax-highlighting zsh-autosuggestions zsh-autocomplete)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -17,7 +19,7 @@ source $ZSH/oh-my-zsh.sh
 alias vc=VimFiles . " > /dev/null"
 alias zc="vim ~/.zshrc"
 alias rn="ranger"
-alias luamake=/home/tqi_vsousa/dev/lua-language-server/3rd/luamake/luamake
+alias luamake=$HOME/dev/lua-language-server/3rd/luamake/luamake
 
 function VimFiles() {
     pushd $(pwd) > /dev/null
@@ -40,20 +42,15 @@ export NVM_DIR="$HOME/.nvm"
 #
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export JAR=$HOME/dev/jdt/plugins/org.eclipse.equinox.launcher_*.jar
-export JDTLS_CONFIG=$HOME/dev/jdt/config_linux
-export WORKSPACE=$HOME/workspace
-export RANGER_LOAD_DEFAULT_RC=false
 
-export SPRING_PROFILES_ACTIVE=qa
-
-export LD_LIBRARY_PATH=/opt/oracle/instantclient_21_3:$LD_LIBRARY_PATH
-export PATH=$HOME/.config/scripts:/opt/oracle/instantclient_21_3:$PATH
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/tqi_vsousa/.sdkman"
-[[ -s "/home/tqi_vsousa/.sdkman/bin/sdkman-init.sh" ]] && source "/home/tqi_vsousa/.sdkman/bin/sdkman-init.sh"
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+eval "$(zoxide init zsh)"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 

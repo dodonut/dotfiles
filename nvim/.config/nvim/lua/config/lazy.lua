@@ -46,7 +46,7 @@ require("lazy").setup({
 
 require("luasnip.loaders.from_lua").load({ paths = { "./lua/snippets" } })
 
-vim.api.nvim_command("colorscheme catppuccin-frappe")
+vim.api.nvim_command("colorscheme tokyonight-storm")
 -- need to be set after the colorscheme set
 vim.api.nvim_set_hl(0, 'LineNr', { fg = 'white' })
 vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = 'white' })

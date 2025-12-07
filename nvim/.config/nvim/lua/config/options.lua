@@ -1,13 +1,13 @@
 local opt = vim.opt
 -- Ignore compiled files
 
-opt.wildmode = { "longest", "list", "full" }
+-- opt.wildmode = { "longest", "list", "full" }
 
 -- Cool floating window popup menu for completion on command line
 opt.pumblend = 17
 
-opt.wildmenu = true
-opt.wildmode = "longest:full,full"
+-- opt.wildmenu = true
+-- opt.wildmode = "longest:full,full"
 
 opt.wildoptions = "pum"
 

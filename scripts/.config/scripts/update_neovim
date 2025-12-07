@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
-cd '/tmp' || exit
-wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.appimage
-mv nvim-linux-x86_64.appimage nvim.appimage
-chmod u+x nvim.appimage
-mv nvim.appimage $HOME/.local/bin/vim
+cd /tmp
+wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.tar.gz
+tar xzvf nvim-linux-x86_64.tar.gz
+sudo mv nvim-linux-x86_64 /usr/local/share/nvim-nightly
+sudo ln -sf /usr/local/share/nvim-nightly/bin/nvim /usr/local/bin/vim
 
 echo 'Done!'
