@@ -7,99 +7,117 @@
 -- kickstart.nvim and not kitchen-sink.nvim ;)
 
 return {
-  'mfussenegger/nvim-dap',
-  dependencies = {
-    -- Creates a beautiful debugger UI
-    {
-      'rcarriga/nvim-dap-ui',
-      event = "VeryLazy",
-      opts = {
-        layouts = {
-          {
-            elements = {
-              {
-                id = "scopes",
-                size = 0.5
-              },
-              {
-                id = "breakpoints",
-                size = 0.5
-              },
-            },
-            position = "left",
-            size = 40
-          },
-          {
-            elements = {
-              {
-                id = "console",
-                size = 1
-              }
-            },
-            position = "bottom",
-            size = 15
-          }
-        },
-      },
-      keys = {
-        {
-          "<leader>dr",
-          function()
-            require('dapui').float_element('repl',
-              { width = 75, height = 15, enter = true, title = "  #######  REPL  #######  " })
-          end,
-          desc = "Debug: [R]epl [O]pen float window"
-        }
-      }
-    },
-    'nvim-neotest/nvim-nio',
-    'rcarriga/cmp-dap',
-    -- Installs the debug adapters for you
-    'williamboman/mason.nvim',
-    'jay-babu/mason-nvim-dap.nvim',
-    'nvim-telescope/telescope-dap.nvim',
-    'theHamsta/nvim-dap-virtual-text',
-    -- Add your own debuggers here
-    'leoluz/nvim-dap-go',
-  },
-  keys = function(_, keys)
-    local dap = require 'dap'
-    local dapui = require 'dapui'
-    return {
-      -- Basic debugging keymaps, feel free to change to your liking!
-      { '<F5>',      dap.continue,          desc = 'Debug: Start/Continue' },
-      { '<F7>',      dap.step_into,         desc = 'Debug: Step Into' },
-      { '<F8>',      dap.step_over,         desc = 'Debug: Step Over' },
-      { '<F9>',      dap.step_out,          desc = 'Debug: Step Out' },
-      { '<leader>b', dap.toggle_breakpoint, desc = 'Debug: Toggle Breakpoint' },
-      {
-        '<leader>B',
-        function()
-          dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-        end,
-        desc = 'Debug: Set Breakpoint',
-      },
-      -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-      { '<F1>', dapui.toggle, desc = 'Debug: See last session result.' },
-      unpack(keys),
-    }
-  end,
-  init = function()
-    local dap = require 'dap'
-    local dapui = require 'dapui'
+	{
+		"mfussenegger/nvim-dap",
+		dependencies = {
+			-- Creates a beautiful debugger UI
+			{
+				"rcarriga/nvim-dap-ui",
+				event = "VeryLazy",
+				opts = {
+					layouts = {
+						{
+							elements = {
+								{
+									id = "scopes",
+									size = 0.5,
+								},
+								{
+									id = "breakpoints",
+									size = 0.5,
+								},
+							},
+							position = "left",
+							size = 40,
+						},
+						{
+							elements = {
+								{
+									id = "console",
+									size = 1,
+								},
+							},
+							position = "bottom",
+							size = 15,
+						},
+					},
+				},
+				keys = {
+					{
+						"<leader>dr",
+						function()
+							require("dapui").float_element(
+								"repl",
+								{ width = 75, height = 15, enter = true, title = "  #######  REPL  #######  " }
+							)
+						end,
+						desc = "Debug: [R]epl [O]pen float window",
+					},
+				},
+			},
+			"nvim-neotest/nvim-nio",
+			"rcarriga/cmp-dap",
+			-- Installs the debug adapters for you
+			"williamboman/mason.nvim",
+			"jay-babu/mason-nvim-dap.nvim",
+			"nvim-telescope/telescope-dap.nvim",
+			"theHamsta/nvim-dap-virtual-text",
+			-- Add your own debuggers here
+			"leoluz/nvim-dap-go",
+		},
+		keys = function(_, keys)
+			local dap = require("dap")
+			local dapui = require("dapui")
+			return {
+				-- Basic debugging keymaps, feel free to change to your liking!
+				{ "<F5>", dap.continue, desc = "Debug: Start/Continue" },
+				{ "<F7>", dap.step_into, desc = "Debug: Step Into" },
+				{ "<F8>", dap.step_over, desc = "Debug: Step Over" },
+				{ "<F9>", dap.step_out, desc = "Debug: Step Out" },
+				{ "<leader>b", dap.toggle_breakpoint, desc = "Debug: Toggle Breakpoint" },
+				{
+					"<leader>B",
+					function()
+						dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+					end,
+					desc = "Debug: Set Breakpoint",
+				},
+				-- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
+				{ "<F1>", dapui.toggle, desc = "Debug: See last session result." },
+				unpack(keys),
+			}
+		end,
+		init = function()
+			local dap = require("dap")
+			local dapui = require("dapui")
 
-    vim.fn.sign_define("DapBreakpoint", { text = "🔴", texthl = "", linehl = "", numhl = "" })
-    vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "", linehl = "", numhl = "" })
-    vim.fn.sign_define("DapStopped", { text = "", texthl = "", linehl = "DiffAdd", numhl = "" })
+			vim.fn.sign_define("DapBreakpoint", { text = "🔴", texthl = "", linehl = "", numhl = "" })
+			vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "", linehl = "", numhl = "" })
+			vim.fn.sign_define("DapStopped", { text = "", texthl = "", linehl = "DiffAdd", numhl = "" })
 
-    require('mason-nvim-dap').setup()
-    -- dapui.setup()
+			require("mason-nvim-dap").setup()
+			-- dapui.setup()
 
-    dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-    dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-    dap.listeners.before.event_exited['dapui_config'] = dapui.close
+			dap.listeners.after.event_initialized["dapui_config"] = dapui.open
+			dap.listeners.before.event_terminated["dapui_config"] = dapui.close
+			dap.listeners.before.event_exited["dapui_config"] = dapui.close
 
-    -- Install golang specific config
-    require('dap-go').setup()
-  end,
+			-- Install golang specific config
+			require("dap-go").setup()
+		end,
+	},
+	{
+		"ph1losof/ecolog.nvim",
+		config = function()
+			require("ecolog").setup({
+				--automatically loads shell env to context
+				load_shell = true,
+				--put all the envs into vim session
+				vim_env = true,
+			})
+		end,
+	},
+	{
+		"ellisonleao/dotenv.nvim",
+	},
 }

@@ -51,6 +51,8 @@ local function java_keymaps()
 	vim.cmd("command! -buffer JdtBytecode lua require('jdtls').javap()")
 	-- Allow yourself/register to run JdtShell as a Vim command
 	vim.cmd("command! -buffer JdtJshell lua require('jdtls').jshell()")
+	-- vim.cmd("command! -buffer JdtTestClass lua require('jdtls').test_class()")
+	-- vim.cmd("command! -buffer JdtTestNearestMethod lua require('jdtls').test_nearest_method()")
 
 	-- Set a Vim motion to <Space> + <Shift>J + o to organize imports in normal mode
 	vim.keymap.set(
@@ -267,10 +269,30 @@ local function setup_jdtls()
 		},
 	}
 
+	-- Carrega automaticamente o arquivo .env do projeto
+	local function load_project_env()
+		local ecolog = require("ecolog")
+		local env_map = ecolog.get_env_vars() or {}
+
+		local result = {}
+
+		for key, entry in pairs(env_map) do
+			result[key] = tostring(entry.value)
+		end
+
+		return result
+	end
+	local env_vars = load_project_env()
+
 	-- Create a table called init_options to pass the bundles with debug and testing jar, along with the extended client capablies to the start or attach function of JDTLS
 	local init_options = {
 		bundles = bundles,
 		extendedClientCapabilities = extendedClientCapabilities,
+		["java.test.config"] = {
+			name = "project-env",
+			env = env_vars,
+			vmArgs = { "-ea" },
+		},
 		settings = {
 			java = {
 				configuration = {
@@ -280,8 +302,13 @@ local function setup_jdtls()
 							path = "/home/vinicin/.sdkman/candidates/java/8.0.462-tem",
 						},
 						{
+							name = "JavaSE-17",
+							path = "/home/vinicin/.sdkman/candidates/java/17.0.12-tem",
+						},
+						{
 							name = "JavaSE-21",
 							path = "/home/vinicin/.sdkman/candidates/java/21.0.2-tem",
+							default = true,
 						},
 					},
 				},
@@ -295,7 +322,9 @@ local function setup_jdtls()
 		java_keymaps()
 
 		-- Setup the java debug adapter of the JDTLS server
-		require("jdtls.dap").setup_dap()
+		require("jdtls.dap").setup_dap({
+			hotcodereplace = "auto",
+		})
 
 		-- Find the main method(s) of the application so the debug adapter can successfully start up the application
 		-- Sometimes this will randomly fail if language server takes to long to startup for the project, if a ClassDefNotFoundException occurs when running
