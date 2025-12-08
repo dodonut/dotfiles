@@ -9,7 +9,7 @@ opt.pumblend = 17
 -- opt.wildmenu = true
 -- opt.wildmode = "longest:full,full"
 
-opt.wildoptions = "pum"
+-- opt.wildoptions = "pum"
 
 opt.modifiable = true
 opt.background = "dark" -- dark background

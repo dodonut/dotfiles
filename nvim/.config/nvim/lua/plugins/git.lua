@@ -13,14 +13,6 @@ return {
                 topdelete = { text = '‾' },
                 changedelete = { text = '~' },
             },
-            on_attach = function(bufnr)
-                vim.keymap.set('n', '[g', require('gitsigns').nav_hunk('prev'),
-                    { buffer = bufnr, desc = 'Go to Previous Hunk' })
-                vim.keymap.set('n', ']g', require('gitsigns').nav_hunc('next'),
-                    { buffer = bufnr, desc = 'Go to Next Hunk' })
-                vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk,
-                    { buffer = bufnr, desc = '[P]review [H]unk' })
-            end,
         },
     },
     {
