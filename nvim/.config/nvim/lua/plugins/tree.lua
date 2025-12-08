@@ -1,39 +1,64 @@
-return
-{
+return {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     dependencies = {
         "nvim-lua/plenary.nvim",
-        "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+        "nvim-tree/nvim-web-devicons",
         "MunifTanjim/nui.nvim",
     },
+
     opts = {
+        -- Opcional: barra para trocar filesystem/buffers/git
         source_selector = {
             winbar = false,
-            statusline = false
+            statusline = false,
         },
+
         filesystem = {
             use_libuv_file_watcher = true,
-            follow_current_file = {
-                enabled = true,
-                leave_dirs_open = false
+            filtered_items = {
+                visible = false, -- mostrar ocultos só com toggle
+                hide_dotfiles = true,
+                hide_gitignored = true,
+                hide_by_name = { "node_modules", "target", ".idea", ".vscode" },
+            },
 
-            }
-        },
-        buffers = {
             follow_current_file = {
                 enabled = true,
-                leave_dirs_open = false
-            }
+                leave_dirs_open = false,
+            },
         },
+
+        buffers = {
+            follow_current_file = { enabled = true, leave_dirs_open = false },
+        },
+
+        git_status = {
+            async = true,
+        },
+
         window = {
             mappings = {
                 ["<c-v>"] = "open_vsplit",
                 ["<c-x>"] = "open_split",
-            }
-        }
+
+                -- Qualidade de vida
+                ["h"] = "close_node",
+                ["l"] = "open",
+                ["H"] = "toggle_hidden",
+            },
+        },
+
+        -- Fecha o Neo-tree se for a única janela aberta
+        close_if_last_window = true,
     },
+
     keys = {
-        { "<localleader>t", ":Neotree filesystem reveal left toggle<cr>", "[T]ree reveal" }
-    }
+        {
+            "<localleader>t",
+            "<cmd>Neotree toggle reveal<cr>",
+            desc = "[T]ree reveal"
+        },
+    },
 }
+

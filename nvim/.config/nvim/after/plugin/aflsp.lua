@@ -24,10 +24,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gr", builtin.lsp_references, { desc = "[g]oto [r]eferences" })
 		vim.keymap.set("n", "gs", builtin.lsp_workspace_symbols, { desc = "[g]oto [s]ymbols" })
 		vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { desc = "refactor rename" })
-		vim.keymap.set({ "n", "x" }, "<c-f>", function()
-			vim.lsp.buf.format({ bufnr = event.buf })
-			vim.cmd("write")
-		end, { desc = "format and save" })
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[c]ode [a]ctions" })
 		vim.keymap.set(
 			"n",
