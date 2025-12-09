@@ -58,4 +58,6 @@ return {
 			})
 		end,
 	},
+	-- loading progress (primaraly for jdtls)
+	{ "j-hui/fidget.nvim", opts = {} },
 }

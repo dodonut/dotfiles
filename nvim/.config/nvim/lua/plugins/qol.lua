@@ -27,5 +27,6 @@ return {
         init = function()
             vim.notify = require('notify')
         end
-    }
+    },
+    "abecodes/tabout.nvim"
 }

@@ -60,30 +60,29 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_user_command("EcologRefreshMine", function()
-  local ok, ecolog = pcall(require, "ecolog")
-  if not ok then
-    vim.notify("ecolog.nvim não encontrado", vim.log.levels.ERROR)
-    return
-  end
+	local ok, ecolog = pcall(require, "ecolog")
+	if not ok then
+		vim.notify("ecolog.nvim não encontrado", vim.log.levels.ERROR)
+		return
+	end
 
-  local vars = ecolog.get_env_vars()
-  if not vars then
-    vim.notify("Nenhuma variável encontrada pelo ecolog", vim.log.levels.WARN)
-    return
-  end
+	local vars = ecolog.get_env_vars()
+	if not vars then
+		vim.notify("Nenhuma variável encontrada pelo ecolog", vim.log.levels.WARN)
+		return
+	end
 
-  for name, data in pairs(vars) do
-    -- data.value é a versão já convertida (string, number, bool)
-    local val = data.value
+	for name, data in pairs(vars) do
+		-- data.value é a versão já convertida (string, number, bool)
+		local val = data.value
 
-    -- converter número ou boolean pra string, porque vim.env exige string
-    if type(val) ~= "string" then
-      val = tostring(val)
-    end
+		-- converter número ou boolean pra string, porque vim.env exige string
+		if type(val) ~= "string" then
+			val = tostring(val)
+		end
 
-    vim.env[name] = val
-  end
+		vim.env[name] = val
+	end
 
-  vim.notify("Ecolog: variáveis carregadas para vim.env!", vim.log.levels.INFO)
+	vim.notify("Ecolog: variáveis carregadas para vim.env!", vim.log.levels.INFO)
 end, {})
-
