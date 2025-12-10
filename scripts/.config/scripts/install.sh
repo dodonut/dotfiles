@@ -4,15 +4,14 @@
 cd $HOME
 sudo apt update && sudo apt upgrade -y
 
-
 # install dependencies
-sudo apt install xclip ripgrep git unzip zip zsh zoxide stow jq gcc -y
+sudo apt install xclip ripgrep git unzip zip zsh zoxide stow jq gcc tmux -y
+
+# install tmux powerline
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # setup oh my zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-#my dotfiles
-git clone https://github.com/dodonut/dotfiles.git
 
 #stowing
 rm $HOME/.zshrc
@@ -37,8 +36,6 @@ if [ ! -d "$HOME/.fzf" ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install
 fi
-
-
 
 # go installation for lf
 cd $HOME/dotfiles/scripts/.config/scripts

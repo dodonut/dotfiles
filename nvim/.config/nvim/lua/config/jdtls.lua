@@ -299,15 +299,19 @@ local function setup_jdtls()
 					runtimes = {
 						{
 							name = "JavaSE-1.8",
-							path = "/home/vinicin/.sdkman/candidates/java/8.0.462-tem",
+							path = vim.fn.expand("$HOME/.sdkman/candidates/java/8.*"),
+						},
+						{
+							name = "JavaSE-11",
+							path = vim.fn.expand("$HOME/.sdkman/candidates/java/11.*"),
 						},
 						{
 							name = "JavaSE-17",
-							path = "/home/vinicin/.sdkman/candidates/java/17.0.12-tem",
+							path = vim.fn.expand("$HOME/.sdkman/candidates/java/17.*"),
 						},
 						{
 							name = "JavaSE-21",
-							path = "/home/vinicin/.sdkman/candidates/java/21.0.2-tem",
+							path = vim.fn.expand("$HOME/.sdkman/candidates/java/21.*"),
 							default = true,
 						},
 					},

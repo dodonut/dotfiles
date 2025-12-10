@@ -7,6 +7,7 @@ vim.g.snippets = "luasnip"
 -- if lazy spec is enabled, config folder is automatically loaded
 require("config.options")
 require("config.keymaps")
+require('config.autocommands')
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -42,12 +43,16 @@ require("lazy").setup({
     enabled = false,
     notify = false,
   },
+  check = {
+    enabled = true,
+    notify = false
+  }
 })
 
 require("luasnip.loaders.from_lua").load({ paths = { "./lua/snippets" } })
 
-vim.api.nvim_command("colorscheme tokyonight-storm")
+vim.api.nvim_command("colorscheme onedark")
 -- need to be set after the colorscheme set
-vim.api.nvim_set_hl(0, 'LineNr', { fg = 'white' })
-vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = 'white' })
-vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = 'white' })
+-- vim.api.nvim_set_hl(0, 'LineNr', { fg = 'white' })
+-- vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = 'white' })
+-- vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = 'white' })

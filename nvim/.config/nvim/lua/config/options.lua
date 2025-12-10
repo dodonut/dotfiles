@@ -11,6 +11,11 @@ opt.pumblend = 17
 
 -- opt.wildoptions = "pum"
 
+-- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
+-- instead raise a dialog asking if you wish to save the current file(s)
+-- See `:help 'confirm'`
+opt.confirm = true
+
 opt.modifiable = true
 opt.background = "dark" -- dark background
 opt.showmode = false
@@ -27,9 +32,13 @@ opt.cursorline = true     -- Highlight the current line
 opt.equalalways = false   -- I don't like my windows changing all the time
 opt.splitright = true     -- Prefer windows splitting to the right
 opt.splitbelow = true     -- Prefer windows splitting to the bottom
-opt.updatetime = 1000     -- Make updates happen faster
-opt.hlsearch = false      -- I wouldn't use this without my DoNoHL function
+opt.updatetime = 250     -- Make updates happen faster
+opt.timeoutlen = 300
+opt.signcolumn = 'yes'
 opt.scrolloff = 10        -- Make it so there are always ten lines below my cursor
+
+vim.o.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Tabs
 opt.autoindent = true

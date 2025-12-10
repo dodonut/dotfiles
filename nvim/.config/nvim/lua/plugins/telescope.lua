@@ -1,6 +1,7 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
+		event = "VimEnter",
 		dependencies = {
 			"nvim-lua/popup.nvim",
 			"nvim-lua/plenary.nvim",
@@ -72,31 +73,33 @@ return {
 				},
 			})
 
-			vim.keymap.set("n", "<leader>fp", function()
-				builtin.find_files({
-					cwd = require("lazy.core.config").options.root,
-				})
-			end, { noremap = true, desc = "[TELE] find plugins" })
+			-- Shortcut for searching your Neovim configuration files
+			vim.keymap.set("n", "<leader>sn", function()
+				builtin.find_files({ cwd = vim.fn.stdpath("config") })
+			end, { desc = "[S]earch [N]eovim files" })
+
+			vim.keymap.set("n", "<leader>sP", function()
+				builtin.find_files({ cwd = require("lazy.core.config").options.root })
+			end, { noremap = true, desc = "[TELE] [S]earch [P]lugin" })
 
 			vim.keymap.set("n", "<c-p>", function()
 				builtin.git_files(noprev_opts)
 			end, { noremap = true, desc = "[TELE] git_files" })
 
-			vim.keymap.set("n", "<leader>fa", function()
+			vim.keymap.set("n", "<leader>sf", function()
 				builtin.find_files(prev_tail)
-			end, { noremap = true, desc = "[TELE] find_files" })
+			end, { noremap = true, desc = "[TELE] [S]earch [F]iles" })
 
-			vim.keymap.set("n", "<leader><space>", function()
+			vim.keymap.set("n", "<leader><leader>", function()
 				builtin.buffers(noprev_opts)
-			end, { noremap = true, desc = "[TELE] buffers" })
+			end, { noremap = true, desc = "[TELE] search buffers" })
 
-			vim.keymap.set("n", "<leader>fd", function()
-				builtin.diagnostics({
-					severity = "ERROR",
-				})
+			vim.keymap.set("n", "<leader>sd", function()
+				builtin.diagnostics({ severity = "ERROR" })
 			end, { noremap = true, desc = "[TELE] diagnostics with error" })
 
-			vim.keymap.set("n", "<leader>ff", function()
+			-- <c-/>
+			vim.keymap.set("n", "<c-_>", function()
 				builtin.current_buffer_fuzzy_find(themes.get_dropdown({
 					winblend = 10,
 					border = true,
@@ -107,20 +110,22 @@ return {
 						height = 0.3,
 					},
 				}))
-			end, { noremap = true, desc = "[TELE] fuzzy find in file" })
+			end, { noremap = true, desc = "[TELE] [S]earch in [F]ile fuzzy" })
 
 			return {
-				{ "<leader>fk", builtin.keymaps, desc = "[TELE] keymaps" },
-				{ "<leader>fs", builtin.lsp_workspace_symbols, desc = "[TELE] symbols" },
-				{ "<leader>fg", builtin.live_grep, desc = "[TELE] live_grep" },
-				{ "<leader>fh", builtin.help_tags, desc = "[TELE] help_tags" },
-				{ "<leader>fD", builtin.diagnostics, desc = "[TELE] all diagnostics" },
+				{ "<leader>sk", builtin.keymaps, desc = "[TELE] keymaps" },
+				{ "<leader>sw", builtin.grep_string, desc = "[TELE] [S]earch current [W]ord" },
+				{ "<leader>ss", builtin.lsp_workspace_symbols, desc = "[TELE] [S]earch [S]ymbols" },
+				{ "<leader>sg", builtin.live_grep, desc = "[TELE] [S]earch by [G]rep" },
+				{ "<leader>sh", builtin.help_tags, desc = "[TELE] [S]earch [H]elptags" },
+				{ "<leader>sr", builtin.resume, desc = "[TELE] [S]earch [R]esume" },
+				{ "<leader>sD", builtin.diagnostics, desc = "[TELE] [S]earch all [D]iagnostics" },
 			}
 		end,
 		init = function()
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
-			require("telescope").load_extension("ecolog")
+			pcall(require("telescope").load_extension("ecolog"))
 		end,
 	},
 }

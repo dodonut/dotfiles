@@ -60,4 +60,5 @@ return {
 	},
 	-- loading progress (primaraly for jdtls)
 	{ "j-hui/fidget.nvim", opts = {} },
+	"saghen/blink.cmp",
 }
