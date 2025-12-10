@@ -42,19 +42,24 @@ return {
 						end
 					end)
 
-					-- Actions
-					map("n", "<leader>hP", gitsigns.preview_hunk, { desc = "Git [H]unk [P]review" })
-					map("n", "<leader>hp", gitsigns.preview_hunk_inline, { desc = "Git [H]unk [P]review inline" })
+					-- git hunk Actions
+					map("n", "<leader>ghP", gitsigns.preview_hunk, { desc = "Git [H]unk [P]review" })
+					map("n", "<leader>ghp", gitsigns.preview_hunk_inline, { desc = "Git [H]unk [P]review inline" })
 
-					map("n", "<leader>hb", function()
+					map("n", "<leader>ghb", function()
 						gitsigns.blame_line({ full = true })
 					end, { desc = "Git [H]unk [B]lame" })
 
-					map("n", "<leader>hd", gitsigns.diffthis, { desc = "Git Open [H]unk [D]iff" })
+					map("n", "<leader>ghd", gitsigns.diffthis, { desc = "Git Open [H]unk [D]iff" })
 
 					-- Toggles
-					map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
-					map("n", "<leader>tw", gitsigns.toggle_word_diff)
+					map(
+						"n",
+						"<leader>tb",
+						gitsigns.toggle_current_line_blame,
+						{ desc = "[T]oggle current line [B]lame" }
+					)
+					map("n", "<leader>tw", gitsigns.toggle_word_diff, { desc = "[T]oggle [W]ord diff" })
 				end,
 			})
 		end,

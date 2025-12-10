@@ -84,7 +84,7 @@ return {
 
 			vim.keymap.set("n", "<c-p>", function()
 				builtin.git_files(noprev_opts)
-			end, { noremap = true, desc = "[TELE] git_files" })
+			end, { noremap = true, desc = "[TELE] git files" })
 
 			vim.keymap.set("n", "<leader>sf", function()
 				builtin.find_files(prev_tail)
@@ -96,7 +96,7 @@ return {
 
 			vim.keymap.set("n", "<leader>sd", function()
 				builtin.diagnostics({ severity = "ERROR" })
-			end, { noremap = true, desc = "[TELE] diagnostics with error" })
+			end, { noremap = true, desc = "[TELE] [D]iagnostics with error" })
 
 			-- <c-/>
 			vim.keymap.set("n", "<c-_>", function()
