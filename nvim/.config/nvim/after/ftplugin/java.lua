@@ -1,101 +1,101 @@
-vim.keymap.set(
-    "n",
-    "<leader>to",
-    "<cmd>JavaTestViewLastReport<cr>",
-    { noremap = true, desc = "Java [T]est [O]pen last report" }
-)
-
-vim.keymap.set(
-    "n",
-    "<leader>td",
-    "<cmd>JavaTestDebugCurrentMethod<cr>",
-    { noremap = true, desc = "Java [T]est [D]ebug" }
-)
-
-vim.keymap.set(
-    "n",
-    "<leader>tr",
-    "<cmd>JavaTestRunCurrentClass<cr>",
-    { noremap = true, desc = "Java [T]est [R]un for class" }
-)
-
-local function execute_tests(java_name, java_path)
-    local ok, jdtls = pcall(require, "jdtls")
-    if not ok then
-        vim.notify("jdtls não encontrado", vim.log.levels.ERROR)
-        return
-    end
-
-    local root = jdtls.setup.find_root({ ".git", "mvnw", "gradlew", "pom.xml" })
-    vim.print(root)
-    if not root or root == "" then
-        vim.notify("Não foi possível detectar o workspace do jdtls", vim.log.levels.ERROR)
-        return
-    end
-
-    if not java_path then
-        vim.notify("Não foi possível detectar o runtime do jdtls", vim.log.levels.WARN)
-        return
-    end
-
-    local Path = require("plenary.path")
-
-    local mvnw = Path:new(root .. "/mvnw")
-    local gradlew = Path:new(root .. "/gradlew")
-    local pom = Path:new(root .. "/pom.xml")
-    local gradle_build = Path:new(root .. "/build.gradle")
-
-    local type = nil
-
-    if mvnw:exists() then
-        type = " ./mvnw"
-    elseif gradlew:exists() then
-        type = " ./gradlew"
-    else
-        vim.notify("Wrapper maven ou gradlew não encontrado", vim.log.levels.ERROR)
-        return
-    end
-
-    vim.notify("Java: " .. java_name .. " | type: " .. type , vim.log.levels.INFO)
-    local cmd = "JAVA_HOME=" .. java_path .. type .. " test"
-
-    -- abre split vertical, diminui o tamanho e inicia como terminal
-    vim.cmd("vsplit | vert resize 100 | terminal")
-    vim.cmd("startinsert")
-    -- pega o channel ID do terminal recém-aberto
-    local term_chan = vim.b.terminal_job_id
-    -- define o cwd (se você quiser)
-    if root then
-        vim.fn.chansend(term_chan, "cd " .. root .. "\n")
-    end
-    -- executa o comando
-    vim.fn.chansend(term_chan, cmd .. "\n")
-end
-
-vim.api.nvim_buf_create_user_command(0, "RunTests", function()
-    local bufnr = vim.api.nvim_get_current_buf() -- CHANGE THIS
-    local _, client = next(vim.lsp.get_clients({ name = "jdtls" }))
-    local command = {
-        command = "java.project.getSettings",
-        arguments = {
-            vim.uri_from_bufnr(bufnr),
-            {
-                "org.eclipse.jdt.core.compiler.source",
-                "org.eclipse.jdt.ls.core.vm.location",
-            },
-        },
-    }
-    assert(client, "client is nil")
-
-    client:request("workspace/executeCommand", command, function(err, result)
-        if err then
-            vim.notify("Não foi possível pegar o runtime", vim.log.levels.ERROR)
-            vim.print(err)
-            return
-        else
-            local java_name = result["org.eclipse.jdt.core.compiler.source"]
-            local java_path = result["org.eclipse.jdt.ls.core.vm.location"]
-            execute_tests(java_name, java_path)
-        end
-    end)
-end, { desc = "Executa todos os testes do projeto Java" })
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<leader>Jto",
+-- 	"<cmd>JavaTestViewLastReport<cr>",
+-- 	{ noremap = true, desc = "Java [T]est [O]pen last report" }
+-- )
+--
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<leader>Jtd",
+-- 	"<cmd>JavaTestDebugCurrentMethod<cr>",
+-- 	{ noremap = true, desc = "Java [T]est [D]ebug" }
+-- )
+--
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<leader>Jtr",
+-- 	"<cmd>JavaTestRunCurrentClass<cr>",
+-- 	{ noremap = true, desc = "Java [T]est [R]un for class" }
+-- )
+--
+-- local function execute_tests(java_name, java_path)
+-- 	local ok, jdtls = pcall(require, "jdtls")
+-- 	if not ok then
+-- 		vim.notify("jdtls não encontrado", vim.log.levels.ERROR)
+-- 		return
+-- 	end
+--
+-- 	local root = jdtls.setup.find_root({ ".git", "mvnw", "gradlew", "pom.xml" })
+-- 	vim.print(root)
+-- 	if not root or root == "" then
+-- 		vim.notify("Não foi possível detectar o workspace do jdtls", vim.log.levels.ERROR)
+-- 		return
+-- 	end
+--
+-- 	if not java_path then
+-- 		vim.notify("Não foi possível detectar o runtime do jdtls", vim.log.levels.WARN)
+-- 		return
+-- 	end
+--
+-- 	local Path = require("plenary.path")
+--
+-- 	local mvnw = Path:new(root .. "/mvnw")
+-- 	local gradlew = Path:new(root .. "/gradlew")
+-- 	local pom = Path:new(root .. "/pom.xml")
+-- 	local gradle_build = Path:new(root .. "/build.gradle")
+--
+-- 	local type = nil
+--
+-- 	if mvnw:exists() then
+-- 		type = " ./mvnw"
+-- 	elseif gradlew:exists() then
+-- 		type = " ./gradlew"
+-- 	else
+-- 		vim.notify("Wrapper maven ou gradlew não encontrado", vim.log.levels.ERROR)
+-- 		return
+-- 	end
+--
+-- 	vim.notify("Java: " .. java_name .. " | type: " .. type, vim.log.levels.INFO)
+-- 	local cmd = "JAVA_HOME=" .. java_path .. type .. " test"
+--
+-- 	-- abre split vertical, diminui o tamanho e inicia como terminal
+-- 	vim.cmd("vsplit | vert resize 100 | terminal")
+-- 	vim.cmd("startinsert")
+-- 	-- pega o channel ID do terminal recém-aberto
+-- 	local term_chan = vim.b.terminal_job_id
+-- 	-- define o cwd (se você quiser)
+-- 	if root then
+-- 		vim.fn.chansend(term_chan, "cd " .. root .. "\n")
+-- 	end
+-- 	-- executa o comando
+-- 	vim.fn.chansend(term_chan, cmd .. "\n")
+-- end
+--
+-- vim.api.nvim_buf_create_user_command(0, "RunTests", function()
+-- 	local bufnr = vim.api.nvim_get_current_buf() -- CHANGE THIS
+-- 	local _, client = next(vim.lsp.get_clients({ name = "jdtls" }))
+-- 	local command = {
+-- 		command = "java.project.getSettings",
+-- 		arguments = {
+-- 			vim.uri_from_bufnr(bufnr),
+-- 			{
+-- 				"org.eclipse.jdt.core.compiler.source",
+-- 				"org.eclipse.jdt.ls.core.vm.location",
+-- 			},
+-- 		},
+-- 	}
+-- 	assert(client, "client is nil")
+--
+-- 	client:request("workspace/executeCommand", command, function(err, result)
+-- 		if err then
+-- 			vim.notify("Não foi possível pegar o runtime", vim.log.levels.ERROR)
+-- 			vim.print(err)
+-- 			return
+-- 		else
+-- 			local java_name = result["org.eclipse.jdt.core.compiler.source"]
+-- 			local java_path = result["org.eclipse.jdt.ls.core.vm.location"]
+-- 			execute_tests(java_name, java_path)
+-- 		end
+-- 	end)
+-- end, { desc = "Executa todos os testes do projeto Java" })

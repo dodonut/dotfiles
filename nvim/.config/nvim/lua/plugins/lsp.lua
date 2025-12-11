@@ -12,7 +12,7 @@ return {
 		config = function()
 			-- ensure the java debug adapter is installed
 			require("mason-nvim-dap").setup({
-				ensure_installed = { "java-debug-adapter", "java-test" },
+				-- ensure_installed = { "java-debug-adapter", "java-test" },
 			})
 		end,
 	},
@@ -32,12 +32,12 @@ return {
 		end,
 	},
 	-- utility plugin for configuring the java language server for us
-	{
-		"mfussenegger/nvim-jdtls",
-		dependencies = {
-			"mfussenegger/nvim-dap",
-		},
-	},
+	-- {
+	-- 	"mfussenegger/nvim-jdtls",
+	-- 	dependencies = {
+	-- 		"mfussenegger/nvim-dap",
+	-- 	},
+	-- },
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
@@ -47,7 +47,7 @@ return {
 				settings = {
 					Lua = {
 						diagnostics = {
-							globals = { "vim" }, -- <-- Isso remove o erro
+							globals = { "vim" }, -- <-- Isso remove o erro do vim global
 						},
 						workspace = {
 							library = vim.api.nvim_get_runtime_file("", true),
@@ -61,4 +61,40 @@ return {
 	-- loading progress (primaraly for jdtls)
 	{ "j-hui/fidget.nvim", opts = {} },
 	"saghen/blink.cmp",
+	{
+		"nvim-java/nvim-java",
+		config = function()
+			require("java").setup()
+
+			vim.lsp.config("jdtls", {
+				settings = {
+					java = {
+						configuration = {
+							runtimes = {
+								{
+									name = "JavaSE-1.8",
+									path = vim.fn.expand("$HOME/.sdkman/candidates/java/8.*"),
+								},
+								{
+									name = "JavaSE-11",
+									path = vim.fn.expand("$HOME/.sdkman/candidates/java/11.*"),
+								},
+								{
+									name = "JavaSE-17",
+									path = vim.fn.expand("$HOME/.sdkman/candidates/java/17.*"),
+								},
+								{
+									name = "JavaSE-21",
+									path = vim.fn.expand("$HOME/.sdkman/candidates/java/21.*"),
+									default = true,
+								},
+							},
+						},
+					},
+				},
+			})
+
+			vim.lsp.enable("jdtls")
+		end,
+	},
 }
