@@ -57,6 +57,8 @@ return {
 				{ "<leader>g", group = "[G]it" },
 				{ "<leader>x", group = "Diagnostics Trouble" },
 				{ "<leader>gh", group = "[H]unk" },
+				{ "<leader>J", group = "[J]ava" },
+				{ "<leader>JT", group = "[T]erminal" },
 			},
 		},
 		init = function()

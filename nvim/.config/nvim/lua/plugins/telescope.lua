@@ -121,6 +121,12 @@ return {
 						find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
 					},
 				},
+				mappings = {
+					n = {
+						["<c-v>"] = require("telescope.actions").select_vertical,
+						["<c-s>"] = require("telescope.actions").select_horizontal,
+					},
+				},
 				extensions = {
 					wrap_results = true,
 					ecolog = {
