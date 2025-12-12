@@ -9,3 +9,4 @@ export PATH=$HOME/.config/scripts:/opt/oracle/instantclient_21_3:$PATH
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+export PATH=/opt/gradle/bin:$PATH

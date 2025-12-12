@@ -18,7 +18,7 @@ local function get_jdtls()
 end
 
 local function get_bundles()
-	local path = vim.fn.expand("$HOME/.local/share/nvim/mason/packages/")
+	local path = vim.fn.expand("$HOME/.local/share/nvim/mason/packages")
 	-- Obtain the full path to the directory where Mason has downloaded the Java Debug Adapter binaries
 	local java_debug_path = path .. "/java-debug-adapter"
 
@@ -256,6 +256,25 @@ local function setup_jdtls()
 			-- If changes to the project will require the developer to update the projects configuration advise the developer before accepting the change
 			configuration = {
 				updateBuildConfiguration = "interactive",
+				runtimes = {
+					{
+						name = "JavaSE-1.8",
+						path = vim.fn.expand("$HOME/.sdkman/candidates/java/8.*"),
+					},
+					{
+						name = "JavaSE-11",
+						path = vim.fn.expand("$HOME/.sdkman/candidates/java/11.*"),
+					},
+					{
+						name = "JavaSE-17",
+						path = vim.fn.expand("$HOME/.sdkman/candidates/java/17.*"),
+					},
+					{
+						name = "JavaSE-21",
+						path = vim.fn.expand("$HOME/.sdkman/candidates/java/21.*"),
+						default = true,
+					},
+				},
 			},
 			-- enable code lens in the lsp
 			referencesCodeLens = {
@@ -271,54 +290,11 @@ local function setup_jdtls()
 	}
 
 	-- Carrega automaticamente o arquivo .env do projeto
-	local function load_project_env()
-		local ecolog = require("ecolog")
-		local env_map = ecolog.get_env_vars() or {}
-
-		local result = {}
-
-		for key, entry in pairs(env_map) do
-			result[key] = tostring(entry.value)
-		end
-
-		return result
-	end
-	local env_vars = load_project_env()
 
 	-- Create a table called init_options to pass the bundles with debug and testing jar, along with the extended client capablies to the start or attach function of JDTLS
 	local init_options = {
 		bundles = bundles,
 		extendedClientCapabilities = extendedClientCapabilities,
-		["java.test.config"] = {
-			name = "project-env",
-			env = env_vars,
-			vmArgs = { "-ea" },
-		},
-		settings = {
-			java = {
-				configuration = {
-					runtimes = {
-						{
-							name = "JavaSE-1.8",
-							path = vim.fn.expand("$HOME/.sdkman/candidates/java/8.*"),
-						},
-						{
-							name = "JavaSE-11",
-							path = vim.fn.expand("$HOME/.sdkman/candidates/java/11.*"),
-						},
-						{
-							name = "JavaSE-17",
-							path = vim.fn.expand("$HOME/.sdkman/candidates/java/17.*"),
-						},
-						{
-							name = "JavaSE-21",
-							path = vim.fn.expand("$HOME/.sdkman/candidates/java/21.*"),
-							default = true,
-						},
-					},
-				},
-			},
-		},
 	}
 
 	-- Function that will be ran once the language server is attached

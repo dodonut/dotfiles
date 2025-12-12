@@ -16,38 +16,6 @@ return {
 				end,
 			},
 		},
-		opts = {
-			defaults = {
-				prompt_prefix = "❯ ",
-				selection_caret = "❯ ",
-				path_display = {
-					"filename_first",
-				},
-			},
-			extensions = {
-				wrap_results = true,
-				ecolog = {
-					shelter = {
-						-- Whether to show masked values when copying to clipboard
-						mask_on_copy = false,
-					},
-					-- Default keybindings
-					mappings = {
-						-- Key to copy value to clipboard
-						copy_value = "<C-y>",
-						-- Key to copy name to clipboard
-						copy_name = "<C-Y>",
-						-- Key to edit environment variable
-						edit_var = "<C-e>",
-					},
-				},
-
-				fzf = {},
-				["ui-select"] = {
-					require("telescope.themes").get_dropdown({}),
-				},
-			},
-		},
 		keys = function()
 			local builtin = require("telescope.builtin")
 			local themes = require("telescope.themes")
@@ -83,12 +51,9 @@ return {
 			end, { noremap = true, desc = "[TELE] [S]earch [P]lugin" })
 
 			vim.keymap.set("n", "<c-p>", function()
-				builtin.git_files(noprev_opts)
+				-- builtin.git_files(noprev_opts)
+				builtin.find_files(noprev_opts)
 			end, { noremap = true, desc = "[TELE] git files" })
-
-			vim.keymap.set("n", "<leader>sf", function()
-				builtin.find_files(prev_tail)
-			end, { noremap = true, desc = "[TELE] [S]earch [F]iles" })
 
 			vim.keymap.set("n", "<leader><leader>", function()
 				builtin.buffers(noprev_opts)
@@ -126,6 +91,60 @@ return {
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
 			pcall(require("telescope").load_extension("ecolog"))
+		end,
+		config = function()
+			local telescope = require("telescope")
+			local telescopeConfig = require("telescope.config")
+
+			-- Clone the default Telescope configuration
+			local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
+
+			-- I want to search in hidden/dot files.
+			table.insert(vimgrep_arguments, "--hidden")
+			-- I don't want to search in the `.git` directory.
+			table.insert(vimgrep_arguments, "--glob")
+			table.insert(vimgrep_arguments, "!**/.git/*")
+
+			telescope.setup({
+				defaults = {
+					-- `hidden = true` is not supported in text grep commands.
+					vimgrep_arguments = vimgrep_arguments,
+					prompt_prefix = "❯ ",
+					selection_caret = "❯ ",
+					path_display = {
+						"filename_first",
+					},
+				},
+				pickers = {
+					find_files = {
+						-- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+						find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+					},
+				},
+				extensions = {
+					wrap_results = true,
+					ecolog = {
+						shelter = {
+							-- Whether to show masked values when copying to clipboard
+							mask_on_copy = false,
+						},
+						-- Default keybindings
+						mappings = {
+							-- Key to copy value to clipboard
+							copy_value = "<C-y>",
+							-- Key to copy name to clipboard
+							copy_name = "<C-Y>",
+							-- Key to edit environment variable
+							edit_var = "<C-e>",
+						},
+					},
+
+					fzf = {},
+					["ui-select"] = {
+						require("telescope.themes").get_dropdown({}),
+					},
+				},
+			})
 		end,
 	},
 }

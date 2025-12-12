@@ -4,60 +4,7 @@ local t = ls.text_node
 local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
 
-local function java_package(_, snip)
-	local filename = snip.env.TM_FILEPATH
-
-	-- Pega tudo após "/java/"
-	local pkg = filename:match(".*/java/(.*)/[^/]+%.java$")
-	if not pkg then
-		return ""
-	end
-
-	-- Converte / para .
-	pkg = pkg:gsub("/", ".")
-	return "package " .. pkg .. ";"
-end
-
--- Nome da classe = nome do arquivo
-local function class_name(_, snip)
-	local fname = snip.env.TM_FILENAME
-	return fname:gsub("%.java$", "")
-end
-
 return {
-
-	s(
-		"pkgc",
-		fmt(
-			[[
-{package}
-
-
-public class {} {{
-    {}
-}}
-]],
-			{
-				f(class_name), -- {} → nome da classe
-				i(0), -- corpo
-				package = f(java_package),
-			}
-		)
-	),
-	-- Snippet: Classe Java padrão
-	s(
-		"class",
-		fmt(
-			[[ 
-public class {} {{
-    public {}() {{
-        {}
-    }}
-}}
-]],
-			{ i(1, "ClassName"), i(2, "ClassName"), i(3) }
-		)
-	),
 
 	-- Snippet: Método Java
 	s(
@@ -71,9 +18,6 @@ public {} {}({}) {{
 			{ i(1, "void"), i(2, "methodName"), i(3), i(4) }
 		)
 	),
-
-	-- Snippet: System.out.println
-	s("sout", fmt([[System.out.println({});]], { i(1) })),
 
 	-- Snippet: Logger SLF4J
 	s(
@@ -258,22 +202,6 @@ void {}() {{
 }}
 ]],
 			{ i(1, "shouldDoSomething"), i(2), i(3), i(4) }
-		)
-	),
-
-	-- Snippet: Lombok construtores
-	s(
-		"lombclass",
-		fmt(
-			[[ 
-@Data
-@Builder
-@RequiredArgsConstructor
-public class {} {{
-    {}
-}}
-]],
-			{ i(1, "ClassName"), i(2) }
 		)
 	),
 

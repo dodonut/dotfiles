@@ -4,14 +4,14 @@ vim.diagnostic.config({
 	severity_sort = true,
 	float = { border = "rounded", source = "if_many" },
 	underline = { severity = vim.diagnostic.severity.ERROR },
-	signs = vim.g.have_nerd_font and {
+	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = "󰅚 ",
 			[vim.diagnostic.severity.WARN] = "󰀪 ",
 			[vim.diagnostic.severity.INFO] = "󰋽 ",
 			[vim.diagnostic.severity.HINT] = "󰌶 ",
 		},
-	} or {},
+	},
 	virtual_text = {
 		source = "if_many",
 		spacing = 2,
@@ -91,20 +91,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- vim.api.nvim_create_autocmd("FileType", {
---     pattern = "java",
---     callback = function()
---         local jdtls = require("jdtls")
---         local root = jdtls.setup.find_root({ "pom.xml", "build.gradle", ".git" })
---         if not root then
---             return
---         end
+-- 	pattern = "java",
+-- 	callback = function()
+-- 		local jdtls = require("jdtls")
+-- 		local root = jdtls.setup.find_root({ "pom.xml", "build.gradle", ".git" })
+-- 		if not root then
+-- 			return
+-- 		end
 --
---         -- evita reinicializar o servidor
---         if vim.g.jdtls_running_for_root == root then
---             return
---         end
---         vim.g.jdtls_running_for_root = root
+-- 		-- evita reinicializar o servidor
+-- 		if vim.g.jdtls_running_for_root == root then
+-- 			return
+-- 		end
+-- 		vim.g.jdtls_running_for_root = root
 --
---         require("config.jdtls").setup_jdtls()
---     end,
+-- 		require("config.jdtls").setup_jdtls()
+-- 	end,
 -- })
