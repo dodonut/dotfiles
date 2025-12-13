@@ -5,7 +5,7 @@ cd $HOME
 sudo apt update && sudo apt upgrade -y
 
 # install dependencies
-sudo apt install xclip ripgrep git unzip zip zsh zoxide stow jq gcc tmux -y
+sudo apt install npm xclip ripgrep git unzip zip zsh zoxide stow jq gcc tmux -y
 
 # install tmux powerline
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -33,8 +33,8 @@ cd $HOME
 
 if [ ! -d "$HOME/.fzf" ]; then
     echo "installing FZF"
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install
+    git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+    $HOME/.fzf/install
 fi
 
 # go installation for lf
@@ -44,10 +44,8 @@ chmod +x install-go.sh
 cd $HOME
 env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
 
-
 if [ ! -d "$HOME/.sdkman" ]; then
     echo "installing sdkman"
     curl -s "https://get.sdkman.io" | bash
     source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
-

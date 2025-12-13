@@ -96,12 +96,12 @@ local function get_class_path()
 end
 
 vim.api.nvim_buf_create_user_command(0, "RunTests", function()
-	java_locations(execute_tests, { "test" })
+	java_locations(execute_tests, { "clean", "test" })
 end, { desc = "Executa todos os testes do projeto Java" })
 
 vim.api.nvim_buf_create_user_command(0, "RunTestsClass", function()
 	local classpath = get_class_path()
-	java_locations(execute_tests, { "test", "--tests", classpath })
+	java_locations(execute_tests, { "clean", "test", "--tests", classpath })
 end, { desc = "Executa todos os testes do projeto Java" })
 
 vim.api.nvim_buf_create_user_command(0, "RunTestsMethod", function()
@@ -110,7 +110,7 @@ vim.api.nvim_buf_create_user_command(0, "RunTestsMethod", function()
 	assert(method_name, "Could not get the method name")
 	local concat = classpath .. "." .. method_name
 
-	java_locations(execute_tests, { "test", "--tests", concat })
+	java_locations(execute_tests, { "clean", "test", "--tests", concat })
 end, { desc = "Executa todos os testes do projeto Java" })
 
 vim.keymap.set(
