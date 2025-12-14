@@ -48,13 +48,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[c]ode [a]ctions" })
 		vim.keymap.set(
 			"n",
-			"]d",
+			"[d",
 			"<cmd>lua vim.diagnostic.jump({count=1, float=true})<cr>",
 			{ desc = "prev diagnostic" }
 		)
 		vim.keymap.set(
 			"n",
-			"[d",
+			"]d",
 			"<cmd>lua vim.diagnostic.jump({count=-1, float=true})<cr>",
 			{ desc = "next diagnostic" }
 		)

@@ -1,37 +1,17 @@
 return {
 	{
 		"williamboman/mason.nvim",
+		dependencies = {
+			"jay-babu/mason-nvim-dap.nvim",
+			config = function()
+				require("mason-nvim-dap").setup()
+			end,
+		},
 		config = function()
-			-- setup mason with default properties
 			require("mason").setup()
 		end,
 	},
-	-- mason nvim dap utilizes mason to automatically ensure debug adapters you want installed are installed, mason-lspconfig will not automatically install debug adapters for us
-	{
-		"jay-babu/mason-nvim-dap.nvim",
-		config = function()
-			-- ensure the java debug adapter is installed
-			require("mason-nvim-dap").setup({
-				-- ensure_installed = { "java-debug-adapter", "java-test" },
-			})
-		end,
-	},
-	-- mason lsp config utilizes mason to automatically ensure lsp servers you want installed are installed
-	{
-		"williamboman/mason-lspconfig.nvim",
-		config = function()
-			-- ensure that we have lua language server, typescript launguage server, java language server, and java test language server are installed
-			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls" },
-				automatic_enable = {
-					exclude = {
-						"jdtls",
-					},
-				},
-			})
-		end,
-	},
-	-- utility plugin for configuring the java language server for us
+	{},
 	-- {
 	-- 	"mfussenegger/nvim-jdtls",
 	-- 	dependencies = {
@@ -41,25 +21,37 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-			vim.lsp.config("lua_ls", {
-				settings = {
-					Lua = {
-						diagnostics = {
-							globals = { "vim" }, -- <-- Isso remove o erro do vim global
-						},
-						workspace = {
-							library = vim.api.nvim_get_runtime_file("", true),
+			local servers = {
+				lua_ls = {
+					settings = {
+						Lua = {
+							diagnostics = {
+								globals = { "vim" }, -- <-- Isso remove o erro do vim global
+							},
+							workspace = {
+								library = vim.api.nvim_get_runtime_file("", true),
+							},
 						},
 					},
 				},
-				capabilities = capabilities,
-			})
+				gradle_ls = {},
+				bashls = {},
+			}
+			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local original_capabilities = vim.lsp.protocol.make_client_capabilities()
+
+			for server, config in pairs(servers) do
+				config.capabilities = vim.tbl_deep_extend(
+					"force",
+					original_capabilities,
+					require("blink.cmp").get_lsp_capabilities({}, false)
+				)
+
+				vim.lsp.config(server, config)
+				vim.lsp.enable(server)
+			end
 		end,
 	},
-	-- loading progress (primaraly for jdtls)
-	{ "j-hui/fidget.nvim", opts = {} },
 	{
 		"nvim-java/nvim-java",
 		config = function()

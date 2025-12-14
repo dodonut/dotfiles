@@ -85,12 +85,14 @@ return {
 				{ "<leader>sh", builtin.help_tags, desc = "[TELE] [S]earch [H]elptags" },
 				{ "<leader>sr", builtin.resume, desc = "[TELE] [S]earch [R]esume" },
 				{ "<leader>sD", builtin.diagnostics, desc = "[TELE] [S]earch all [D]iagnostics" },
+				{ "<leader>sN", "<cmd>Telescope fidget<cr>", desc = "[TELE] [S]earch [N]otifications" },
 			}
 		end,
 		init = function()
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
 			pcall(require("telescope").load_extension("ecolog"))
+			pcall(require("telescope").load_extension("fidget"))
 		end,
 		config = function()
 			local telescope = require("telescope")

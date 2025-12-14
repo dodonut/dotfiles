@@ -1,0 +1,5 @@
+alias vim="nvim"
+alias vc=VimFiles . " > /dev/null"
+alias zc="vim ~/.zshrc"
+alias rn="ranger"
+alias luamake=$HOME/dev/lua-language-server/3rd/luamake/luamake

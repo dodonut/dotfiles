@@ -73,13 +73,6 @@ return {
 		},
 	},
 	"rafcamlet/nvim-luapad",
-	{
-		"rcarriga/nvim-notify",
-		init = function()
-			vim.notify = require("notify")
-		end,
-	},
-	"abecodes/tabout.nvim",
 	{ "numToStr/Comment.nvim", opts = {} },
 	{ "nvim-mini/mini.surround", opts = {} },
 	{ "nvim-mini/mini.ai", opts = { n_lines = 500 } },

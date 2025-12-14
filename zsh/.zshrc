@@ -1,6 +1,9 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 source $HOME/.exports
+source $HOME/.aliases
+source $HOME/.functions
+
 
 # ZSH_THEME="agnoster"
 ZSH_THEME="robbyrussell"
@@ -16,10 +19,6 @@ source $ZSH/oh-my-zsh.sh
 
 
 # alias vc="dir=$(pwd); cd ~/.config/nvim; vim; cd $dir;"
-alias vc=VimFiles . " > /dev/null"
-alias zc="vim ~/.zshrc"
-alias rn="ranger"
-alias luamake=$HOME/dev/lua-language-server/3rd/luamake/luamake
 
 function VimFiles() {
     pushd $(pwd) > /dev/null

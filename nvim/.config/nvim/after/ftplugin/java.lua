@@ -95,6 +95,7 @@ local function get_class_path()
 	return path:gsub(".*/src/test/java/", ""):gsub("/", "."):gsub("%.java$", "")
 end
 
+-- NOTE clean test only supports gradlew
 vim.api.nvim_buf_create_user_command(0, "RunTests", function()
 	java_locations(execute_tests, { "clean", "test" })
 end, { desc = "Executa todos os testes do projeto Java" })
