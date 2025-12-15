@@ -98,7 +98,6 @@ return {
 			fuzzy = { implementation = "prefer_rust_with_warning" },
 			ghost_text = { enabled = true },
 			signature = { enabled = true },
-completion.menu.draw.columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
 		},
 	},
 }
